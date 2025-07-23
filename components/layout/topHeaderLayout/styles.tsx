@@ -6,7 +6,7 @@ import { GRAY, BLACK } from '@/constant/color';
 export const Wrapper = styled.div`
   background-color: ${GRAY[100]};
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   padding: 60px 16px 0 16px;
   position: relative;
 `;
