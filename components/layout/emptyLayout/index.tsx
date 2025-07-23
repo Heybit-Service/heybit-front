@@ -10,8 +10,6 @@ const EmptyLayout = ({
   return (
     <html lang="ko">
       <body>
-        {/* Layout UI */}
-        {/* Place children where you want to render a page or nested layout */}
         <Wrapper>{children}</Wrapper>
       </body>
     </html>

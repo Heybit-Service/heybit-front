@@ -7,3 +7,5 @@ export const GRAY = {
 };
 
 export const BLACK = '#202020';
+
+export const MAIN_GREEN = '#0EC189';
