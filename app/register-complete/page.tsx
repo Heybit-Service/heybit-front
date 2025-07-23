@@ -11,7 +11,7 @@ const RegisterPage: FC = () => {
     const router = useRouter();
     
     const handleStart = () => {
-        router.push('/dashboard/timer'); // Redirect to the survey page after onboarding
+        router.push('/dashboard/timer/progress'); // Redirect to the survey page after onboarding
     }
 
     return (

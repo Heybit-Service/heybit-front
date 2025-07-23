@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
       use: ['@svgr/webpack'],
     });
     return config;
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: false,
+      },
+    ];
   },
 };
 

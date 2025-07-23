@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   background-color: ${GRAY[100]};
   width: 100vw;
   height: 100dvh;
-  padding: 56px 16px 84px 16px;
+  padding: calc(56px + 60px) 16px 84px 16px;
   position: relative;
   overflow: auto;
 `;
