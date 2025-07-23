@@ -29,7 +29,7 @@ const EmptyLayout = ({
                     <IconTimer />
                     타이머
                 </Link>
-                <Link className={`item${pathname === '/dashboard/vote' ? ' active' : ''}`} href={"/dashboard/vote"}>
+                <Link className={`item${pathname.startsWith('/dashboard/vote') ? ' active' : ''}`} href={"/dashboard/vote/progress"}>
                     <IconVote />
                     살말투표
                 </Link>
