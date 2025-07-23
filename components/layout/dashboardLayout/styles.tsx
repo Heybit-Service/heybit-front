@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   height: 100dvh;
   padding: 56px 16px 84px 16px;
   position: relative;
+  overflow: auto;
 `;
 
 export const Top = styled.div`
@@ -16,7 +17,7 @@ export const Top = styled.div`
   height: 56px;
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   padding: 0 16px;
@@ -29,7 +30,7 @@ export const Bottom = styled.div`
   height: 84px;
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   background-color: #ffffff;

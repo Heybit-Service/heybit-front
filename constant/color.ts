@@ -6,6 +6,11 @@ export const GRAY = {
   500: '#5B5B5B',
 };
 
+export const BLUE = {
+  100: '#CDE9FA',
+  200: '#005BDB',
+};
+
 export const BLACK = '#202020';
 
 export const MAIN_GREEN = '#0EC189';

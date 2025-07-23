@@ -25,7 +25,7 @@ const EmptyLayout = ({
             </Top>
                 {children}
             <Bottom>
-                <Link className={`item${pathname === '/dashboard/timer' ? ' active' : ''}`} href={"/dashboard/timer"}>
+                <Link className={`item${pathname.startsWith('/dashboard/timer') ? ' active' : ''}`} href={"/dashboard/timer/progress"}>
                     <IconTimer />
                     타이머
                 </Link>
