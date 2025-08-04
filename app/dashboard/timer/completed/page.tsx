@@ -1,23 +1,22 @@
-"use client";
+'use server';
 
-import { FC } from 'react';
 import TimerCompletedCard from '@/components/timer/timerCompletedCard';
 import { Title, TitleWrapper, Description } from './styles';
+import { fetchHistoryTimers } from '@/data/api/timer';
 
-const TimerCompletedPage: FC = () => {
-    return (
-        <>
-            <TitleWrapper>
-                <Title>어떤 상품을 참았나요?</Title>
-                <Description>내가 시작한 모든 타이머를 둘려봐요</Description>
-            </TitleWrapper>
-            <TimerCompletedCard />
-            <TimerCompletedCard />
-            <TimerCompletedCard />
-            <TimerCompletedCard />
-            <TimerCompletedCard />
-        </>
-    );
-}
+const TimerCompletedPage = async () => {
+  const timers = await fetchHistoryTimers();
+  return (
+    <>
+      <TitleWrapper>
+        <Title>어떤 상품을 참았나요?</Title>
+        <Description>내가 시작한 모든 타이머를 둘려봐요</Description>
+      </TitleWrapper>
+      {timers.map((timer) => (
+        <TimerCompletedCard key={timer.timerId} timer={timer} />
+      ))}
+    </>
+  );
+};
 
 export default TimerCompletedPage;

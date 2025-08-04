@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { GRAY, BLACK, MAIN_GREEN } from '@/constant/color';
 
@@ -11,9 +13,9 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;  
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled.div`
@@ -34,16 +36,16 @@ export const Price = styled.div`
 `;
 
 export const Tag = styled.div`
-    padding: 0px 7px;
-    height: 24px;
-    box-sizing: border-box;
-    font-size: 12px;
-    background-color: ${BLACK};
-    color: #ffffff;
-    display: inline-block;
-    border-radius: 100px;
-    line-height: 24px;
-    text-align: center;
+  padding: 0px 7px;
+  height: 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+  background-color: ${BLACK};
+  color: #ffffff;
+  display: inline-block;
+  border-radius: 100px;
+  line-height: 24px;
+  text-align: center;
 `;
 
 export const Description = styled.div`
@@ -67,4 +69,4 @@ export const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   gap: 4px;
-`
+`;

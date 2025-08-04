@@ -1,27 +1,29 @@
-import { FC } from 'react';
-import { Wrapper, TitleWrapper, Title, Price,Tag,Description, Button } from './styles';
+import { Wrapper, TitleWrapper, Title, Price, Tag, Description, Button } from './styles';
 import IconTimer from '@/assets/menu/icon_timer.svg';
+import { CurrentTimer } from '@/data/type/timer';
 
-const TimerCard: FC = () => {
-    return (
-        <Wrapper>
-            <TitleWrapper>
-                <Title>
-                    스타벅스 텀블러
-                    <Tag>투표중</Tag>
-                </Title>
-                <Price>28,000원</Price>
-            </TitleWrapper>
-            <Description>
-                여름 시즌에 새로 나온 스타벅스 텀블런데 집에 비슷한 색깔이 있어서 살까 말까 고민중
-            </Description>
-
-            <Button>
-                <IconTimer />
-                1일 3시간 45분 남음
-            </Button>
-        </Wrapper>
-    );
+interface Props {
+  timer: CurrentTimer;
 }
+
+const TimerCard = ({ timer }: Props) => {
+  return (
+    <Wrapper>
+      <TitleWrapper>
+        <Title>
+          {timer.name}
+          <Tag>{timer.withVotePost ? '투표중' : '투표 종료'}</Tag>
+        </Title>
+        <Price>{timer.amount}원</Price>
+      </TitleWrapper>
+      <Description>{timer.description}</Description>
+
+      <Button>
+        <IconTimer />
+        {timer.endTime}분 남음
+      </Button>
+    </Wrapper>
+  );
+};
 
 export default TimerCard;
