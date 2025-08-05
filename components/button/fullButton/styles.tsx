@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { GRAY, BLACK } from '@/constant/color';
+import styled from 'styled-components';
+import { BLACK } from '@/constant/color';
 
 export const Button = styled.button`
   width: 100%;
@@ -11,5 +11,3 @@ export const Button = styled.button`
   background-color: ${BLACK};
   color: #ffffff;
 `;
-
-

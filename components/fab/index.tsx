@@ -1,6 +1,6 @@
 'use client';
 
-import IconPlus from '@/assets/icon/icon_plus.svg';
+import PlusIcon from '@/assets/icon/plus.svg';
 import { useRouter } from 'next/navigation';
 
 export const Fab = () => {
@@ -15,7 +15,7 @@ export const Fab = () => {
       className="absolute bottom-25 right-4 w-16 h-16 bg-[#202020] rounded-full flex items-center justify-center"
       onClick={onClick}
     >
-      <IconPlus />
+      <PlusIcon />
     </button>
   );
 };
