@@ -1,12 +1,21 @@
+'use client';
+
 import { Wrapper, TitleWrapper, Title, Price, Tag, Description, Button } from './styles';
 import IconTimer from '@/assets/menu/icon_timer.svg';
 import { CurrentTimer } from '@/data/type/timer';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   timer: CurrentTimer;
 }
 
 const TimerCard = ({ timer }: Props) => {
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(`/timer/${timer.timerId}`);
+  };
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -18,7 +27,7 @@ const TimerCard = ({ timer }: Props) => {
       </TitleWrapper>
       <Description>{timer.description}</Description>
 
-      <Button>
+      <Button onClick={onClick}>
         <IconTimer />
         {timer.endTime}분 남음
       </Button>
