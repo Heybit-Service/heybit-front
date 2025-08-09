@@ -3,9 +3,13 @@
 import TimerCompletedCard from '@/components/timer/timerCompletedCard';
 import { Title, TitleWrapper, Description } from './styles';
 import { fetchHistoryTimers } from '@/data/api/timer';
+import { Empty } from './empty';
 
 const TimerCompletedPage = async () => {
   const timers = await fetchHistoryTimers();
+  if (timers.length === 0) {
+    return <Empty />;
+  }
   return (
     <>
       <TitleWrapper>
