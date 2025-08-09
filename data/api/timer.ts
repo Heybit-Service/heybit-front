@@ -47,7 +47,7 @@ const mockHistoryTimers: HistoryTimer[] = [
 
 const mockTimer: Timer = {
   name: '비트코인 30분 도전',
-  imageUrl: '/images/bitcoin.png',
+  imageUrl: 'https://images.unpa.me/1685621',
   amount: 10000,
   description: '30분 동안 비트코인 가격 상승을 예측하는 타이머입니다.',
   category: '암호화폐',

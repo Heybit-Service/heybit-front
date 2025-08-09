@@ -26,7 +26,7 @@ const TimerCompletedCard = ({ timer }: Props) => {
     : `-${timer.amount.toLocaleString()}원`;
 
   const onClick = () => {
-    router.push(`/timer/${timer.timerId}`);
+    router.push(`/timer/${timer.timerId}/completed`);
   };
 
   return (
