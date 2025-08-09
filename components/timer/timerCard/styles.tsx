@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { GRAY, BLACK, MAIN_GREEN } from '@/constant/color';
+import { GRAY, BLACK, WHITE, GREEN } from '@/constant/color';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -35,12 +35,12 @@ export const Price = styled.div`
   color: ${BLACK};
 `;
 
-export const Tag = styled.div`
+export const Tag = styled.div<{ $active?: boolean }>`
   padding: 0px 7px;
   height: 24px;
   box-sizing: border-box;
   font-size: 12px;
-  background-color: ${BLACK};
+  background-color: ${({ $active }) => ($active ? BLACK : GRAY[300])};
   color: #ffffff;
   display: inline-block;
   border-radius: 100px;
@@ -56,11 +56,12 @@ export const Description = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ $active?: boolean }>`
   width: 100%;
   height: 48px;
-  background-color: ${MAIN_GREEN};
-  color: #ffffff;
+  background-color: ${({ $active }) => ($active ? WHITE : GREEN.SUB1)};
+  color: ${({ $active }) => ($active ? GREEN.MAIN : GREEN.SUB2)};
+  border: ${({ $active }) => ($active ? `1px solid ${GREEN.MAIN}` : 'none')};
   border-radius: 10px;
   display: flex;
   justify-content: center;

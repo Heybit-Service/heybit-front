@@ -12,5 +12,11 @@ export const BLUE = {
 };
 
 export const BLACK = '#202020';
-
+export const WHITE = '#FFFFFF';
 export const MAIN_GREEN = '#0EC189';
+
+export const GREEN = {
+  MAIN: '#0EC189',
+  SUB1: '#CFF3E7',
+  SUB2: '#0A906B',
+};
