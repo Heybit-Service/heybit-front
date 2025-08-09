@@ -17,3 +17,17 @@ export interface HistoryTimer {
   durationMessage: string;
   endedAt: string;
 }
+
+export interface Timer {
+  name: string;
+  imageUrl: string;
+  amount: number;
+  description: string;
+  category: string;
+  startTime: string;
+  endTime: string;
+  withVotePost: boolean;
+  buyCount: number;
+  holdCount: number;
+  holdPercent: number;
+}
