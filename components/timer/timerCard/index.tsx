@@ -13,7 +13,7 @@ const TimerCard = ({ timer }: Props) => {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/timer/${timer.timerId}`);
+    router.push(`/timer/${timer.timerId}/progress`);
   };
 
   const formatRemaining = (endTime: Date | string | number, now: Date = new Date()): string => {

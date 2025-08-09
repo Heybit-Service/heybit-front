@@ -1,6 +1,9 @@
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back-button';
 import { fetchTimer } from '@/data/api/timer';
+import { TimerProgressSummary } from '@/components/timer/summary/progress';
+import { TimerInformation } from '@/components/timer/information';
+import { TimerStopButton } from '@/components/timer/button/timer-stop';
 
 interface Props {
   params: {
@@ -12,8 +15,13 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const timer = await fetchTimer(id);
   return (
-    <div>
+    <div className="h-screen bg-[#F7F7F7]">
       <AppBar title="참고 있는 상품" leadings={<BackButton />} />
+      <TimerProgressSummary timer={timer} />
+      <TimerInformation timer={timer} />
+      <div className="absolute bottom-14 w-full px-4">
+        <TimerStopButton id={id} />
+      </div>
     </div>
   );
 };

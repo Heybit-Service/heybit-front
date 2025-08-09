@@ -1,7 +1,7 @@
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back-button';
 import { fetchTimer } from '@/data/api/timer';
-import { TimerSummary } from '@/components/timer/summary';
+import { TimerSummary } from '@/components/timer/summary/completed';
 import { TimerInformation } from '@/components/timer/information';
 import { ReportConfirmButton } from '@/components/timer/button/report-confirm';
 
