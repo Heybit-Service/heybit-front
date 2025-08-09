@@ -1,47 +1,55 @@
-"use client"
+'use client';
 
 import { Wrapper, Top, Bottom } from './styles';
-import Link from 'next/link'
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Logo from '@/assets/logo.svg';
 import IconTimer from '@/assets/menu/icon_timer.svg';
 import IconVote from '@/assets/menu/icon_vote.svg';
 import IconReport from '@/assets/menu/icon_report.svg';
 import IconBell from '@/assets/menu/icon_bell.svg';
+import { Fab } from '../../fab';
 
-const EmptyLayout = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
-    const pathname = usePathname();
+const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  const fabVisible =
+    pathname.startsWith('/dashboard/timer') || pathname.startsWith('/dashboard/vote');
 
   return (
     <html lang="ko">
       <body>
         <Wrapper>
-            <Top>
-                <IconBell />
-            </Top>
-                {children}
-            <Bottom>
-                <Link className={`item${pathname.startsWith('/dashboard/timer') ? ' active' : ''}`} href={"/dashboard/timer/progress"}>
-                    <IconTimer />
-                    타이머
-                </Link>
-                <Link className={`item${pathname.startsWith('/dashboard/vote') ? ' active' : ''}`} href={"/dashboard/vote/progress"}>
-                    <IconVote />
-                    살말투표
-                </Link>
-                <Link className={`item${pathname === '/dashboard/report' ? ' active' : ''}`} href={"/dashboard/report"}>
-                    <IconReport />
-                    리포트
-                </Link>
-            </Bottom>
+          <Top>
+            <IconBell />
+          </Top>
+          {children}
+          <Bottom>
+            <Link
+              className={`item${pathname.startsWith('/dashboard/timer') ? ' active' : ''}`}
+              href={'/dashboard/timer/progress'}
+            >
+              <IconTimer />
+              타이머
+            </Link>
+            <Link
+              className={`item${pathname.startsWith('/dashboard/vote') ? ' active' : ''}`}
+              href={'/dashboard/vote/progress'}
+            >
+              <IconVote />
+              살말투표
+            </Link>
+            <Link
+              className={`item${pathname === '/dashboard/report' ? ' active' : ''}`}
+              href={'/dashboard/report'}
+            >
+              <IconReport />
+              리포트
+            </Link>
+          </Bottom>
         </Wrapper>
+        {fabVisible && <Fab />}
       </body>
     </html>
-  )
-}
+  );
+};
 
 export default EmptyLayout;

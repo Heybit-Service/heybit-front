@@ -4,7 +4,6 @@ import { FC, PropsWithChildren } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { TabWrapper } from './styles';
-import { Fab } from '../../../components/fab';
 
 const TimerLayout: FC<PropsWithChildren> = ({ children }) => {
   const pathname = usePathname();
@@ -26,7 +25,6 @@ const TimerLayout: FC<PropsWithChildren> = ({ children }) => {
         </Link>
       </TabWrapper>
       {children}
-      <Fab />
     </>
   );
 };
