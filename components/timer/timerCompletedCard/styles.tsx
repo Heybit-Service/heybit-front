@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { GRAY, BLACK, BLUE } from '@/constant/color';
+import { GRAY, BLACK, BLUE, RED } from '@/constant/color';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -47,11 +47,11 @@ export const Tag = styled.div`
   text-align: center;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ success: boolean }>`
   width: 100%;
   height: 48px;
-  background-color: ${BLUE[100]};
-  color: ${BLUE[200]};
+  background-color: ${({ success }) => (success ? BLUE[200] : RED[400])};
+  color: ${({ success }) => (success ? BLUE[100] : RED[200])};
   border-radius: 10px;
   display: flex;
   justify-content: center;

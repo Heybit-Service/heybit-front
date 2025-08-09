@@ -7,18 +7,31 @@ interface Props {
 }
 
 const TimerCompletedCard = ({ timer }: Props) => {
+  const endedAtLabel = () => {
+    const date = new Date(timer.endedAt);
+    if (isNaN(date.getTime())) {
+      return timer.endedAt;
+    }
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}년 ${month}월 ${day}일`;
+  };
+  const priceLabel = timer.success
+    ? `+${timer.amount.toLocaleString()}원`
+    : `-${timer.amount.toLocaleString()}원`;
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>
-          스타벅스 텀블러
-          <Tag>2025년 7월 19일</Tag>
+          {timer.name}
+          <Tag>{endedAtLabel()}</Tag>
         </Title>
-        <Price>+28,000원</Price>
+        <Price>{priceLabel}</Price>
       </TitleWrapper>
-      <Button>
+      <Button success={timer.success}>
         <IconTimer />
-        1일 3시간 45분 남음
+        {timer.durationMessage}
       </Button>
     </Wrapper>
   );

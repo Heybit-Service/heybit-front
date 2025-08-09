@@ -7,8 +7,13 @@ export const GRAY = {
 };
 
 export const BLUE = {
-  100: '#CDE9FA',
-  200: '#005BDB',
+  100: '#005BDB',
+  200: '#CDE9FA',
+};
+
+export const RED = {
+  200: '#E74A27',
+  400: '#FADBD4',
 };
 
 export const BLACK = '#202020';

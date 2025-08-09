@@ -15,4 +15,5 @@ export interface HistoryTimer {
   amount: number;
   durationMinutes: number;
   durationMessage: string;
+  endedAt: string;
 }
