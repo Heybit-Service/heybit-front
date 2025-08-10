@@ -3,9 +3,9 @@ import { BackButton } from '@/components/button/back-button';
 import { SizedBox } from '@/components/sized-box';
 import Bubble from '@/assets/timer/start/bubble.png';
 import Character from '@/assets/timer/start/character.png';
-import TimePicker from '@/assets/timer/start/time_picker.png';
 import Image from 'next/image';
 import { TimerStartButton } from '@/components/timer/button/timer-start';
+import DurationPicker from '@/components/timer/picker';
 
 export default function Page() {
   return (
@@ -18,7 +18,7 @@ export default function Page() {
           <SizedBox className="h-6" />
           <Image className="px-28" src={Character} alt="character" />
         </div>
-        <Image src={TimePicker} alt="time-picker" />
+        <DurationPicker />
       </div>
       <div className="absolute bottom-14 w-full px-4">
         <TimerStartButton />
