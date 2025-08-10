@@ -43,7 +43,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Price onChange={(value) => setForm({ ...form, price: value })} />
         <Description onChange={(value) => setForm({ ...form, description: value })} />
         <Upload />
-        <Voting />
+        <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
       <button
         className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
