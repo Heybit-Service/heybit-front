@@ -8,6 +8,7 @@ import { Step3 } from './step3';
 import { Step4 } from './step4';
 import { Step5 } from './step5';
 import { useRouter } from 'next/navigation';
+import { ProgressBar } from './components';
 
 const Page = () => {
   const [step, setStep] = useState(1);
@@ -36,6 +37,7 @@ const Page = () => {
           </>
         }
       />
+      <ProgressBar current={step} total={5} />
       {step === 1 && <Step1 />}
       {step === 2 && <Step2 />}
       {step === 3 && <Step3 />}
