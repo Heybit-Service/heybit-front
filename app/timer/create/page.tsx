@@ -23,6 +23,7 @@ const Page = () => {
               startTime: new Date(),
               endTime: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30),
               withVotePost: form.voting,
+              image: form.image,
             });
             router.push('/dashboard/timer/progress');
           }}

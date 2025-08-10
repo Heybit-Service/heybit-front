@@ -10,6 +10,7 @@ interface TimerCommand {
   startTime: Date;
   endTime: Date;
   withVotePost: boolean;
+  image: string;
 }
 
 export const createTimer = async ({
@@ -20,6 +21,7 @@ export const createTimer = async ({
   startTime,
   endTime,
   withVotePost,
+  image,
 }: TimerCommand) => {
   const formData = new FormData();
   const data = {
@@ -30,8 +32,12 @@ export const createTimer = async ({
     startTime,
     endTime,
     withVotePost,
+    image,
   };
   formData.append('data', JSON.stringify(data));
+  if (image) {
+    formData.append('img', image);
+  }
   const token = await getServerToken();
   const response = await fetch(`${API_BASE_URL}/api/v1/timers`, {
     method: 'POST',
