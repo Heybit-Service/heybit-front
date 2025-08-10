@@ -32,3 +32,20 @@ export interface Timer {
   holdCount: number;
   holdPercent: number;
 }
+
+export interface Duration {
+  days: number;
+  hours: number;
+  minutes: number;
+}
+
+export const getDuration = (startTime: string, endTime: string) => {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+  const diffMs = end.getTime() - start.getTime();
+  const totalMinutes = Math.floor(diffMs / (1000 * 60));
+  const days = Math.floor(totalMinutes / (24 * 60));
+  const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+  const minutes = totalMinutes % 60;
+  return { days, hours, minutes };
+};
