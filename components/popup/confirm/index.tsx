@@ -59,10 +59,10 @@ export const ConfirmPopup = ({
           <div className="flex flex-col items-center gap-4">
             <Image src={image} alt="popup-character" width={140} height={110} priority />
             <div className="flex flex-col items-center text-center gap-3">
-              <h2 className="text-[22px] font-pretendard font-bold leading-[130%] text-center text-[#202020]">
+              <h2 className="text-[22px] font-pretendard font-bold leading-[130%] text-center text-[#202020] whitespace-pre-line">
                 {title}
               </h2>
-              <p className="text-sm font-pretendard font-medium leading-[140%] text-center text-[#898989]">
+              <p className="text-sm font-pretendard font-medium leading-[140%] text-center text-[#898989] whitespace-pre-line">
                 {description}
               </p>
             </div>
