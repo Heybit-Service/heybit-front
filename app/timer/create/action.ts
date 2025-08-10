@@ -32,7 +32,6 @@ export const createTimer = async ({
     startTime,
     endTime,
     withVotePost,
-    image,
   };
   formData.append('data', JSON.stringify(data));
   if (image) {
