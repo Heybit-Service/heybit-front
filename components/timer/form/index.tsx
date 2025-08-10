@@ -42,7 +42,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Name onChange={(value) => setForm({ ...form, name: value })} />
         <Price onChange={(value) => setForm({ ...form, price: value })} />
         <Description onChange={(value) => setForm({ ...form, description: value })} />
-        <Upload />
+        <Upload onChange={(value) => setForm({ ...form, image: value })} />
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
       <button
