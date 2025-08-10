@@ -1,6 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ConfirmPopup } from '@/components/popup/confirm';
+import Character from '@/assets/popup/fail_character.png';
 
 interface Props {
   id: number;
@@ -8,13 +11,26 @@ interface Props {
 
 export const Actions = ({ id }: Props) => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const onClickSuccess = () => {
     router.push(`/timer/${id}/success`);
   };
 
   const onClickFail = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const onCancel = () => {
     router.push(`/timer/${id}/fail`);
+  };
+
+  const onConfirm = () => {
+    setOpen(false);
   };
 
   return (
@@ -31,6 +47,17 @@ export const Actions = ({ id }: Props) => {
       >
         절제 성공
       </button>
+      <ConfirmPopup
+        open={open}
+        onClose={onClose}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        image={Character}
+        title="이미 구매한건가요?"
+        description="아직 구매하지 않았다면 한번 더 고민해보세요"
+        confirmLabel="생각해볼게요"
+        cancelLabel="구매했어요"
+      />
     </div>
   );
 };
