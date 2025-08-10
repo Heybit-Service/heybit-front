@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useAtom } from 'jotai';
 import { Category } from './category';
 import { Description } from './description';
 import { Name } from './name';
@@ -8,32 +8,14 @@ import { Price } from './price';
 import { Title } from './title';
 import { Upload } from './upload';
 import { Voting } from './voting';
-
-interface Form {
-  title: string;
-  category: string;
-  name: string;
-  price: string;
-  description: string;
-  image: string;
-  voting: boolean;
-}
+import { Form, formAtom } from './store';
 
 interface Props {
   onSubmit: (form: Form) => void;
 }
 
 export const TimerForm = ({ onSubmit }: Props) => {
-  const [form, setForm] = useState<Form>({
-    title: '',
-    category: '',
-    name: '',
-    price: '',
-    description: '',
-    image: '',
-    voting: false,
-  });
-
+  const [form, setForm] = useAtom(formAtom);
   return (
     <div className="flex flex-col gap-13 px-4">
       <div className="flex flex-col gap-6">
