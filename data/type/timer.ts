@@ -19,6 +19,7 @@ export interface HistoryTimer {
 }
 
 export interface Timer {
+  status: 'IN_PROGRESS' | 'WAITING' | 'SAVED' | 'PURCHASED';
   name: string;
   imageUrl: string;
   amount: number;

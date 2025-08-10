@@ -46,6 +46,7 @@ const mockHistoryTimers: HistoryTimer[] = [
 ];
 
 const mockTimer: Timer = {
+  status: 'SAVED',
   name: '비트코인 30분 도전',
   imageUrl: 'https://images.unpa.me/1685621',
   amount: 10000,
