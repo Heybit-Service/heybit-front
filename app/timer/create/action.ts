@@ -22,7 +22,7 @@ export const createTimer = async ({
   endTime,
   withVotePost,
   image,
-}: TimerCommand) => {
+}: TimerCommand): Promise<void> => {
   const formData = new FormData();
   const data = {
     name,

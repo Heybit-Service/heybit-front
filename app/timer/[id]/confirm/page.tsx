@@ -31,7 +31,7 @@ const Page = async ({ params }: Props) => {
             </span>
           </div>
         </div>
-        <Actions id={id} />
+        <Actions id={id} amount={timer.amount} />
       </div>
     </div>
   );

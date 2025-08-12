@@ -4,16 +4,23 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ConfirmPopup } from '@/components/popup/confirm';
 import Character from '@/assets/popup/fail_character.png';
+import { createTimerResult } from './action';
 
 interface Props {
   id: number;
+  amount: number;
 }
 
-export const Actions = ({ id }: Props) => {
+export const Actions = ({ id, amount }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const onClickSuccess = () => {
+  const onClickSuccess = async () => {
+    await createTimerResult({
+      timerId: id,
+      result: 'SAVED',
+      amount,
+    });
     router.push(`/timer/${id}/success`);
   };
 
@@ -25,7 +32,12 @@ export const Actions = ({ id }: Props) => {
     setOpen(false);
   };
 
-  const onCancel = () => {
+  const onCancel = async () => {
+    await createTimerResult({
+      timerId: id,
+      result: 'PURCHASED',
+      amount,
+    });
     router.push(`/timer/${id}/fail`);
   };
 
