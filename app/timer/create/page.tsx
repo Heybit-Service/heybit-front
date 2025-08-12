@@ -7,13 +7,16 @@ import { createTimer } from './action';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { formAtom, initValue } from '@/components/timer/form/store';
+import TimerBubble from '@/components/timer/bubble';
 
 const Page = () => {
   const router = useRouter();
-  const [, setForm] = useAtom(formAtom);
+  const [form, setForm] = useAtom(formAtom);
+  const duration = `${form.day}일 ${form.hour}시간 ${form.minute}분`;
   return (
     <div className="h-screen bg-[#F7F7F7]">
       <AppBar title="타이머 상품 등록" leadings={<BackButton />} />
+      <TimerBubble duration={duration} />
       <div className="pt-8">
         <TimerForm
           onSubmit={async (form) => {
