@@ -20,7 +20,7 @@ const mockCurrentTimers: CurrentTimer[] = [
     description: '1시간 동안 이더리움 가격 하락 예측',
     amount: 25000,
     endTime: '2024-01-20T16:00:00Z',
-    withVotePost: false,
+    withVotePost: true,
   },
 ];
 
