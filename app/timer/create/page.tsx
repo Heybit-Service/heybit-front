@@ -1,7 +1,7 @@
 'use client';
 
 import { AppBar } from '@/components/app-bar';
-import { BackButton } from '@/components/button/back-button';
+import { BackButton } from '@/components/button/back';
 import { TimerForm } from '@/components/timer/form';
 import { createTimer } from './action';
 import { useRouter } from 'next/navigation';

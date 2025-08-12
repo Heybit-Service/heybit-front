@@ -11,7 +11,7 @@ interface Props {
   onClose: () => void;
   onConfirm: () => void;
   onCancel: () => void;
-  image: StaticImageData | string;
+  image?: StaticImageData | string;
   title: string;
   description: string;
   confirmLabel: string;
@@ -57,7 +57,7 @@ export const ConfirmPopup = ({
           onClick={handlePopupClick}
         >
           <div className="flex flex-col items-center gap-4">
-            <Image src={image} alt="popup-character" width={140} height={110} priority />
+            {image && <Image src={image} alt="popup-character" width={140} height={110} priority />}
             <div className="flex flex-col items-center text-center gap-3">
               <h2 className="text-[22px] font-pretendard font-bold leading-[130%] text-center text-[#202020] whitespace-pre-line">
                 {title}

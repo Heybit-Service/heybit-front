@@ -1,7 +1,7 @@
 'use client';
 
 import { AppBar } from '@/components/app-bar';
-import { BackButton } from '@/components/button/back-button';
+import { BackButton } from '@/components/button/back';
 import { SizedBox } from '@/components/sized-box';
 import Bubble from '@/assets/timer/start/bubble.png';
 import Character from '@/assets/timer/start/character.png';

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { AppBar } from '@/components/app-bar';
-import { BackButton } from '@/components/button/back-button';
+import { BackButton } from '@/components/button/back';
 import { fetchTimer } from '@/data/api/timer';
 import Timer from '@/assets/timer/confirm/timer.png';
 import CheckIcon from '@/assets/icon/check.svg';

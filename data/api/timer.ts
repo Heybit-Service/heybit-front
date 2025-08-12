@@ -113,3 +113,18 @@ export const fetchTimer = async (id: number): Promise<Timer> => {
   const data = await response.json();
   return data.data;
 };
+
+export const deleteTimer = async (id: number): Promise<void> => {
+  if (USE_MOCK_DATA) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return;
+  }
+  const token = await getServerToken();
+  await fetch(`${API_BASE_URL}/api/v1/timers/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+};
