@@ -1,5 +1,5 @@
 import Background from '@/assets/timer/create/background.png';
-import Bubble from '@/assets/timer/create/bubble.svg';
+import Bubble from '@/assets/timer/create/bubble.png';
 
 interface Props {
   duration: string;
@@ -16,9 +16,16 @@ const TimerBubble = ({ duration }: Props) => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="relative">
-        <Bubble />
-        <div className="absolute top-2 left-8 flex gap-[3px]">
+      <div
+        className="w-[250px] h-[38px]"
+        style={{
+          backgroundImage: `url(${Bubble.src})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="pl-[31px] py-[9px] flex gap-[3px]">
           <span className="font-extrabold text-sm leading-[140%] text-center text-[#202020]">
             {duration}
           </span>
