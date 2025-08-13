@@ -8,11 +8,7 @@ const EmptyLayout = ({
   children: React.ReactNode
 }) => {
   return (
-    <html lang="ko">
-      <body>
-        <Wrapper>{children}</Wrapper>
-      </body>
-    </html>
+    <Wrapper>{children}</Wrapper>
   )
 }
 
