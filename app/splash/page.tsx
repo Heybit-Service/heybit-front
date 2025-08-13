@@ -35,8 +35,8 @@ export default function SplashPage() {
           Hey! 잠깐 멈춰볼까?
         </p>
       </div>
-      <div className="absolute bottom-0 left-[23px] right-0">
-        <Character className="w-full h-auto max-w-none" />
+      <div className="absolute bottom-0 left-[23px] right-0 md:left-0 md:flex md:justify-center">
+        <Character className="w-full h-auto max-w-none md:max-w-md" />
       </div>
     </div>
   );
