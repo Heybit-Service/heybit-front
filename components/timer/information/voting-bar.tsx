@@ -1,10 +1,14 @@
 // ProgressBar.jsx
 
 import React from 'react';
-import Bubble from '@/assets/timer/progress/bubble.png';
 import { VotingPoint } from './voting-point';
 
-export const VotingBar = ({ buyCount = 0, stopCount = 0 }) => {
+interface Props {
+  buyCount: number;
+  stopCount: number;
+}
+
+export const VotingBar = ({ buyCount, stopCount }: Props) => {
   const totalCount = buyCount + stopCount;
   const buyPercentage = totalCount > 0 ? (buyCount / totalCount) * 100 : 50;
   const stopPercentage = 100 - buyPercentage;
