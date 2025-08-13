@@ -4,9 +4,9 @@ import { fetchTimer } from '@/data/api/timer';
 import Link from 'next/link';
 
 interface Props {
-  params: {
+  params: Promise<{
     id: number;
-  };
+  }>;
 }
 
 const Page = async ({ params }: Props) => {

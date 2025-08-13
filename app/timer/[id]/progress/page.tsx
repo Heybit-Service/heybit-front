@@ -7,9 +7,9 @@ import { TimerStopButton } from '@/components/timer/button/timer-stop';
 import { MoreButton } from '@/components/timer/button/more';
 
 interface Props {
-  params: {
+  params: Promise<{
     id: number;
-  };
+  }>;
 }
 
 const Page = async ({ params }: Props) => {
