@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import StyledComponentsRegistry from '@/lib/registry';
 import '@ncdai/react-wheel-picker/style.css';
 import './globals.css';
 
@@ -24,10 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-        <div id="popup-root" />
+        <StyledComponentsRegistry>
+          {children}
+          <div id="popup-root" />
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
