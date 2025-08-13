@@ -6,9 +6,9 @@ import { TimerInformation } from '@/components/timer/information';
 import { ReportConfirmButton } from '@/components/timer/button/report-confirm';
 
 interface Props {
-  params: {
+  params: Promise<{
     id: number;
-  };
+  }>;
 }
 
 const Page = async ({ params }: Props) => {

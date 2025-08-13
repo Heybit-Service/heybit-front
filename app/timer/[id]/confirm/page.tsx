@@ -7,9 +7,9 @@ import CheckIcon from '@/assets/icon/check.svg';
 import { Actions } from './actions';
 
 interface Props {
-  params: {
+  params: Promise<{
     id: number;
-  };
+  }>;
 }
 
 const Page = async ({ params }: Props) => {
