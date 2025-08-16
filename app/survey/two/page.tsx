@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Wrapper, TitleWrapper, Title, Description } from './../styles';
 import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
+import { SurveyProgressBar } from '@/components/surveyProgressBar';
 
 const SurveyPage: FC = () => {
     const router = useRouter();
@@ -24,6 +25,7 @@ const SurveyPage: FC = () => {
 
     return (
         <Wrapper>
+            <SurveyProgressBar progressbar="progress-02" />
             <TitleWrapper>
                 <Title>
                     충동 소비라고 느끼는 빈도가 <br/> 어떻게 되나요?
@@ -37,8 +39,13 @@ const SurveyPage: FC = () => {
                 <SurveyItem key={item.id} selected={item.id === selectedItem} onClick={() => setSelectedItem(item.id)}>{item.label}</SurveyItem>
             ))}
 
-            {selectedItem !== null && 
-            <FullButton style={{ marginTop: 'auto', marginBottom: '56px' }} onClick={handleStart}>다음</FullButton>}
+            <FullButton 
+                style={{ marginTop: 'auto', marginBottom: '56px' }} 
+                onClick={handleStart}
+                disabled={selectedItem === null}
+            >
+                다음
+            </FullButton>
         </Wrapper>
     )
 }
