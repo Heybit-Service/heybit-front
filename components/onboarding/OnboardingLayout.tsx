@@ -12,6 +12,7 @@ interface OnboardingLayoutProps {
     title?: ReactNode;
     showSkipButton?: boolean;
     showNextButton?: boolean;
+    nextButtonText?: string;
 }
 
 export default function OnboardingLayout({
@@ -19,10 +20,11 @@ export default function OnboardingLayout({
     currentPage,
     totalPages = 3,
     nextPath,
-    skipPath = '/survey/one',
+    skipPath = '/register',
     title,
     showSkipButton = true,
-    showNextButton = true
+    showNextButton = true,
+    nextButtonText = '다음'
 }: OnboardingLayoutProps) {
     const router = useRouter();
     
@@ -136,7 +138,7 @@ export default function OnboardingLayout({
                         lineHeight: '150%'
                     }}
                 >
-                    다음
+                    {nextButtonText}
                 </button>
             )}
         </div>
