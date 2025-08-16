@@ -1,12 +1,11 @@
 "use client";
 
-import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { Wrapper, Title, Description } from './styles';
 import CharacterDefault from '@/assets/character/character-default.svg';
 import FullButton from '@/components/button/fullButton';
 
-const RegisterPage: FC = () => {
+export default function RegisterPage() {
 
     const router = useRouter();
     
@@ -30,5 +29,3 @@ const RegisterPage: FC = () => {
         </Wrapper>
     )
 }
-
-export default RegisterPage;
