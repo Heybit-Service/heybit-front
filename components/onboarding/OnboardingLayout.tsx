@@ -39,7 +39,7 @@ export default function OnboardingLayout({
     };
     
     return (
-        <div className="min-h-screen relative bg-heybit-variable-HB-gray100">
+        <div className="h-full relative bg-heybit-variable-HB-gray100 flex flex-col">
             {/* 건너뛰기 버튼 - 우측 상단 */}
             {showSkipButton && (
                 <div 
@@ -62,51 +62,54 @@ export default function OnboardingLayout({
                 </div>
             )}
             
-            {/* 온보딩 컨텐츠 */}
-            <div style={{ paddingTop: '58px', paddingLeft: '26.5px', paddingRight: '26.5px' }}>
-                {children}
-            </div>
-            
-            {/* 텍스트 */}
-            {title && (
+            {/* 스크롤 가능한 컨텐츠 영역 */}
+            <div className="flex-1 overflow-y-auto" style={{ paddingBottom: '140px' }}>
+                {/* 온보딩 컨텐츠 */}
+                <div style={{ paddingTop: '58px', paddingLeft: '26.5px', paddingRight: '26.5px' }}>
+                    {children}
+                </div>
+                
+                {/* 텍스트 */}
+                {title && (
+                    <div 
+                        className="text-center"
+                        style={{
+                            marginTop: '36px',
+                            color: 'var(--heybit-variable-HB-balck)',
+                            fontFamily: 'Pretendard',
+                            fontSize: '24px',
+                            fontStyle: 'normal',
+                            fontWeight: 700,
+                            lineHeight: '133%'
+                        }}
+                    >
+                        {title}
+                    </div>
+                )}
+                
+                {/* 페이지 인디케이터 */}
                 <div 
-                    className="text-center"
                     style={{
-                        marginTop: '36px',
-                        color: 'var(--heybit-variable-HB-balck)',
-                        fontFamily: 'Pretendard',
-                        fontSize: '24px',
-                        fontStyle: 'normal',
-                        fontWeight: 700,
-                        lineHeight: '133%'
+                        marginTop: '32px',
+                        display: 'flex',
+                        gap: '12px',
+                        justifyContent: 'center'
                     }}
                 >
-                    {title}
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <div 
+                            key={index}
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                borderRadius: '50%',
+                                backgroundColor: index === currentPage - 1 
+                                    ? 'var(--heybit-variable-HB-balck)' 
+                                    : 'var(--heybit-variable-HB-gray200)'
+                            }}
+                        />
+                    ))}
                 </div>
-            )}
-            
-            {/* 페이지 인디케이터 */}
-            <div 
-                style={{
-                    marginTop: '32px',
-                    display: 'flex',
-                    gap: '12px',
-                    justifyContent: 'center'
-                }}
-            >
-                {Array.from({ length: totalPages }, (_, index) => (
-                    <div 
-                        key={index}
-                        style={{
-                            width: '12px',
-                            height: '12px',
-                            borderRadius: '50%',
-                            backgroundColor: index === currentPage - 1 
-                                ? 'var(--heybit-variable-HB-balck)' 
-                                : 'var(--heybit-variable-HB-gray200)'
-                        }}
-                    />
-                ))}
             </div>
             
             {/* 다음 버튼 */}
@@ -121,15 +124,12 @@ export default function OnboardingLayout({
                         right: '16px',
                         display: 'flex',
                         height: '60px',
-                        padding: '20px 132px',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        gap: '10px',
                         borderRadius: '10px',
                         background: 'var(--heybit-variable-HB-balck)',
                         border: 'none',
                         cursor: 'pointer',
-                        marginTop: '10px',
                         textAlign: 'center',
                         fontFamily: 'Pretendard',
                         fontSize: '18px',
