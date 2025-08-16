@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Wrapper, Title, Description } from './styles';
-import CharacterDefault from '@/assets/character/character-default.svg';
+import Character from '@/assets/register-complete/character.svg';
 import FullButton from '@/components/button/fullButton';
 
 export default function RegisterPage() {
@@ -15,8 +15,8 @@ export default function RegisterPage() {
 
     return (
         <Wrapper>
-            <CharacterDefault style={{ marginBottom: '50px', marginTop: 'auto' }} />
-            <Title>
+            <Character style={{ marginTop: '110px', marginBottom: '31px' }} />
+            <Title style={{ marginBottom: '16px' }}>
                 무의식적인 소비, <br />
                 한 번 돌아보셨나요?
             </Title>
