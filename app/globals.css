@@ -4,6 +4,48 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Heybit Design System Variables */
+  --hbblue: rgba(1, 132, 233, 1);
+  --heybit-variable-delete: rgba(255, 78, 39, 1);
+  --heybit-variable-HB-balck: rgba(32, 32, 32, 1);
+  --heybit-variable-HB-blue01: rgba(0, 91, 219, 1);
+  --heybit-variable-HB-blue02: rgba(205, 233, 250, 1);
+  --heybit-variable-HB-gray100: rgba(247, 247, 247, 1);
+  --heybit-variable-HB-gray200: rgba(232, 232, 232, 1);
+  --heybit-variable-HB-gray300: rgba(168, 168, 168, 1);
+  --heybit-variable-HB-gray400: rgba(124, 124, 124, 1);
+  --heybit-variable-HB-gray500: rgba(91, 91, 91, 1);
+  --heybit-variable-HB-green-main: rgba(14, 193, 137, 1);
+  --heybit-variable-HB-green-sub01: rgba(207, 243, 231, 1);
+  --heybit-variable-HB-green-sub02: rgba(10, 144, 107, 1);
+  --heybit-variable-HB-green-sub03: rgba(4, 93, 69, 1);
+  --heybit-variable-HB-red01: rgba(255, 0, 0, 1);
+  --heybit-variable-HB-red02: rgba(231, 74, 39, 1);
+  --heybit-variable-HB-red03: rgba(251, 123, 123, 1);
+  --heybit-variable-HB-red04: rgba(250, 219, 212, 1);
+  --heybit-variable-HB-white: rgba(255, 255, 255, 1);
+  --heybit-variable-HB-yellow01: rgba(255, 196, 0, 1);
+  --heybit-variable-HB-yellow02: rgba(228, 137, 0, 1);
+  
+  /* Typography Variables */
+  --h0-medium-font-family: "Pretendard", Helvetica;
+  --h0-medium-font-size: 28px;
+  --h0-medium-font-weight: 500;
+  --h0-medium-line-height: 150%;
+  --h1-bold-font-family: "Pretendard", Helvetica;
+  --h1-bold-font-size: 26px;
+  --h1-bold-font-weight: 700;
+  --h1-bold-line-height: 133%;
+  --h1-medium-font-family: "Pretendard", Helvetica;
+  --h1-medium-font-size: 26px;
+  --h1-medium-font-weight: 500;
+  --h1-medium-line-height: 133%;
+  
+  /* Shadow Variables */
+  --HB-shadow-card: 0px 3px 8px 0px rgba(83, 83, 83, 0.05);
+  --HB-shadow-sub: 2px 2px 4px 5px rgba(0, 0, 0, 0.05);
+  --bubble: 0px 4px 5px 0px rgba(0, 0, 0, 0.01);
 }
 
 @theme inline {
@@ -11,6 +53,29 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Heybit Colors */
+  --color-hbblue: var(--hbblue);
+  --color-heybit-variable-delete: var(--heybit-variable-delete);
+  --color-heybit-variable-HB-balck: var(--heybit-variable-HB-balck);
+  --color-heybit-variable-HB-blue01: var(--heybit-variable-HB-blue01);
+  --color-heybit-variable-HB-blue02: var(--heybit-variable-HB-blue02);
+  --color-heybit-variable-HB-gray100: var(--heybit-variable-HB-gray100);
+  --color-heybit-variable-HB-gray200: var(--heybit-variable-HB-gray200);
+  --color-heybit-variable-HB-gray300: var(--heybit-variable-HB-gray300);
+  --color-heybit-variable-HB-gray400: var(--heybit-variable-HB-gray400);
+  --color-heybit-variable-HB-gray500: var(--heybit-variable-HB-gray500);
+  --color-heybit-variable-HB-green-main: var(--heybit-variable-HB-green-main);
+  --color-heybit-variable-HB-green-sub01: var(--heybit-variable-HB-green-sub01);
+  --color-heybit-variable-HB-green-sub02: var(--heybit-variable-HB-green-sub02);
+  --color-heybit-variable-HB-green-sub03: var(--heybit-variable-HB-green-sub03);
+  --color-heybit-variable-HB-red01: var(--heybit-variable-HB-red01);
+  --color-heybit-variable-HB-red02: var(--heybit-variable-HB-red02);
+  --color-heybit-variable-HB-red03: var(--heybit-variable-HB-red03);
+  --color-heybit-variable-HB-red04: var(--heybit-variable-HB-red04);
+  --color-heybit-variable-HB-white: var(--heybit-variable-HB-white);
+  --color-heybit-variable-HB-yellow01: var(--heybit-variable-HB-yellow01);
+  --color-heybit-variable-HB-yellow02: var(--heybit-variable-HB-yellow02);
 }
 
 body {
