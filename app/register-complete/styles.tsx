@@ -4,10 +4,7 @@ import { GRAY, BLACK } from '@/constant/color';
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  position: relative;
 `;
 
 export const Title = styled.div`
