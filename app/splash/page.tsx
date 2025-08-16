@@ -18,7 +18,7 @@ export default function SplashPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen relative" style={{ backgroundColor: GRAY[100] }}>
+    <div className="min-h-screen relative" style={{ backgroundColor: GRAY[100], minHeight: '100dvh' }}>
       <div className="flex flex-col items-center pt-32">
         <Logo width={198} height={71.92} />
         <p 

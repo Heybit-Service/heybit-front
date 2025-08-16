@@ -39,7 +39,7 @@ export default function OnboardingLayout({
     };
     
     return (
-        <div className="h-full relative bg-heybit-variable-HB-gray100 flex flex-col">
+        <div className="h-screen relative bg-heybit-variable-HB-gray100 flex flex-col" style={{ height: '100dvh' }}>
             {/* 건너뛰기 버튼 - 우측 상단 */}
             {showSkipButton && (
                 <div 
@@ -120,8 +120,8 @@ export default function OnboardingLayout({
                     style={{
                         position: 'absolute',
                         bottom: '56px',
-                        left: '16px',
-                        right: '16px',
+                        left: '0',
+                        right: '0',
                         display: 'flex',
                         height: '60px',
                         justifyContent: 'center',

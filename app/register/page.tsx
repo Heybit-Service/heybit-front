@@ -67,9 +67,9 @@ const RegisterPage: FC = () => {
                     style={{ 
                         position: 'absolute',
                         bottom: '56px',
-                        left: '16px',
-                        right: '16px',
-                        width: 'calc(100% - 32px)'
+                        left: '0',
+                        right: '0',
+                        width: '100%'
                     }} 
                     onClick={handleStart}
                 >
