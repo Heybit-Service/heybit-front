@@ -17,16 +17,29 @@ export const TitleWrapper = styled.div`
 `;  
 
 export const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 133%;
+  overflow: hidden;
   color: ${BLACK};
+  text-overflow: ellipsis;
+
+  /* H2_Bold */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 133%; /* 31.92px */
   margin: 0;
 `;
 
 export const Description = styled.h1`
-  font-size: 16px;
-  line-height: 140%;
+  overflow: hidden;
   color: ${GRAY[400]};
-  margin-bottom: 16px;
+  text-overflow: ellipsis;
+
+  /* H6_Medium */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 22.4px */
+  margin: 0;
 `;
