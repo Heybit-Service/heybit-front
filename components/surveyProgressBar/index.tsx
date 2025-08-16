@@ -9,7 +9,7 @@ interface Props {
     | "progress-03";
 }
 
-export const SurveyProgressBar = ({ progressbar }: Props): JSX.Element => {
+export const SurveyProgressBar = ({ progressbar }: Props) => {
   return (
     <div className="w-[calc(100%+32px)] h-1 bg-heybit-variable-HB-gray200 -ml-4">
       {[
