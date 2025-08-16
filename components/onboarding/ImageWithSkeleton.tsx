@@ -66,7 +66,7 @@ export default function ImageWithSkeleton({
             <Image
                 {...props}
                 alt={alt}
-                onLoadingComplete={() => setIsLoading(false)}
+                onLoad={() => setIsLoading(false)}
                 style={{ 
                     ...props.style,
                     opacity: isLoading ? 0 : 1,
