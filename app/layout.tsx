@@ -31,7 +31,11 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StyledComponentsRegistry>
-          {children}
+          <div className="min-h-screen flex justify-center bg-gray-100">
+            <div className="w-full max-w-[430px] bg-white relative shadow-xl">
+              {children}
+            </div>
+          </div>
           <div id="popup-root" />
         </StyledComponentsRegistry>
       </body>

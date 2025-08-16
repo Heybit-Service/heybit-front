@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import OnboardingImage1 from '@/assets/on-boarding/1.png';
+import OnboardingImage1 from '@/assets/on-boarding/1.webp';
 
 export default function OnboardingPage() {
     const router = useRouter();

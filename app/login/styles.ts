@@ -3,7 +3,7 @@ import { GRAY, BLACK } from '@/constant/color';
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +31,7 @@ export const KaKaoButton = styled.button`
   font-weight: 600;
   margin-bottom: 16px;
   gap: 7px;
+  cursor: pointer;
 `;
 
 export const GoogleButton = styled.button`
@@ -46,6 +47,7 @@ export const GoogleButton = styled.button`
   font-weight: 600;
   gap: 7px;
   margin-bottom: 36px;
+  cursor: pointer;
 `;
 
 export const Footer = styled.div`
