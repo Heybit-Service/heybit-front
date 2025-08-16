@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Heybit',
   description: '헤이빗과 함께 유예 타이머와 살까말까 투표, 소비 리포트를 통해 불필요한 충동구매를 절제해 보세요.',
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
