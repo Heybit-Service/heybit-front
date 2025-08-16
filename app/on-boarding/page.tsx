@@ -39,6 +39,8 @@ export default function OnboardingPage() {
                     src={OnboardingImage1} 
                     alt="온보딩 이미지"
                     priority={true}
+                    placeholder="blur"
+                    quality={100}
                     style={{ width: '100%', height: 'auto' }}
                 />
             </div>
