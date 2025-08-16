@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StyledComponentsRegistry>
           <div className="min-h-screen flex justify-center bg-gray-100">
-            <div className="w-full max-w-[430px] bg-white relative shadow-xl">
+            <div className="w-full md:max-w-[430px] bg-white relative md:shadow-xl">
               {children}
             </div>
           </div>
