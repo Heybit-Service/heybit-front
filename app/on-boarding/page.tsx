@@ -38,6 +38,7 @@ export default function OnboardingPage() {
                 <Image 
                     src={OnboardingImage1} 
                     alt="온보딩 이미지"
+                    priority={true}
                     style={{ width: '100%', height: 'auto' }}
                 />
             </div>
