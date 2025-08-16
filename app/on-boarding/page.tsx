@@ -9,6 +9,7 @@ export default function OnboardingPage() {
         <OnboardingLayout
             currentPage={1}
             nextPath="/on-boarding/2"
+            skipPath="/register"
             title={<>다시 생각해보며<br /> 소비 절제 능력을 길러요</>}
         >
             <ImageWithSkeleton 
