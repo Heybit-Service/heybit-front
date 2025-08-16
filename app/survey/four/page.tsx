@@ -1,17 +1,17 @@
 "use client";
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Wrapper, TitleWrapper, Title, Description } from './../styles';
+import { Wrapper, TitleWrapper, Title } from './../styles';
 import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
 import { SurveyProgressBar } from '@/components/surveyProgressBar';
 
-const SurveyPage: FC = () => {
+export default function SurveyPage() {
     const router = useRouter();
     
     const handleStart = () => {
-        router.push('/register-complete'); // Redirect to the next page after registration
+        router.push('/register-complete');
     }
 
     const [items] = useState([
@@ -48,5 +48,3 @@ const SurveyPage: FC = () => {
         </Wrapper>
     )
 }
-
-export default SurveyPage;

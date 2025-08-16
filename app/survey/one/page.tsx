@@ -11,7 +11,7 @@ export default function SurveyPage() {
     const router = useRouter();
     
     const handleStart = () => {
-        router.push('/survey/two'); // Redirect to the next page after registration
+        router.push('/survey/two');
     }
 
     const [items] = useState([
