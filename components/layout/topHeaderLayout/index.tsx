@@ -12,16 +12,12 @@ const TopHeaderLayout = ({
     const router = useRouter(); 
 
   return (
-    <html lang="ko">
-      <body>
-        <Wrapper>
-            <Top>
-                <ArrowBack onClick={() => router.back()} />
-            </Top>
-            {children}
-        </Wrapper>
-      </body>
-    </html>
+    <Wrapper>
+        <Top>
+            <ArrowBack onClick={() => router.back()} style={{ cursor: 'pointer' }} />
+        </Top>
+        {children}
+    </Wrapper>
   )
 }
 
