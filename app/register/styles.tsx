@@ -14,17 +14,29 @@ export const TitleWrapper = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 24px;
-  line-height: 133%;
-  font-weight: 700;
+  overflow: hidden;
   color: ${BLACK};
+  text-overflow: ellipsis;
+
+  /* H2_Bold */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 133%; /* 31.92px */
   margin-bottom: 6px;
 `;
 
 export const Description = styled.div`
-  font-size: 16px;
-  line-height: 140%;
-  font-weight: 700;
+  overflow: hidden;
   color: ${GRAY[400]};
+  text-overflow: ellipsis;
+
+  /* H6_Medium */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 22.4px */
   margin-bottom: 6px;
 `;
