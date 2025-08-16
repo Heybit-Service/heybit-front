@@ -5,11 +5,16 @@ import { GRAY, BLACK } from '@/constant/color';
 
 export const Wrapper = styled.div`
   background-color: ${GRAY[100]};
-  width: 100vw;
+  width: 100%;
   height: 100dvh;
   padding: calc(56px + 60px) 16px 84px 16px;
   position: relative;
   overflow: auto;
+  
+  @media (min-width: 768px) {
+    max-width: 430px;
+    margin: 0 auto;
+  }
 `;
 
 export const Top = styled.div`
@@ -20,9 +25,16 @@ export const Top = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   padding: 0 16px;
   background-color: #ffffff;
   justify-content: flex-end;
+  
+  @media (min-width: 768px) {
+    max-width: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 export const Bottom = styled.div`
@@ -33,8 +45,15 @@ export const Bottom = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   background-color: #ffffff;
   flex-direction: row;
+  
+  @media (min-width: 768px) {
+    max-width: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .item {
     flex: 1;

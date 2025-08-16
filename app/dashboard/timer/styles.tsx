@@ -8,7 +8,14 @@ export const TabWrapper = styled.div`
     position: fixed;
     top: 56px;
     left: 0;
+    right: 0;
     display: flex;
+    
+    @media (min-width: 768px) {
+        max-width: 430px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
 
     .item {

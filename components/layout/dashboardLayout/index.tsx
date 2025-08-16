@@ -15,40 +15,38 @@ const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
     pathname.startsWith('/dashboard/timer') || pathname.startsWith('/dashboard/vote');
 
   return (
-    <html lang="ko">
-      <body>
-        <Wrapper>
-          <Top>
-            <IconBell />
-          </Top>
-          {children}
-          <Bottom>
-            <Link
-              className={`item${pathname.startsWith('/dashboard/timer') ? ' active' : ''}`}
-              href={'/dashboard/timer/progress'}
-            >
-              <IconTimer />
-              타이머
-            </Link>
-            <Link
-              className={`item${pathname.startsWith('/dashboard/vote') ? ' active' : ''}`}
-              href={'/dashboard/vote/progress'}
-            >
-              <IconVote />
-              살말투표
-            </Link>
-            <Link
-              className={`item${pathname === '/dashboard/report' ? ' active' : ''}`}
-              href={'/dashboard/report'}
-            >
-              <IconReport />
-              리포트
-            </Link>
-          </Bottom>
-        </Wrapper>
-        {fabVisible && <Fab />}
-      </body>
-    </html>
+    <>
+      <Wrapper>
+        <Top>
+          <IconBell />
+        </Top>
+        {children}
+        <Bottom>
+          <Link
+            className={`item${pathname.startsWith('/dashboard/timer') ? ' active' : ''}`}
+            href={'/dashboard/timer/progress'}
+          >
+            <IconTimer />
+            타이머
+          </Link>
+          <Link
+            className={`item${pathname.startsWith('/dashboard/vote') ? ' active' : ''}`}
+            href={'/dashboard/vote/progress'}
+          >
+            <IconVote />
+            살말투표
+          </Link>
+          <Link
+            className={`item${pathname === '/dashboard/report' ? ' active' : ''}`}
+            href={'/dashboard/report'}
+          >
+            <IconReport />
+            리포트
+          </Link>
+        </Bottom>
+      </Wrapper>
+      {fabVisible && <Fab />}
+    </>
   );
 };
 
