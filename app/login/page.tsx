@@ -15,13 +15,13 @@ const LoginPage: FC = () => {
     const handleKakaoLogin = () => {
         // Implement Kakao login logic here
         // console.log("Kakao login clicked");
-        router.push('/register'); // Redirect to register page after login
+        router.push('/on-boarding'); // Redirect to onboarding page after login
     }; 
 
     const handleGoogleLogin = () => {
         // Implement Google login logic here
         // console.log("Google login clicked");
-        router.push('/register'); // Redirect to register page after login
+        router.push('/on-boarding'); // Redirect to onboarding page after login
     };
     
     return (
