@@ -46,7 +46,7 @@ const RegisterPage: FC = () => {
 
     const handleStart = () => {
         if (textFieldStatus === 'success') {
-            router.push('/on-boarding'); // Redirect to the next page after registration
+            router.push('/survey/one');
         }
     }
 
