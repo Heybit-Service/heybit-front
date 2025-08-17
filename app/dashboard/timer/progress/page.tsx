@@ -7,7 +7,7 @@ import { Empty } from './empty';
 
 const Page = async () => {
   const timers = await fetchCurrentTimers();
-  if (timers.length !== 0) {
+  if (timers.length === 0) {
     return <Empty />;
   }
   return (

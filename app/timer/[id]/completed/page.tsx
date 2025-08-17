@@ -15,11 +15,13 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const timer = await fetchTimer(id);
   return (
-    <div className="h-dvh bg-[#F7F7F7]">
+    <div className="bg-[#F7F7F7]">
       <AppBar title="내가 등록한 상품" leadings={<BackButton />} />
-      <TimerSummary timer={timer} />
-      <TimerInformation timer={timer} />
-      <div className="absolute bottom-14 w-full px-4">
+      <main className="pb-[126px]">
+        <TimerSummary timer={timer} />
+        <TimerInformation timer={timer} />
+      </main>
+      <div className="w-full fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <ReportConfirmButton id={id} />
       </div>
     </div>
