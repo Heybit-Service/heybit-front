@@ -24,9 +24,9 @@ export default function Page() {
 
   return (
     <>
-      <div className="h-dvh bg-[#F7F7F7] flex flex-col">
+      <div className="h-dvh bg-[#F7F7F7]">
         <AppBar title="타이머 시작" leadings={<BackButton />} />
-        <div className="flex-1 flex flex-col items-center overflow-y-auto">
+        <div className="flex flex-col items-center pb-[126px]">
           <SizedBox className="h-16" />
           <Image width={321} height={62} src={Bubble} alt="bubble" />
           <SizedBox className="h-6" />
@@ -34,7 +34,7 @@ export default function Page() {
           <SizedBox className="h-8" />
           <DurationPicker onChanged={onChanged} />
         </div>
-        <div className="w-full px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+        <div className="fixed bottom-0 left-0 right-0 w-full px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
           <TimerStartButton disabled={!enabled()} />
         </div>
       </div>
