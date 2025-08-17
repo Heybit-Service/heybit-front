@@ -7,7 +7,7 @@ import Bubble from '@/assets/timer/start/bubble.png';
 import Character from '@/assets/timer/start/character.png';
 import Image from 'next/image';
 import { TimerStartButton } from '@/components/timer/button/timer-start';
-import DurationPicker from '@/components/timer/picker';
+import DurationPicker, { Duration } from '@/components/timer/picker';
 import { useAtom } from 'jotai';
 import { formAtom } from '@/components/timer/form/store';
 

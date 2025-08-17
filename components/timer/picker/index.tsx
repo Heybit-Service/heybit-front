@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Picker from 'react-mobile-picker';
 import './styles.css';
 
-interface Duration {
+export interface Duration {
   day: number;
   hour: number;
   minute: number;
