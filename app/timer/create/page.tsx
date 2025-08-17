@@ -14,7 +14,7 @@ const Page = () => {
   const [form, setForm] = useAtom(formAtom);
   const duration = `${form.day}일 ${form.hour}시간 ${form.minute}분`;
   return (
-    <div className="h-screen bg-[#F7F7F7]">
+    <div className="h-dvh bg-[#F7F7F7]">
       <AppBar title="타이머 상품 등록" leadings={<BackButton />} />
       <TimerBubble duration={duration} />
       <div className="pt-8">

@@ -15,7 +15,7 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const timer = await fetchTimer(id);
   return (
-    <div className="h-screen bg-[#F7F7F7]">
+    <div className="h-dvh bg-[#F7F7F7]">
       <AppBar title="내가 등록한 상품" leadings={<BackButton />} />
       <TimerSummary timer={timer} />
       <TimerInformation timer={timer} />

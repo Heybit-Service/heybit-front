@@ -23,7 +23,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-screen bg-[#F7F7F7]">
+    <div className="h-dvh bg-[#F7F7F7]">
       <AppBar
         title=""
         actions={

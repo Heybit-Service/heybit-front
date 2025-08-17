@@ -28,7 +28,7 @@ const Page = async ({ params }: Props) => {
   };
 
   return (
-    <div className="h-screen bg-[#F7F7F7] flex flex-col pt-30">
+    <div className="h-dvh bg-[#F7F7F7] flex flex-col pt-30">
       <div className="flex flex-col items-center gap-5 flex-grow">
         <Image className="px-23" src={Character} alt="character" />
         <div className="flex flex-col items-center gap-3">

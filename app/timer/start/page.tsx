@@ -14,7 +14,7 @@ import { formAtom } from '@/components/timer/form/store';
 export default function Page() {
   const [form, setForm] = useAtom(formAtom);
   return (
-    <div className="h-screen bg-[#F7F7F7]">
+    <div className="h-dvh bg-[#F7F7F7]">
       <AppBar title="타이머 시작" leadings={<BackButton />} />
       <SizedBox className="h-16" />
       <div className="flex flex-col items-center gap-8">
