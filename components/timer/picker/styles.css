@@ -1,0 +1,3 @@
+.w-full > div:first-child > div:last-child {
+  display: none !important;
+}
