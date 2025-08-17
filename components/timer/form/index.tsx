@@ -9,6 +9,7 @@ import { Title } from './title';
 import { Upload } from './upload';
 import { Voting } from './voting';
 import { Form, formAtom } from './store';
+import { TimerCreateButton } from '../button/create';
 
 interface Props {
   onSubmit: (form: Form) => void;
@@ -27,8 +28,6 @@ export const TimerForm = ({ onSubmit }: Props) => {
     return true;
   };
 
-  const textColor = enabled() ? '#FFFFFF' : '#5B5B5B';
-  const backgroundColor = enabled() ? '#202020' : '#E8E8E8';
   return (
     <div className="h-dvh flex flex-col items-center gap-13 px-4">
       <div className="flex flex-col gap-6 pb-[126px]">
@@ -41,13 +40,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
       <div className="w-full fixed bottom-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
-        <button
-          className={`w-full bg-[${backgroundColor}] py-4 font-semibold text-xl text-[${textColor}] leading-[150%] text-center rounded-[10px] transition-colors duration-300 ease-in-out`}
-          onClick={() => onSubmit(form)}
-          disabled={!enabled()}
-        >
-          등록
-        </button>
+        <TimerCreateButton onClick={() => onSubmit(form)} disabled={!enabled()} />
       </div>
     </div>
   );
