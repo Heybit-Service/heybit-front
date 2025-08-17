@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { gsap } from 'gsap';
 
 const ITEM_HEIGHT = 56;
 const VISIBLE_ITEMS = 3;
@@ -35,9 +36,10 @@ export const Column = ({ options, value, onChange }: Props) => {
 
   useEffect(() => {
     if (scrollRef.current && selectedIndex > 0) {
-      scrollRef.current.scrollTo({
-        top: (selectedIndex - 1) * ITEM_HEIGHT,
-        behavior: 'smooth',
+      gsap.to(scrollRef.current, {
+        scrollTop: (selectedIndex - 1) * ITEM_HEIGHT,
+        duration: 0.3,
+        ease: 'power2.inOut',
       });
     }
   }, [value, selectedIndex]);
