@@ -9,6 +9,7 @@ import { Step4 } from './step4';
 import { Step5 } from './step5';
 import { useRouter } from 'next/navigation';
 import { ProgressBar } from './components';
+import { AnimatePresence } from 'framer-motion';
 
 const Page = () => {
   const [step, setStep] = useState(1);
@@ -38,11 +39,13 @@ const Page = () => {
         }
       />
       <ProgressBar current={step} total={5} />
-      {step === 1 && <Step1 />}
-      {step === 2 && <Step2 />}
-      {step === 3 && <Step3 />}
-      {step === 4 && <Step4 />}
-      {step === 5 && <Step5 />}
+      <AnimatePresence mode="wait">
+        {step === 1 && <Step1 key="step1" />}
+        {step === 2 && <Step2 key="step2" />}
+        {step === 3 && <Step3 key="step3" />}
+        {step === 4 && <Step4 key="step4" />}
+        {step === 5 && <Step5 key="step5" />}
+      </AnimatePresence>
       <div className="absolute bottom-14 w-full px-4 flex justify-center gap-[14px]">
         <button
           className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"

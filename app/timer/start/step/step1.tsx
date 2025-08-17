@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import Title from '@/assets/timer/start/step1/title.png';
 import Character from '@/assets/timer/start/step1/character.png';
+import { StepMotion } from './components';
 
 export const Step1 = () => {
   return (
-    <div className="flex flex-col items-center gap-18">
-      <Image src={Title} alt="title" />
-      <Image className="px-4" src={Character} alt="character" />
-    </div>
+    <StepMotion>
+      <div className="flex flex-col items-center gap-18">
+        <Image src={Title} alt="title" />
+        <Image className="px-4" src={Character} alt="character" />
+      </div>
+    </StepMotion>
   );
 };
