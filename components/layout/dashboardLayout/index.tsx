@@ -20,7 +20,9 @@ const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
       <Wrapper>
         <Top>
           <Logo />
-          <IconBell />
+          <Link href="/alarm-center">
+            <IconBell />
+          </Link>
         </Top>
         {children}
         <Bottom>
