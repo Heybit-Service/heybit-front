@@ -12,7 +12,7 @@ export const Fab = () => {
 
   return (
     <button
-      className="absolute bottom-25 right-4 w-16 h-16 bg-[#202020] rounded-full flex items-center justify-center"
+      className="fixed bottom-25 right-4 w-16 h-16 bg-[#202020] rounded-full flex items-center justify-center"
       onClick={onClick}
     >
       <PlusIcon />
