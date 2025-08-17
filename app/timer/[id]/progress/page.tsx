@@ -18,11 +18,13 @@ const Page = async ({ params }: Props) => {
   return (
     <div className="h-dvh bg-[#F7F7F7] flex flex-col">
       <AppBar title="참고 있는 상품" leadings={<BackButton />} actions={<MoreButton id={id} />} />
-      <TimerProgressSummary timer={timer} />
-      <TimerInformation timer={timer} />
-      {/* <div className="absolute bottom-14 w-full px-4">
+      <div className="pb-[126px]">
+        <TimerProgressSummary timer={timer} />
+        <TimerInformation timer={timer} />
+      </div>
+      <div className="w-full fixed bottom-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <TimerStopButton id={id} />
-      </div> */}
+      </div>
     </div>
   );
 };
