@@ -25,7 +25,7 @@ export default function Page() {
           <SizedBox className="h-16" />
           <Image className="px-9" src={Bubble} alt="bubble" />
           <SizedBox className="h-6" />
-          <Image className="px-28" src={Character} alt="character" />
+          <Image width={171} height={191} src={Character} alt="character" />
           <SizedBox className="h-8" />
           <DurationPicker onChanged={onChanged} />
         </div>
