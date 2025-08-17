@@ -28,7 +28,7 @@ export const Price = ({ onChange }: Props) => {
       <input
         value={value}
         type="text"
-        className="w-full border border-[#A8A8A8] rounded-[10px] px-[14px] py-4 bg-white font-medium text-base leading-[140%] tracking-[0%] focus:outline-none pr-12"
+        className="w-full border border-[#A8A8A8] rounded-[10px] px-[14px] py-4 bg-white font-medium text-base leading-[140%] tracking-[0%] text-[#202020] focus:outline-none pr-12"
         placeholder="₩ 상품 금액을 입력해주세요"
         onChange={handleChange}
       />
