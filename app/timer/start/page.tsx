@@ -29,7 +29,7 @@ export default function Page() {
           }
         />
       </div>
-      <div className="absolute bottom-14 w-full px-4">
+      <div className="w-full fixed bottom-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <TimerStartButton />
       </div>
     </div>
