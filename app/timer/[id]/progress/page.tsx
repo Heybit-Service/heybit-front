@@ -22,7 +22,7 @@ const Page = async ({ params }: Props) => {
         <TimerProgressSummary timer={timer} />
         <TimerInformation timer={timer} />
       </div>
-      <div className="w-full fixed bottom-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <div className="w-full fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <TimerStopButton id={id} />
       </div>
     </div>
