@@ -1,16 +1,38 @@
 'use client';
 
+import Asterisk from '@/assets/timer/create/asterisk.svg';
+import { useState } from 'react';
+
 interface Props {
   onChange: (value: string) => void;
 }
 
 export const Price = ({ onChange }: Props) => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.replace(/[^\d]/g, '');
+    if (inputValue.length > 0) {
+      const numberWithCommas = Number(inputValue).toLocaleString();
+      const formattedValue = `₩ ${numberWithCommas}`;
+      setValue(formattedValue);
+      onChange(formattedValue);
+    } else {
+      setValue('');
+      onChange('');
+    }
+  };
+
   return (
-    <input
-      type="text"
-      className="border border-[#A8A8A8] rounded-[10px] px-[14px] py-4 bg-white font-medium text-base leading-[140%] tracking-[0% focus:outline-none"
-      placeholder="₩ 상품 금액을 입력해주세요"
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <div className="relative w-full">
+      <input
+        value={value}
+        type="text"
+        className="w-full border border-[#A8A8A8] rounded-[10px] px-[14px] py-4 bg-white font-medium text-base leading-[140%] tracking-[0%] focus:outline-none pr-12"
+        placeholder="₩ 상품 금액을 입력해주세요"
+        onChange={handleChange}
+      />
+      <Asterisk className="absolute right-3 top-3" />
+    </div>
   );
 };
