@@ -1,93 +1,58 @@
-'use client';
-
 import { useState } from 'react';
-import Picker from 'react-mobile-picker';
+import { Column } from './column';
 import './styles.css';
+
+const selections = {
+  day: Array.from({ length: 31 }, (_, i) => i),
+  hour: Array.from({ length: 24 }, (_, i) => i),
+  minute: Array.from({ length: 60 }, (_, i) => i),
+};
 
 export interface Duration {
   day: number;
   hour: number;
   minute: number;
 }
-
 interface Props {
   onChanged: (duration: Duration) => void;
 }
 
-type PickerValue = {
-  day: string;
-  hour: string;
-  minute: string;
-};
-
-const selections = {
-  day: Array.from({ length: 30 }, (_, i) => i.toString()),
-  hour: Array.from({ length: 24 }, (_, i) => i.toString()),
-  minute: Array.from({ length: 60 }, (_, i) => i.toString()),
-};
-
 const DurationPicker = ({ onChanged }: Props) => {
-  const [pickerValue, setPickerValue] = useState<PickerValue>({
-    day: '0',
-    hour: '0',
-    minute: '0',
-  });
+  const [value, setValue] = useState<Duration>({ day: 0, hour: 0, minute: 0 });
 
-  const handleChange = (value: PickerValue) => {
-    const numericDuration: Duration = {
-      day: Number(value.day),
-      hour: Number(value.hour),
-      minute: Number(value.minute),
-    };
-    setPickerValue(value);
-    onChanged(numericDuration);
+  const handleChange = (unit: keyof Duration, newValue: string | number) => {
+    const numericValue = Number(newValue);
+    if (isNaN(numericValue)) return;
+    setValue((prevValue) => {
+      const updatedValue = { ...prevValue, [unit]: numericValue };
+      onChanged(updatedValue);
+      return updatedValue;
+    });
   };
 
   return (
-    <div className="w-full px-13">
-      <Picker
-        value={pickerValue}
-        onChange={handleChange}
-        wheelMode="natural"
-        height={180}
-        itemHeight={60}
-        style={{
-          display: 'flex',
-          gap: '30px',
-        }}
-      >
-        {Object.keys(selections).map((name) => (
-          <Picker.Column key={name} name={name}>
-            {selections[name as keyof typeof selections].map((option) => (
-              <Picker.Item
-                key={option}
-                value={option}
-                style={{
-                  width: '62px',
-                  borderBottom: '1.8px solid #EAEAEA',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                }}
-              >
-                {({ selected }) => (
-                  <div
-                    className="font-medium text-[28px] leading-[150%] text-center"
-                    style={{
-                      color: selected ? '#202020' : '#0000004D',
-                    }}
-                  >
-                    {option}
-                  </div>
-                )}
-              </Picker.Item>
-            ))}
-          </Picker.Column>
-        ))}
-      </Picker>
-      <div className="w-full flex gap-[30px] font-['Pretendard'] font-semibold text-base text-[#878787] leading-[150%]">
-        <span className="w-full text-center">일</span>
-        <span className="w-full text-center">시간</span>
-        <span className="w-full text-center">분</span>
+    <div className="w-full px-18 flex flex-col gap-[14px]">
+      <div className="w-full flex justify-between">
+        <Column
+          options={selections.day}
+          value={value.day}
+          onChange={(value) => handleChange('day', value)}
+        />
+        <Column
+          options={selections.hour}
+          value={value.hour}
+          onChange={(value) => handleChange('hour', value)}
+        />
+        <Column
+          options={selections.minute}
+          value={value.minute}
+          onChange={(value) => handleChange('minute', value)}
+        />
+      </div>
+      <div className="w-full flex justify-between font-semibold text-base text-[#878787] leading-[150%]">
+        <span className="w-[62px] text-center">일</span>
+        <span className="w-[62px] text-center">시간</span>
+        <span className="w-[62px] text-center">분</span>
       </div>
     </div>
   );
