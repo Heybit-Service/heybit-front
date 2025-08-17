@@ -7,14 +7,10 @@ import IconTimer from '@/assets/menu/icon_timer.svg';
 import IconVote from '@/assets/menu/icon_vote.svg';
 import IconReport from '@/assets/menu/icon_report.svg';
 import IconBell from '@/assets/menu/icon_bell.svg';
-import { Fab } from '../../fab';
 import { Logo } from '@/assets/logo';
 
 const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const fabVisible =
-    pathname.startsWith('/dashboard/timer') || pathname.startsWith('/dashboard/vote');
-
   return (
     <>
       <Wrapper>
@@ -49,7 +45,6 @@ const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
         </Bottom>
       </Wrapper>
-      {fabVisible && <Fab />}
     </>
   );
 };

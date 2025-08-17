@@ -3,6 +3,7 @@
 import TimerCompletedCard from '@/components/timer/timerCompletedCard';
 import { Title, TitleWrapper, Description } from './styles';
 import { fetchHistoryTimers } from '@/data/api/timer';
+import { Fab } from '@/components/fab';
 import { Empty } from './empty';
 
 const TimerCompletedPage = async () => {
@@ -19,6 +20,7 @@ const TimerCompletedPage = async () => {
       {timers.map((timer) => (
         <TimerCompletedCard key={timer.timerId} timer={timer} />
       ))}
+      <Fab />
     </>
   );
 };
