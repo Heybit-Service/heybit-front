@@ -49,7 +49,7 @@ const DurationPicker = ({ onChanged }: Props) => {
         value={pickerValue}
         onChange={handleChange}
         wheelMode="natural"
-        height={220}
+        height={180}
         itemHeight={60}
         style={{
           display: 'flex',
