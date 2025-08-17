@@ -23,7 +23,7 @@ export default function Page() {
         <AppBar title="타이머 시작" leadings={<BackButton />} />
         <div className="flex flex-col items-center pb-[126px]">
           <SizedBox className="h-16" />
-          <Image className="px-9" src={Bubble} alt="bubble" />
+          <Image width={321} height={62} src={Bubble} alt="bubble" />
           <SizedBox className="h-6" />
           <Image width={171} height={191} src={Character} alt="character" />
           <SizedBox className="h-8" />
