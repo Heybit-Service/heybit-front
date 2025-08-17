@@ -16,6 +16,19 @@ interface Props {
 
 export const TimerForm = ({ onSubmit }: Props) => {
   const [form, setForm] = useAtom(formAtom);
+
+  const enabled = () => {
+    if (form.day === 0 && form.hour === 0 && form.minute === 0) return false;
+    if (form.category === '') return false;
+    if (form.name === '') return false;
+    if (form.price === '') return false;
+    if (form.description === '') return false;
+    if (form.image === '') return false;
+    return true;
+  };
+
+  const textColor = enabled() ? '#FFFFFF' : '#5B5B5B';
+  const backgroundColor = enabled() ? '#202020' : '#E8E8E8';
   return (
     <div className="h-dvh flex flex-col items-center gap-13 px-4">
       <div className="flex flex-col gap-6 pb-[126px]">
@@ -29,8 +42,9 @@ export const TimerForm = ({ onSubmit }: Props) => {
       </div>
       <div className="w-full fixed bottom-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <button
-          className="w-full bg-[#202020] py-4 font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
+          className={`w-full bg-[${backgroundColor}] py-4 font-semibold text-xl text-[${textColor}] leading-[150%] text-center rounded-[10px] transition-colors duration-300 ease-in-out`}
           onClick={() => onSubmit(form)}
+          disabled={!enabled()}
         >
           등록
         </button>
