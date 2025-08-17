@@ -10,7 +10,7 @@ interface TimerCommand {
   startTime: Date;
   endTime: Date;
   withVotePost: boolean;
-  image: string;
+  image: File;
 }
 
 export const createTimer = async ({

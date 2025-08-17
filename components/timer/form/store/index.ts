@@ -9,7 +9,7 @@ export interface Form {
   name: string;
   price: string;
   description: string;
-  image: string;
+  image: File | null;
   voting: boolean;
 }
 
@@ -22,7 +22,7 @@ export const initValue: Form = {
   name: '',
   price: '',
   description: '',
-  image: '',
+  image: null,
   voting: false,
 };
 

@@ -24,7 +24,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
     if (form.name === '') return false;
     if (form.price === '') return false;
     if (form.description === '') return false;
-    if (form.image === '') return false;
+    if (form.image === null) return false;
     return true;
   };
 

@@ -5,7 +5,7 @@ import CameraIcon from '@/assets/icon/camera.svg';
 import Asterisk from '@/assets/timer/create/asterisk.svg';
 
 interface Props {
-  onChange: (value: string) => void;
+  onChange: (file: File) => void;
 }
 
 export const Upload = ({ onChange }: Props) => {
@@ -25,7 +25,7 @@ export const Upload = ({ onChange }: Props) => {
     reader.onloadend = () => {
       const base64String = reader.result as string;
       setPreview(base64String);
-      onChange(base64String);
+      onChange(file);
     };
   };
   return (

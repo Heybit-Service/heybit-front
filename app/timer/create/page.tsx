@@ -31,7 +31,7 @@ const Page = () => {
       startTime,
       endTime,
       withVotePost: form.voting,
-      image: form.image,
+      image: form.image!,
     });
     setForm(initValue);
     router.push('/dashboard/timer/progress');
