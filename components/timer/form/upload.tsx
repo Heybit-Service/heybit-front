@@ -2,6 +2,7 @@
 
 import { useState, useRef, ChangeEvent } from 'react';
 import CameraIcon from '@/assets/icon/camera.svg';
+import Asterisk from '@/assets/timer/create/asterisk.svg';
 
 interface Props {
   onChange: (value: string) => void;
@@ -36,9 +37,8 @@ export const Upload = ({ onChange }: Props) => {
         onChange={handleChanged}
         className="hidden"
       />
-
       <div
-        className="w-[90px] h-[90px] flex flex-col justify-center items-center gap-2 bg-white cursor-pointer"
+        className="relative w-[90px] h-[90px] flex flex-col justify-center items-center gap-2 bg-white cursor-pointer"
         onClick={handleClick}
       >
         {preview && <img src={preview} alt="미리보기" className="w-full h-full object-contain" />}
@@ -48,6 +48,7 @@ export const Upload = ({ onChange }: Props) => {
             <span className="font-pretendard font-medium text-xs text-[#A8A8A8] leading-[140%] tracking-[0%] text-center">
               이미지 업로드
             </span>
+            <Asterisk className="absolute right-[10px] top-[10px]" />
           </>
         )}
       </div>
