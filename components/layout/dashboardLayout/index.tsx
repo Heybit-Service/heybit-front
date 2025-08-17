@@ -8,6 +8,7 @@ import IconVote from '@/assets/menu/icon_vote.svg';
 import IconReport from '@/assets/menu/icon_report.svg';
 import IconBell from '@/assets/menu/icon_bell.svg';
 import { Fab } from '../../fab';
+import { Logo } from '@/assets/logo';
 
 const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Wrapper>
         <Top>
+          <Logo />
           <IconBell />
         </Top>
         {children}
