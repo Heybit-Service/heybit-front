@@ -25,7 +25,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-dvh bg-[#F7F7F7]">
+    <div className="h-dvh bg-[#F7F7F7] flex flex-col">
       <AppBar
         title=""
         actions={
@@ -40,13 +40,15 @@ const Page = () => {
         }
       />
       <ProgressBar current={step} total={5} />
-      <AnimatePresence mode="wait">
-        {step === 1 && <Step1 key="step1" />}
-        {step === 2 && <Step2 key="step2" />}
-        {step === 3 && <Step3 key="step3" />}
-        {step === 4 && <Step4 key="step4" />}
-        {step === 5 && <Step5 key="step5" />}
-      </AnimatePresence>
+      <div className="flex-1 overflow-hidden min-h-screen">
+        <AnimatePresence mode="wait">
+          {step === 1 && <Step1 key="step1" />}
+          {step === 2 && <Step2 key="step2" />}
+          {step === 3 && <Step3 key="step3" />}
+          {step === 4 && <Step4 key="step4" />}
+          {step === 5 && <Step5 key="step5" />}
+        </AnimatePresence>
+      </div>
       <FixedBottom>
         <div className="w-full flex justify-center gap-[14px]">
           <button
