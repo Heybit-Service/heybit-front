@@ -4,6 +4,7 @@ import { fetchTimer } from '@/data/api/timer';
 import { TimerSummary } from '@/components/timer/summary/completed';
 import { TimerInformation } from '@/components/timer/information';
 import { ReportConfirmButton } from '@/components/timer/button/report-confirm';
+import FixedBottom from '@/components/layout/fixed-bottom';
 
 interface Props {
   params: Promise<{
@@ -21,9 +22,9 @@ const Page = async ({ params }: Props) => {
         <TimerSummary timer={timer} />
         <TimerInformation timer={timer} />
       </main>
-      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <FixedBottom>
         <ReportConfirmButton id={id} />
-      </div>
+      </FixedBottom>
     </div>
   );
 };

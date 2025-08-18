@@ -1,17 +1,18 @@
 'use client';
 
+import { useEffect } from 'react';
+import Image from 'next/image';
+import { useAtom } from 'jotai';
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back';
 import { SizedBox } from '@/components/sized-box';
 import Bubble from '@/assets/timer/start/bubble.png';
 import Character from '@/assets/timer/start/character.png';
-import Image from 'next/image';
 import { TimerStartButton } from '@/components/timer/button/timer-start';
 import DurationPicker, { Duration } from '@/components/timer/picker';
-import { useAtom } from 'jotai';
 import { formAtom } from '@/components/timer/form/store';
 import useScrollBottom from '@/hooks/use-scroll-bottom';
-import { useEffect } from 'react';
+import FixedBottom from '@/components/layout/fixed-bottom';
 
 export default function Page() {
   const [form, setForm] = useAtom(formAtom);
@@ -38,9 +39,9 @@ export default function Page() {
         <SizedBox className="h-8" />
         <DurationPicker onChanged={onChanged} />
       </div>
-      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 w-full px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <FixedBottom>
         <TimerStartButton disabled={!enabled()} />
-      </div>
+      </FixedBottom>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import FixedBottom from '@/components/layout/fixed-bottom';
 import { useAtom } from 'jotai';
 import { Category } from './category';
 import { Description } from './description';
@@ -39,9 +40,9 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Upload onChange={(value) => setForm({ ...form, image: value })} />
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
-      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <FixedBottom>
         <TimerCreateButton onClick={() => onSubmit(form)} disabled={!enabled()} />
-      </div>
+      </FixedBottom>
     </div>
   );
 };
