@@ -11,7 +11,7 @@ type Props = {
 const size = 238;
 const strokeWidth = 14;
 
-export default function ProgressStatus({ progress, timer }: Props) {
+const ProgressStatus = ({ progress, timer }: Props) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const percent = Math.min(Math.max(progress, 0), 100) / 100;
@@ -24,7 +24,7 @@ export default function ProgressStatus({ progress, timer }: Props) {
   const now = new Date();
   const duration = getDuration(now.toISOString(), timer.endTime);
   const endTimeLabel = formatKoreanTime(new Date(timer.endTime));
-
+  const textColor = progress === 0 ? 'text-[#7C7C7C]' : 'text-[#202020]';
   return (
     <div className="relative flex items-center justify-center">
       <svg width={size} height={size} className="-rotate-90">
@@ -56,27 +56,37 @@ export default function ProgressStatus({ progress, timer }: Props) {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <Icon progress={progress} />
+        {progress > 0 && <Icon progress={progress} />}
       </div>
       <div className="absolute flex flex-col items-center justify-center">
         {duration.days > 0 && (
-          <span className="font-extrabold text-2xl leading-[150%] tracking-[0%] text-center">
+          <span
+            className={`font-extrabold text-2xl leading-[150%] tracking-[0%] text-center ${textColor}`}
+          >
             {duration.days}일
           </span>
         )}
-        <span className="font-bold text-[40px] leading-[150%] tracking-[0%] text-center">
+        <span
+          className={`font-bold text-[40px] leading-[150%] tracking-[0%] text-center ${textColor}`}
+        >
           {duration.hours.toString().padStart(2, '0')}:
           {duration.minutes.toString().padStart(2, '0')}
         </span>
         <div className="flex flex-col gap-[2px]">
-          <span className="font-bold text-sm leading-[133%] tracking-[0%] text-center">
+          <span
+            className={`font-bold text-sm leading-[133%] tracking-[0%] text-center ${textColor}`}
+          >
             완료 시간
           </span>
-          <span className="font-semibold text-xs leading-[150%] tracking-[0%] text-center">
+          <span
+            className={`font-semibold text-xs leading-[150%] tracking-[0%] text-center ${textColor}`}
+          >
             {endTimeLabel}
           </span>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProgressStatus;
