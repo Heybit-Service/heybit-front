@@ -21,7 +21,7 @@ const Page = async ({ params }: Props) => {
         <TimerSummary timer={timer} />
         <TimerInformation timer={timer} />
       </main>
-      <div className="w-full fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <ReportConfirmButton id={id} />
       </div>
     </div>

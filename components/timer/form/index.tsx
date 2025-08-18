@@ -39,7 +39,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Upload onChange={(value) => setForm({ ...form, image: value })} />
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
-      <div className="w-full fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <TimerCreateButton onClick={() => onSubmit(form)} disabled={!enabled()} />
       </div>
     </div>

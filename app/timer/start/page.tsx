@@ -38,7 +38,7 @@ export default function Page() {
         <SizedBox className="h-8" />
         <DurationPicker onChanged={onChanged} />
       </div>
-      <div className="fixed bottom-0 left-0 right-0 w-full px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
+      <div className="md:max-w-[430px] mx-auto fixed bottom-0 left-0 right-0 w-full px-4 pt-[10px] pb-14 bg-[#F7F7F7]">
         <TimerStartButton disabled={!enabled()} />
       </div>
     </div>
