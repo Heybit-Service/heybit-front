@@ -40,6 +40,9 @@ export interface Duration {
 }
 
 export const getDuration = (startTime: string, endTime: string) => {
+  if (startTime >= endTime) {
+    return { days: 0, hours: 0, minutes: 0 };
+  }
   const start = new Date(startTime);
   const end = new Date(endTime);
   const diffMs = end.getTime() - start.getTime();
@@ -48,4 +51,14 @@ export const getDuration = (startTime: string, endTime: string) => {
   const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
   const minutes = totalMinutes % 60;
   return { days, hours, minutes };
+};
+
+export const getProgress = (startTime: string, endTime: string) => {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+  const now = new Date();
+  const totalDuration = end.getTime() - start.getTime();
+  const elapsed = now.getTime() - start.getTime();
+  const progress = Math.min(Math.max(100 - (elapsed / totalDuration) * 100, 0), 100);
+  return Math.round(progress);
 };
