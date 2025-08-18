@@ -16,16 +16,8 @@ const TimerBubble = ({ duration }: Props) => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div
-        className="w-[250px] h-[38px]"
-        style={{
-          backgroundImage: `url(${Bubble.src})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="pl-[31px] py-[9px] flex gap-[3px]">
+      <div className="bg-white rounded-[5px]">
+        <div className="px-[31px] py-[9px] flex gap-[3px]">
           <span className="font-extrabold text-sm leading-[140%] text-center text-[#202020]">
             {duration}
           </span>
