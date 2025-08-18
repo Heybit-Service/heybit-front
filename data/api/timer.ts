@@ -62,7 +62,6 @@ const mockTimer: Timer = {
 
 export const fetchCurrentTimers = async (): Promise<CurrentTimer[]> => {
   if (USE_MOCK_DATA) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
     return mockCurrentTimers;
   }
 
@@ -80,7 +79,6 @@ export const fetchCurrentTimers = async (): Promise<CurrentTimer[]> => {
 
 export const fetchHistoryTimers = async (): Promise<HistoryTimer[]> => {
   if (USE_MOCK_DATA) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
     return mockHistoryTimers;
   }
 
@@ -98,7 +96,6 @@ export const fetchHistoryTimers = async (): Promise<HistoryTimer[]> => {
 
 export const fetchTimer = async (id: number): Promise<Timer> => {
   if (USE_MOCK_DATA) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
     return mockTimer;
   }
 
@@ -116,7 +113,6 @@ export const fetchTimer = async (id: number): Promise<Timer> => {
 
 export const deleteTimer = async (id: number): Promise<void> => {
   if (USE_MOCK_DATA) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
     return;
   }
   const token = await getServerToken();
