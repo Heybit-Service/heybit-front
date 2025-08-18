@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { AppBar } from '@/components/app-bar';
+import FixedBottom from '@/components/layout/fixed-bottom';
 import { Step1 } from './step1';
 import { Step2 } from './step2';
 import { Step3 } from './step3';
@@ -46,20 +47,22 @@ const Page = () => {
         {step === 4 && <Step4 key="step4" />}
         {step === 5 && <Step5 key="step5" />}
       </AnimatePresence>
-      <div className="absolute bottom-14 w-full px-4 flex justify-center gap-[14px]">
-        <button
-          className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
-          onClick={onNext}
-        >
-          예
-        </button>
-        <button
-          className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
-          onClick={onNext}
-        >
-          아니요
-        </button>
-      </div>
+      <FixedBottom>
+        <div className="w-full flex justify-center gap-[14px]">
+          <button
+            className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
+            onClick={onNext}
+          >
+            예
+          </button>
+          <button
+            className="w-full bg-[#202020] py-4 font-pretendard font-semibold text-xl text-[#FFFFFF] leading-[150%] text-center rounded-[10px]"
+            onClick={onNext}
+          >
+            아니요
+          </button>
+        </div>
+      </FixedBottom>
     </div>
   );
 };
