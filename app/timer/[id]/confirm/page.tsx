@@ -1,10 +1,9 @@
-import Image from 'next/image';
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back';
 import { fetchTimer } from '@/data/api/timer';
-import Timer from '@/assets/timer/confirm/timer.png';
 import CheckIcon from '@/assets/icon/check.svg';
 import { Actions } from './actions';
+import ProgressStatus from '@/components/timer/summary/progress/status';
 
 interface Props {
   params: Promise<{
@@ -20,8 +19,8 @@ const Page = async ({ params }: Props) => {
       <AppBar title="참고 있는 상품" leadings={<BackButton />} />
       <div className="flex flex-col flex-grow items-center justify-between">
         <div className="flex flex-col items-center justify-center pt-10 gap-4">
-          <div className="flex flex-col items-center justify-center">
-            <Image src={Timer} alt="timer" />
+          <div className="flex flex-col items-center justify-center gap-8">
+            <ProgressStatus progress={0} timer={timer} />
             <CheckIcon />
           </div>
           <div className="flex flex-col items-center justify-center gap-[10px]">
