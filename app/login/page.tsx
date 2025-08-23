@@ -1,26 +1,30 @@
 'use client';
 
-import { FC } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Wrapper, Title, KaKaoButton, GoogleButton, Footer } from './styles';
 import Logo from '@/assets/logo.svg';
 import CharacterDefault from '@/assets/character/character-default.svg';
 import KakaoIcon from '@/assets/login/kakao.svg';
 import GoogleIcon from '@/assets/login/google.svg';
+import { API_BASE_URL } from '@/data/api';
+import { isAuthenticated } from '@/data/auth';
 
-const LoginPage: FC = () => {
+export default function LoginPage() {
   const router = useRouter();
 
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push('/dashboard/timer/progress');
+    }
+  }, [router]);
+
   const handleKakaoLogin = () => {
-    // Implement Kakao login logic here
-    // console.log("Kakao login clicked");
-    router.push('/on-boarding'); // Redirect to onboarding page after login
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/kakao`;
   };
 
   const handleGoogleLogin = () => {
-    // Implement Google login logic here
-    // console.log("Google login clicked");
-    router.push('/on-boarding'); // Redirect to onboarding page after login
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/google`;
   };
 
   return (
@@ -62,6 +66,4 @@ const LoginPage: FC = () => {
       </Wrapper>
     </>
   );
-};
-
-export default LoginPage;
+}
