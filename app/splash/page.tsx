@@ -5,13 +5,18 @@ import { useRouter } from 'next/navigation';
 import Logo from '@/assets/splash/logo.svg';
 import Character from '@/assets/splash/character.svg';
 import { GRAY } from '@/constant/color';
+import { isAuthenticated } from '@/data/auth';
 
 export default function SplashPage() {
   const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/login');
+      if (isAuthenticated()) {
+        router.push('/dashboard/timer/progress');
+      } else {
+        router.push('/login');
+      }
     }, 1500);
 
     return () => clearTimeout(timer);

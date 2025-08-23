@@ -1,16 +1,28 @@
 "use client";
 
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Wrapper, TitleWrapper, Title, Description } from './styles';
 import FullButton from '@/components/button/fullButton';
 import { RegisterNicknameTextField } from '@/components/TextField/RegisterNicknameTextField';
+import { extractTokenFromUrl } from '@/data/auth';
+import { checkNickname, updateNickname } from '@/data/api/user';
 
-const RegisterPage: FC = () => {
+export default function RegisterPage() {
     const router = useRouter();
     const [nickname, setNickname] = useState('');
     const [textFieldStatus, setTextFieldStatus] = useState<'default' | 'active' | 'success' | 'error'>('default');
     const [lastCheckedNickname, setLastCheckedNickname] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    // 컴포넌트 마운트 시 URL에서 토큰 추출
+    useEffect(() => {
+        const token = extractTokenFromUrl();
+        if (!token) {
+            // 토큰이 없으면 로그인 페이지로 리다이렉트
+            router.push('/login');
+        }
+    }, [router]);
 
     useEffect(() => {
         // 닉네임이 변경되면 상태를 리셋
@@ -29,24 +41,34 @@ const RegisterPage: FC = () => {
         }
     }, [nickname, lastCheckedNickname, textFieldStatus]);
 
-    const handleNicknameCheck = () => {
-        if (textFieldStatus === 'active') {
-            // TODO: API 호출하여 닉네임 중복 확인
-            // 임시로 랜덤하게 성공/실패 처리
-            const isAvailable = Math.random() > 0.5;
-            setTextFieldStatus(isAvailable ? 'success' : 'error');
-            setLastCheckedNickname(nickname); // 체크한 닉네임 저장
-        } else if (textFieldStatus === 'error') {
-            // error 상태에서 다시 클릭하면 재시도
-            const isAvailable = Math.random() > 0.5;
-            setTextFieldStatus(isAvailable ? 'success' : 'error');
-            setLastCheckedNickname(nickname); // 체크한 닉네임 저장
+    const handleNicknameCheck = async () => {
+        if (textFieldStatus === 'active' || textFieldStatus === 'error') {
+            setIsLoading(true);
+            try {
+                const isAvailable = await checkNickname(nickname);
+                setTextFieldStatus(isAvailable ? 'success' : 'error');
+                setLastCheckedNickname(nickname);
+            } catch (error) {
+                console.error('Failed to check nickname:', error);
+                setTextFieldStatus('error');
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
-    const handleStart = () => {
+    const handleStart = async () => {
         if (textFieldStatus === 'success') {
-            router.push('/survey/one');
+            setIsLoading(true);
+            try {
+                await updateNickname(nickname);
+                router.push('/survey/one');
+            } catch (error) {
+                console.error('Failed to save nickname:', error);
+                alert('닉네임 저장에 실패했습니다. 다시 시도해주세요.');
+            } finally {
+                setIsLoading(false);
+            }
         }
     }
 
@@ -72,12 +94,11 @@ const RegisterPage: FC = () => {
                         width: '100%'
                     }} 
                     onClick={handleStart}
+                    disabled={isLoading}
                 >
-                    저장
+                    {isLoading ? '저장 중...' : '저장'}
                 </FullButton>
             )}
         </Wrapper>
     )
 }
-
-export default RegisterPage;
