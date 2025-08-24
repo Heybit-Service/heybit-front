@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { getUserProfile } from '@/data/api/user';
 
 export default function VotePage() {
-  const [nickname, setNickname] = useState<string>('사용자');
+  const [nickname, setNickname] = useState<string>('');
 
   useEffect(() => {
     const fetchUserProfile = async () => {
