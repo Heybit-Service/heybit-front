@@ -1,7 +1,28 @@
+'use client';
+
 import { VoteCard } from '@/components/vote/VoteCard';
 import thumbnailImage from '@/assets/vote/thumbnail.png';
+import { useEffect, useState } from 'react';
+import { getUserProfile } from '@/data/api/user';
 
 export default function VotePage() {
+  const [nickname, setNickname] = useState<string>('사용자');
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const profile = await getUserProfile();
+        if (profile?.nickname) {
+          setNickname(profile.nickname);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   return (
     <div className="flex flex-col items-start relative pb-6">
       <div className="flex flex-col items-start gap-1 mb-6">
@@ -10,7 +31,7 @@ export default function VotePage() {
         </div>
         <p className="text-heybit-variable-HB-gray400 font-pretendard text-base font-medium leading-[140%]">
           <span className="underline decoration-solid decoration-auto underline-offset-auto">
-            닉네임최고길이테스트
+            {nickname}
           </span>
           <span>
             {' '}
