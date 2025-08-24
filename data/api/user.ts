@@ -1,5 +1,36 @@
 import { getToken } from '../auth';
 
+export interface UserProfile {
+  id: number;
+  email: string;
+  nickname: string;
+  role: string;
+  status: string;
+}
+
+export const getUserProfile = async (): Promise<UserProfile> => {
+  const token = getToken();
+  
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/users/me', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user profile');
+  }
+
+  const data = await response.json();
+  return data.data;
+};
+
 export const checkNickname = async (nickname: string): Promise<boolean> => {
   const token = getToken();
   
