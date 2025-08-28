@@ -1,27 +1,77 @@
 'use client';
 
 import { VoteCard } from '@/components/vote/VoteCard';
+import { VoteCardSkeleton } from '@/components/vote/VoteCardSkeleton';
 import thumbnailImage from '@/assets/vote/thumbnail.png';
 import { useEffect, useState } from 'react';
 import { getUserProfile } from '@/data/api/user';
+import { getVotes, castVote } from '@/data/api/vote';
+import type { ProductVotePost } from '@/data/type/vote';
 
 export default function VotePage() {
   const [nickname, setNickname] = useState<string>('');
+  const [votes, setVotes] = useState<ProductVotePost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const init = async () => {
       try {
-        const profile = await getUserProfile();
-        if (profile?.nickname) {
-          setNickname(profile.nickname);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
+        const profile = await getUserProfile().catch(() => null);
+        if (profile?.nickname) setNickname(profile.nickname);
+
+        const list = await getVotes();
+        setVotes(list ?? []);
+      } catch (e) {
+        console.error('Failed to initialize vote page', e);
+        setError('투표 목록을 불러오지 못했습니다.');
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchUserProfile();
+    init();
   }, []);
+
+  const formatRemaining = (endTime: string | null) => {
+    if (!endTime) return undefined;
+    try {
+      const end = new Date(endTime);
+      const now = new Date();
+      const ms = end.getTime() - now.getTime();
+      if (ms <= 0) return undefined;
+      const totalMinutes = Math.floor(ms / 60000);
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      if (hours > 0) return `${hours}시간 ${minutes}분 남음`;
+      return `${minutes}분 남음`;
+    } catch {
+      return undefined;
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-start relative pb-6 w-full">
+        <div className="flex flex-col items-start gap-1 mb-6 w-full">
+          <div className="h-7 w-32 bg-heybit-variable-HB-gray100 rounded animate-pulse" />
+          <div className="h-4 w-60 bg-heybit-variable-HB-gray100 rounded animate-pulse" />
+        </div>
+        <div className="flex flex-col gap-[14px] w-full">
+          <VoteCardSkeleton />
+          <VoteCardSkeleton />
+          <VoteCardSkeleton />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-start relative pb-6">
+        <div className="text-heybit-variable-HB-gray400">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-start relative pb-6">
@@ -33,70 +83,34 @@ export default function VotePage() {
           <span className="underline decoration-solid decoration-auto underline-offset-auto">
             {nickname}
           </span>
-          <span>
-            {' '}
-            님의 의견을 들려주세요
-          </span>
+          <span> 님의 의견을 들려주세요</span>
         </p>
       </div>
-      
-      <div className="flex flex-col gap-[14px]">
-        <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
-      <VoteCard
-        productImage={thumbnailImage}
-        productName="헤어 리프팅 샴푸"
-        productPrice={37000}
-        timeRemaining="3시간 45분 남음"
-        userName="헤이빗님"
-        userComment="머릿결이 많이 푸석해져서 사고 싶은데 정말 효과가 있을까? 샴푸 한 통에 삼만원이 넘으니 고민돼.."
-      />
+
+      <div className="flex flex-col gap-[14px] w-full">
+        {votes.length === 0 ? (
+          <div className="text-heybit-variable-HB-gray400">투표할 항목이 없어요.</div>
+        ) : (
+          votes.map((v) => (
+            <VoteCard
+              key={v.votePostId}
+              productImage={
+                (v.imageUrl ?? thumbnailImage) as string | import('next/image').StaticImageData
+              }
+              productName={v.name}
+              productPrice={v.amount}
+              timeRemaining={formatRemaining(v.endTime)}
+              userName={v.writer ?? undefined}
+              userComment={v.description}
+              onBuy={async () => {
+                await castVote(v.votePostId, 'BUY');
+              }}
+              onHold={async () => {
+                await castVote(v.votePostId, 'HOLD');
+              }}
+            />
+          ))
+        )}
       </div>
     </div>
   );
