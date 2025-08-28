@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { VoteToggle } from '@/components/vote/VoteToggle';
+import { StatusDropdown } from '@/components/common/StatusDropdown';
 import Character from '@/assets/vote/character.svg';
 import { getUserProfile } from '@/data/api/user';
 
@@ -26,11 +27,18 @@ export default function VotePage() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-center">
-        <VoteToggle 
-          defaultValue="registered" 
-          onToggle={setVoteType} 
-        />
+      <div className="relative w-full">
+        <div className="flex justify-center">
+          <VoteToggle
+            defaultValue="registered"
+            onToggle={setVoteType}
+          />
+        </div>
+        {voteType === 'registered' && (
+          <div className="absolute right-0 top-full mt-4">
+            <StatusDropdown />
+          </div>
+        )}
       </div>
       
       <div className="flex-1 flex flex-col items-center justify-center">

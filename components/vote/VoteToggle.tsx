@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 type VoteType = 'registered' | 'participated';
 
@@ -9,10 +9,7 @@ interface VoteToggleProps {
   defaultValue?: VoteType;
 }
 
-export const VoteToggle: React.FC<VoteToggleProps> = ({ 
-  onToggle, 
-  defaultValue = 'registered' 
-}) => {
+export function VoteToggle({ onToggle, defaultValue = 'registered' }: VoteToggleProps) {
   const [selected, setSelected] = useState<VoteType>(defaultValue);
 
   const handleToggle = (type: VoteType) => {
@@ -28,19 +25,23 @@ export const VoteToggle: React.FC<VoteToggleProps> = ({
           className={`
             inline-flex items-center justify-center gap-[10px] h-[34px] px-3 rounded-lg
             transition-all duration-200 relative cursor-pointer
-            ${selected === 'registered' 
-              ? 'bg-white shadow-[2px_2px_4px_5px_rgba(0,0,0,0.05)]' 
-              : 'shadow-[0px_4px_5px_0px_rgba(0,0,0,0.01)]'
+            ${
+              selected === 'registered'
+                ? 'bg-white shadow-[2px_2px_4px_5px_rgba(0,0,0,0.05)]'
+                : 'shadow-[0px_4px_5px_0px_rgba(0,0,0,0.01)]'
             }
           `}
         >
-          <span className={`
+          <span
+            className={`
             whitespace-nowrap text-[14px] leading-[150%]
-            ${selected === 'registered' 
-              ? 'text-[#202020] font-semibold' 
-              : 'text-[#7C7C7C] font-normal'
+            ${
+              selected === 'registered'
+                ? 'text-[#202020] font-semibold'
+                : 'text-[#7C7C7C] font-normal'
             }
-          `}>
+          `}
+          >
             내가 등록한 투표
           </span>
         </button>
@@ -50,23 +51,27 @@ export const VoteToggle: React.FC<VoteToggleProps> = ({
           className={`
             inline-flex items-center justify-center gap-[10px] h-[34px] px-3 rounded-lg
             transition-all duration-200 relative ml-2 cursor-pointer
-            ${selected === 'participated' 
-              ? 'bg-white shadow-[2px_2px_4px_5px_rgba(0,0,0,0.05)]' 
-              : 'shadow-[0px_4px_5px_0px_rgba(0,0,0,0.01)]'
+            ${
+              selected === 'participated'
+                ? 'bg-white shadow-[2px_2px_4px_5px_rgba(0,0,0,0.05)]'
+                : 'shadow-[0px_4px_5px_0px_rgba(0,0,0,0.01)]'
             }
           `}
         >
-          <span className={`
+          <span
+            className={`
             whitespace-nowrap text-[14px] leading-[150%]
-            ${selected === 'participated' 
-              ? 'text-[#202020] font-semibold' 
-              : 'text-[#7C7C7C] font-normal'
+            ${
+              selected === 'participated'
+                ? 'text-[#202020] font-semibold'
+                : 'text-[#7C7C7C] font-normal'
             }
-          `}>
+          `}
+          >
             내가 참여한 투표
           </span>
         </button>
       </div>
     </div>
   );
-};
+}
