@@ -27,11 +27,14 @@ export const createTimer = async ({
     amount,
     description,
     category,
-    startTime,
-    endTime,
+    startTime: startTime.toISOString().replace(/\.\d{3}Z$/, ''),
+    endTime: endTime.toISOString().replace(/\.\d{3}Z$/, ''),
     withVotePost,
   };
-  formData.append('data', JSON.stringify(data));
+  const dataJson = new Blob([JSON.stringify(data)], {
+    type: 'application/json',
+  });
+  formData.append('data', dataJson);
   if (image) {
     formData.append('img', image);
   }
