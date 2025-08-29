@@ -1,10 +1,20 @@
+'use client';
+
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back';
+import { SettingItem } from '@/components/setting/item';
 
 const Page = () => {
   return (
-    <div className="h-dvh bg-[#F7F7F7]">
+    <div className="h-dvh">
       <AppBar title="설정" leadings={<BackButton />} />
+      <div className="px-4 flex flex-col items-start">
+        <SettingItem label="로그아웃" onClick={() => {}} />
+        <SettingItem label="회원 탈퇴" onClick={() => {}} />
+        <SettingItem label="서비스 이용약관" onClick={() => {}} />
+        <SettingItem label="개인정보 처리방침" onClick={() => {}} />
+        <SettingItem label="문의" onClick={() => {}} />
+      </div>
     </div>
   );
 };
