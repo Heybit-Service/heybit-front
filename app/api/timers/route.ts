@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/timer`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/timers`, {
       method: 'POST',
       headers: {
         Authorization: token,

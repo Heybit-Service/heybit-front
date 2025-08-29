@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/timer/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/timers/${id}`, {
       method: 'GET',
       headers: {
         Authorization: token,

@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/timer/current`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/timers/current`, {
       method: 'GET',
       headers: {
         Authorization: token,
