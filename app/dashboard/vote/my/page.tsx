@@ -28,6 +28,18 @@ interface MyRegisteredVote {
   votedAt: string; // YYYY-MM-DD
 }
 
+type ParticipatedStatus = 'SUCCESS' | 'FAIL' | 'UNREGISTERED' | 'IN_PROGRESS';
+interface ParticipatedVote {
+  id: number;
+  title: string;
+  price: number; // KRW
+  image: string | StaticImageData;
+  date: string; // YYYY-MM-DD
+  buyCount: number;
+  stopCount: number;
+  status: ParticipatedStatus;
+}
+
 function formatRemainingUntil(endISO?: string | null): string | undefined {
   if (!endISO) return undefined;
   try {
@@ -125,12 +137,138 @@ function MyVoteCard({ vote }: { vote: MyRegisteredVote }) {
   );
 }
 
+function StatusChip({ status }: { status: ParticipatedStatus }) {
+  const style =
+    status === 'SUCCESS'
+      ? {
+          bg: 'bg-heybit-variable-HB-blue02',
+          text: 'text-heybit-variable-HB-blue01',
+          label: '절제 성공',
+        }
+      : status === 'FAIL'
+      ? {
+          bg: 'bg-heybit-variable-HB-red04',
+          text: 'text-heybit-variable-HB-red02',
+          label: '절제 실패',
+        }
+      : status === 'UNREGISTERED'
+      ? {
+          bg: 'bg-heybit-variable-HB-gray200',
+          text: 'text-heybit-variable-HB-gray500',
+          label: '결과 미등록',
+        }
+      : {
+          bg: 'bg-heybit-variable-HB-balck',
+          text: 'text-heybit-variable-HB-white',
+          label: '투표 중',
+        };
+  return (
+    <div className={`inline-flex items-center h-[26px] px-2.5 rounded ${style.bg}`}>
+      <span className={`${style.text} text-[12px] leading-[18px] font-bold whitespace-nowrap`}>
+        {style.label}
+      </span>
+    </div>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="7" cy="7" r="7" fill="currentColor" />
+      <path
+        d="M3.5 7.5L6 9.8L10.5 4.8"
+        stroke="#FFFFFF"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ParticipatedCard({ v }: { v: ParticipatedVote }) {
+  const winner = v.buyCount > v.stopCount ? 'buy' : v.stopCount > v.buyCount ? 'stop' : 'tie';
+  const formattedDate = new Date(v.date);
+  const dateLabel = `${formattedDate.getFullYear()}년 ${
+    formattedDate.getMonth() + 1
+  }월 ${formattedDate.getDate()}일`;
+  return (
+    <div className="bg-white rounded-[10px] w-full overflow-hidden">
+      <div className="p-[14px_12px] flex flex-col gap-[10px]">
+        <div className="flex items-start justify-between">
+          <StatusChip status={v.status} />
+          <div className="flex flex-col gap-1 items-end w-[120px]">
+            <div className="flex items-center gap-1 text-right">
+              {winner === 'stop' && <CheckIcon className="text-heybit-variable-HB-green-main" />}
+              <span className="text-heybit-variable-HB-green-main text-[12px] font-semibold leading-[18px] whitespace-nowrap">
+                멈춰요 {v.stopCount.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex items-center gap-1 text-right">
+              {winner === 'buy' && <CheckIcon className="text-heybit-variable-HB-gray400" />}
+              <span className="text-heybit-variable-HB-gray400 text-[12px] font-semibold leading-[18px] whitespace-nowrap">
+                구매해요 {v.buyCount.toLocaleString()}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-end justify-between gap-3">
+          <div className="flex flex-col h-[54px] w-[234px]">
+            <div className="text-[#202020] font-bold text-[18px] leading-[27px] truncate">
+              {v.title}
+            </div>
+            <div className="text-[#202020] font-medium text-[18px] leading-[27px] whitespace-nowrap">
+              {v.price.toLocaleString()}원
+            </div>
+          </div>
+          <div className="text-heybit-variable-HB-gray300 text-[10px] font-medium leading-[15px] whitespace-nowrap">
+            {dateLabel}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ParticipatedCardSkeleton() {
+  return (
+    <div className="bg-white rounded-[10px] w-full overflow-hidden animate-pulse">
+      <div className="p-[14px_12px] flex flex-col gap-[10px]">
+        <div className="flex items-start justify-between">
+          <div className="h-[26px] w-[80px] rounded bg-heybit-variable-HB-gray100" />
+          <div className="flex flex-col gap-1 items-end w-[120px]">
+            <div className="h-4 w-[100px] bg-heybit-variable-HB-gray100 rounded" />
+            <div className="h-4 w-[100px] bg-heybit-variable-HB-gray100 rounded" />
+          </div>
+        </div>
+        <div className="flex items-end justify-between gap-3">
+          <div className="flex flex-col gap-2 h-[54px] w-[234px]">
+            <div className="h-5 w-[180px] bg-heybit-variable-HB-gray100 rounded" />
+            <div className="h-5 w-[100px] bg-heybit-variable-HB-gray100 rounded" />
+          </div>
+          <div className="h-3 w-[120px] bg-heybit-variable-HB-gray100 rounded" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function VotePage() {
   const [voteType, setVoteType] = useState<'registered' | 'participated'>('registered');
   const [nickname, setNickname] = useState<string>('');
   const [filter, setFilter] = useState<Filter>('all');
   const [loading, setLoading] = useState<boolean>(true);
   const [myVotes, setMyVotes] = useState<MyVotedPost[]>([]);
+  const [participatedLoading, setParticipatedLoading] = useState<boolean>(true);
+  const [participated, setParticipated] = useState<ParticipatedVote[]>([]);
 
   useEffect(() => {
     const init = async () => {
@@ -149,6 +287,56 @@ export default function VotePage() {
       }
     };
     init();
+  }, []);
+
+  useEffect(() => {
+    setParticipatedLoading(true);
+    const timer = setTimeout(() => {
+      setParticipated([
+        {
+          id: 1,
+          title: '일이삼사오일이삼사오일이삼사오',
+          price: 37000,
+          image: Thumbnail,
+          date: '2025-07-19',
+          buyCount: 345,
+          stopCount: 138000,
+          status: 'SUCCESS',
+        },
+        {
+          id: 2,
+          title: '헤어 리프팅 샴푸',
+          price: 37000,
+          image: Thumbnail,
+          date: '2025-07-19',
+          buyCount: 345,
+          stopCount: 138000,
+          status: 'UNREGISTERED',
+        },
+        {
+          id: 3,
+          title: '아이폰16 정품 케이스',
+          price: 45000,
+          image: Thumbnail,
+          date: '2025-07-19',
+          buyCount: 138000,
+          stopCount: 345,
+          status: 'FAIL',
+        },
+        {
+          id: 4,
+          title: '일이삼사오일이삼사오일이삼사오',
+          price: 37000,
+          image: Thumbnail,
+          date: '2025-07-19',
+          buyCount: 345,
+          stopCount: 138000,
+          status: 'IN_PROGRESS',
+        },
+      ]);
+      setParticipatedLoading(false);
+    }, 700);
+    return () => clearTimeout(timer);
   }, []);
 
   const registeredVotes = useMemo<MyRegisteredVote[]>(
@@ -188,14 +376,14 @@ export default function VotePage() {
           <VoteToggle defaultValue="registered" onToggle={setVoteType} />
         </div>
         {voteType === 'registered' && (
-          <div className="flex justify-end mt-4 mb-1">
+          <div className="flex justify-end mt-4">
             <StatusDropdown onChange={handleStatusChange} />
           </div>
         )}
       </div>
 
       {voteType === 'registered' ? (
-        <div className="mt-0 flex flex-col gap-[14px] flex-1">
+        <div className="mt-4 flex flex-col gap-[14px] flex-1">
           {loading ? (
             <>
               <VoteCardSkeleton />
@@ -220,20 +408,36 @@ export default function VotePage() {
           )}
         </div>
       ) : (
-        <div className="flex-1 flex flex-col items-center justify-center mt-10">
-          <Character width={120} height={134} className="mb-5" />
-          <div className="flex flex-col items-center gap-1">
-            <p className="text-[18px] font-bold leading-[27px] text-[#202020] text-center">
-              아직 참여한 투표가 없어요!
-            </p>
-            <p className="text-[16px] font-medium leading-[150%] text-[#7C7C7C] text-center">
-              <span>진행중인 투표를 보고</span>
-              <br />
-              <span className="underline">{nickname}</span>
-              <span> 님의 생각을 전달해봐요</span>
-            </p>
+        <>
+          <div className="mt-4 flex flex-col gap-[14px] flex-1">
+            {participatedLoading ? (
+              <>
+                <ParticipatedCardSkeleton />
+                <ParticipatedCardSkeleton />
+                <ParticipatedCardSkeleton />
+                <ParticipatedCardSkeleton />
+              </>
+            ) : (
+              participated.map((v) => <ParticipatedCard key={v.id} v={v} />)
+            )}
           </div>
-        </div>
+          {false && (
+            <div className="flex-1 flex flex-col items-center justify-center mt-10">
+              <Character width={120} height={134} className="mb-5" />
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-[18px] font-bold leading-[27px] text-[#202020] text-center">
+                  아직 참여한 투표가 없어요!
+                </p>
+                <p className="text-[16px] font-medium leading-[150%] text-[#7C7C7C] text-center">
+                  <span>진행중인 투표를 보고</span>
+                  <br />
+                  <span className="underline">{nickname}</span>
+                  <span> 님의 생각을 전달해봐요</span>
+                </p>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
