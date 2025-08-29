@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const upstream = await fetch(`${API_BASE_URL}/api/v1/votes/me`, {
+    const upstream = await fetch(`${API_BASE_URL}/api/v1/votes/my`, {
       method: 'GET',
       headers: {
         Authorization: token,

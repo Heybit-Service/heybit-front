@@ -22,3 +22,17 @@ export interface MyVotedPost {
   buyCount: number;
   votedAt: string; // YYYY-MM-DD
 }
+
+export interface MyVotesApiResponse {
+  name: string;
+  description: string;
+  amount: number;
+  imageUrl: string;
+  inProgress: boolean;
+  endTime: string;
+  voteStats: {
+    buyCount: number;
+    holdCount: number;
+    holdPercent: number;
+  };
+}
