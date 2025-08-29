@@ -6,12 +6,37 @@ import { Wrapper, TitleWrapper, Title } from './../styles';
 import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
 import { SurveyProgressBar } from '@/components/surveyProgressBar';
+import { SurveyStorage, mapImprovementReason } from '@/utils/survey';
+import { submitUserSurvey } from '@/data/api/survey';
 
 export default function SurveyPage() {
     const router = useRouter();
+    const [submitting, setSubmitting] = useState(false);
     
-    const handleStart = () => {
-        router.push('/register-complete');
+    const handleStart = async () => {
+        if (selectedItem !== null) {
+            SurveyStorage.setImprovementReason(mapImprovementReason(selectedItem));
+        }
+        const all = SurveyStorage.getAll();
+        if (!all.consumptionTime || !all.impulseFrequency || !all.purchaseTrigger || !all.improvementReason) {
+            alert('설문 응답을 모두 완료해주세요.');
+            return;
+        }
+
+        try {
+            setSubmitting(true);
+            await submitUserSurvey(all as any);
+            SurveyStorage.clear();
+            router.push('/register-complete');
+        } catch (e: any) {
+            if (e?.status === 400) {
+                router.push('/register-complete');
+                return;
+            }
+            alert('설문 제출에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        } finally {
+            setSubmitting(false);
+        }
     }
 
     const [items] = useState([
@@ -41,7 +66,7 @@ export default function SurveyPage() {
             <FullButton 
                 style={{ marginTop: 'auto', marginBottom: '56px' }} 
                 onClick={handleStart}
-                disabled={selectedItem === null}
+                disabled={selectedItem === null || submitting}
             >
                 완료
             </FullButton>

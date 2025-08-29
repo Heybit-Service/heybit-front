@@ -6,11 +6,15 @@ import { Wrapper, TitleWrapper, Title, Description } from './../styles';
 import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
 import { SurveyProgressBar } from '@/components/surveyProgressBar';
+import { SurveyStorage, mapImpulseFrequency } from '@/utils/survey';
 
 export default function SurveyPage() {
     const router = useRouter();
     
     const handleStart = () => {
+        if (selectedItem !== null) {
+            SurveyStorage.setImpulseFrequency(mapImpulseFrequency(selectedItem));
+        }
         router.push('/survey/three');
     }
 

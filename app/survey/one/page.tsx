@@ -6,11 +6,15 @@ import { Wrapper, TitleWrapper, Title } from './../styles';
 import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
 import { SurveyProgressBar } from '@/components/surveyProgressBar';
+import { SurveyStorage, mapConsumptionTime } from '@/utils/survey';
 
 export default function SurveyPage() {
     const router = useRouter();
     
     const handleStart = () => {
+        if (selectedItem !== null) {
+            SurveyStorage.setConsumptionTime(mapConsumptionTime(selectedItem));
+        }
         router.push('/survey/two');
     }
 
