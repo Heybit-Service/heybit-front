@@ -1,4 +1,3 @@
-import { API_BASE_URL } from '@/data/api';
 import { getToken } from '@/data/auth';
 
 interface TimerCommand {
@@ -38,7 +37,12 @@ export const createTimer = async ({
   }
 
   const token = getToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timers`, {
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/timers', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -47,6 +51,6 @@ export const createTimer = async ({
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error('Failed to create timer');
   }
 };

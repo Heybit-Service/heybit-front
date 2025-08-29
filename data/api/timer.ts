@@ -1,10 +1,14 @@
-import { API_BASE_URL } from '../api';
 import { CurrentTimer, HistoryTimer, Timer } from '../type/timer';
 import { getToken } from '../auth';
 
 export const fetchCurrentTimers = async (): Promise<CurrentTimer[]> => {
   const token = getToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timer/current`, {
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/timers/current', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -13,7 +17,7 @@ export const fetchCurrentTimers = async (): Promise<CurrentTimer[]> => {
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error('Failed to fetch current timers');
   }
 
   const data = await response.json();
@@ -22,7 +26,12 @@ export const fetchCurrentTimers = async (): Promise<CurrentTimer[]> => {
 
 export const fetchHistoryTimers = async (): Promise<HistoryTimer[]> => {
   const token = getToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timer/history`, {
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/timers/history', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -31,7 +40,7 @@ export const fetchHistoryTimers = async (): Promise<HistoryTimer[]> => {
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error('Failed to fetch timer history');
   }
 
   const data = await response.json();
@@ -40,7 +49,12 @@ export const fetchHistoryTimers = async (): Promise<HistoryTimer[]> => {
 
 export const fetchTimer = async (id: number): Promise<Timer> => {
   const token = getToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timer/${id}`, {
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch(`/api/timers/${id}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -49,7 +63,7 @@ export const fetchTimer = async (id: number): Promise<Timer> => {
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error('Failed to fetch timer');
   }
 
   const data = await response.json();
@@ -58,7 +72,12 @@ export const fetchTimer = async (id: number): Promise<Timer> => {
 
 export const deleteTimer = async (id: number): Promise<void> => {
   const token = getToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timers/${id}`, {
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch(`/api/timers/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -67,6 +86,6 @@ export const deleteTimer = async (id: number): Promise<void> => {
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error('Failed to delete timer');
   }
 };
