@@ -3,9 +3,9 @@ import { Column } from './column';
 import './styles.css';
 
 const selections = {
-  day: Array.from({ length: 31 }, (_, i) => i),
+  day: Array.from({ length: 11 }, (_, i) => i),
   hour: Array.from({ length: 24 }, (_, i) => i),
-  minute: Array.from({ length: 60 }, (_, i) => i),
+  minute: Array.from({ length: 6 }, (_, i) => i * 10),
 };
 
 export interface Duration {
