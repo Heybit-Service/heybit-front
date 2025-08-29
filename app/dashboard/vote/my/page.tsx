@@ -10,7 +10,7 @@ import Thumbnail from '@/assets/vote/thumbnail.png';
 import Character from '@/assets/vote/character.svg';
 import { getUserProfile } from '@/data/api/user';
 import { VoteCardSkeleton } from '@/components/vote/VoteCardSkeleton';
-import { getMyVotes } from '@/data/api/vote';
+import { getMyVotes, getParticipatedVotes } from '@/data/api/vote';
 import type { MyVotedPost } from '@/data/type/vote';
 
 type Filter = 'all' | 'ongoing' | 'completed';
@@ -38,6 +38,7 @@ interface ParticipatedVote {
   buyCount: number;
   stopCount: number;
   status: ParticipatedStatus;
+  myVote: 'BUY' | 'HOLD';
 }
 
 function formatRemainingUntil(endISO?: string | null): string | undefined {
@@ -290,53 +291,29 @@ export default function VotePage() {
   }, []);
 
   useEffect(() => {
-    setParticipatedLoading(true);
-    const timer = setTimeout(() => {
-      setParticipated([
-        {
-          id: 1,
-          title: '일이삼사오일이삼사오일이삼사오',
-          price: 37000,
+    const loadParticipatedVotes = async () => {
+      setParticipatedLoading(true);
+      try {
+        const votes = await getParticipatedVotes();
+        const mapped: ParticipatedVote[] = votes.map((v) => ({
+          id: v.votePostId || Math.random(),
+          title: v.name,
+          price: v.amount,
           image: Thumbnail,
-          date: '2025-07-19',
-          buyCount: 345,
-          stopCount: 138000,
-          status: 'SUCCESS',
-        },
-        {
-          id: 2,
-          title: '헤어 리프팅 샴푸',
-          price: 37000,
-          image: Thumbnail,
-          date: '2025-07-19',
-          buyCount: 345,
-          stopCount: 138000,
-          status: 'UNREGISTERED',
-        },
-        {
-          id: 3,
-          title: '아이폰16 정품 케이스',
-          price: 45000,
-          image: Thumbnail,
-          date: '2025-07-19',
-          buyCount: 138000,
-          stopCount: 345,
-          status: 'FAIL',
-        },
-        {
-          id: 4,
-          title: '일이삼사오일이삼사오일이삼사오',
-          price: 37000,
-          image: Thumbnail,
-          date: '2025-07-19',
-          buyCount: 345,
-          stopCount: 138000,
-          status: 'IN_PROGRESS',
-        },
-      ]);
-      setParticipatedLoading(false);
-    }, 700);
-    return () => clearTimeout(timer);
+          date: v.votedAt,
+          buyCount: v.buyCount,
+          stopCount: v.holdCount,
+          status: v.status as ParticipatedStatus,
+          myVote: v.myVote,
+        }));
+        setParticipated(mapped);
+      } catch (e) {
+        console.error('Failed to load participated votes', e);
+      } finally {
+        setParticipatedLoading(false);
+      }
+    };
+    loadParticipatedVotes();
   }, []);
 
   const registeredVotes = useMemo<MyRegisteredVote[]>(
@@ -408,23 +385,16 @@ export default function VotePage() {
           )}
         </div>
       ) : (
-        <>
-          <div className="mt-4 flex flex-col gap-[14px] flex-1">
-            {participatedLoading ? (
-              <>
-                <ParticipatedCardSkeleton />
-                <ParticipatedCardSkeleton />
-                <ParticipatedCardSkeleton />
-                <ParticipatedCardSkeleton />
-              </>
-            ) : (
-              participated.map((v) => (
-                <ParticipatedCard key={v.id} v={v} className="last:mb-4" />
-              ))
-            )}
-          </div>
-          {false && (
-            <div className="flex-1 flex flex-col items-center justify-center mt-10">
+        <div className="mt-4 flex flex-col gap-[14px] flex-1">
+          {participatedLoading ? (
+            <>
+              <ParticipatedCardSkeleton />
+              <ParticipatedCardSkeleton />
+              <ParticipatedCardSkeleton />
+              <ParticipatedCardSkeleton />
+            </>
+          ) : participated.length === 0 ? (
+            <div className="flex-1 flex flex-col items-center justify-center">
               <Character width={120} height={134} className="mb-5" />
               <div className="flex flex-col items-center gap-1">
                 <p className="text-[18px] font-bold leading-[27px] text-[#202020] text-center">
@@ -438,8 +408,10 @@ export default function VotePage() {
                 </p>
               </div>
             </div>
+          ) : (
+            participated.map((v) => <ParticipatedCard key={v.id} v={v} className="last:mb-4" />)
           )}
-        </>
+        </div>
       )}
     </div>
   );
