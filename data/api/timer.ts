@@ -89,3 +89,39 @@ export const deleteTimer = async (id: number): Promise<void> => {
     throw new Error('Failed to delete timer');
   }
 };
+
+interface TimerResultCommand {
+  timerId: number;
+  result: 'PURCHASED' | 'SAVED';
+  amount: number;
+}
+
+export const createTimerResult = async ({
+  timerId,
+  result,
+  amount,
+}: TimerResultCommand): Promise<void> => {
+  const token = getToken();
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/timer-results', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      timerId,
+      result,
+      amount,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || errorData.message || 'Failed to create timer result');
+  }
+};

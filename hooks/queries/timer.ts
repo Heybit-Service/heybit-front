@@ -1,5 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchCurrentTimers, fetchHistoryTimers, fetchTimer, deleteTimer } from '@/data/api/timer';
+import {
+  fetchCurrentTimers,
+  fetchHistoryTimers,
+  fetchTimer,
+  deleteTimer,
+  createTimerResult,
+} from '@/data/api/timer';
 import { createTimer } from '@/app/timer/create/action';
 import { CurrentTimer, HistoryTimer, Timer } from '@/data/type/timer';
 
@@ -46,6 +52,17 @@ export const useDeleteTimer = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteTimer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timerKeys.current() });
+      queryClient.invalidateQueries({ queryKey: timerKeys.history() });
+    },
+  });
+};
+
+export const useCreateTimerResult = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createTimerResult,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: timerKeys.current() });
       queryClient.invalidateQueries({ queryKey: timerKeys.history() });

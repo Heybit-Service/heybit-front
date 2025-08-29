@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ConfirmPopup } from '@/components/popup/confirm';
 import Character from '@/assets/popup/fail_character.png';
-import { createTimerResult } from './action';
+import { useCreateTimerResult } from '@/hooks/queries/timer';
 
 interface Props {
   id: number;
@@ -14,14 +14,19 @@ interface Props {
 export const Actions = ({ id, amount }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const createTimerResultMutation = useCreateTimerResult();
 
   const onClickSuccess = async () => {
-    await createTimerResult({
-      timerId: id,
-      result: 'SAVED',
-      amount,
-    });
-    router.push(`/timer/${id}/success`);
+    try {
+      await createTimerResultMutation.mutateAsync({
+        timerId: id,
+        result: 'SAVED',
+        amount,
+      });
+      router.push(`/timer/${id}/success`);
+    } catch (error) {
+      console.error('Failed to create timer result:', error);
+    }
   };
 
   const onClickFail = () => {
@@ -33,12 +38,16 @@ export const Actions = ({ id, amount }: Props) => {
   };
 
   const onCancel = async () => {
-    await createTimerResult({
-      timerId: id,
-      result: 'PURCHASED',
-      amount,
-    });
-    router.push(`/timer/${id}/fail`);
+    try {
+      await createTimerResultMutation.mutateAsync({
+        timerId: id,
+        result: 'PURCHASED',
+        amount,
+      });
+      router.push(`/timer/${id}/fail`);
+    } catch (error) {
+      console.error('Failed to create timer result:', error);
+    }
   };
 
   const onConfirm = () => {

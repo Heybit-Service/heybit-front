@@ -14,7 +14,7 @@ export const createTimerResult = async ({
   amount,
 }: TimerResultCommand): Promise<void> => {
   const token = await getServerToken();
-  const response = await fetch(`${API_BASE_URL}/api/v1/timer-results`, {
+  await fetch(`${API_BASE_URL}/api/v1/timer-results`, {
     method: 'POST',
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -26,5 +26,4 @@ export const createTimerResult = async ({
       amount,
     }),
   });
-  console.log('response: ', response);
 };
