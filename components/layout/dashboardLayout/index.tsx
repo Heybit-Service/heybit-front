@@ -7,6 +7,7 @@ import IconTimer from '@/assets/menu/icon_timer.svg';
 import IconVote from '@/assets/menu/icon_vote.svg';
 import IconReport from '@/assets/menu/icon_report.svg';
 import IconBell from '@/assets/menu/icon_bell.svg';
+import IconSetting from '@/assets/icon/setting.svg';
 import { Logo } from '@/assets/logo';
 
 const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
@@ -16,9 +17,14 @@ const EmptyLayout = ({ children }: { children: React.ReactNode }) => {
       <Wrapper>
         <Top>
           <Logo />
-          <Link href="/alarm-center">
-            <IconBell />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/alarm-center">
+              <IconBell />
+            </Link>
+            <Link href="/setting">
+              <IconSetting />
+            </Link>
+          </div>
         </Top>
         {children}
         <Bottom>
