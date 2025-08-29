@@ -195,7 +195,7 @@ export default function VotePage() {
       </div>
 
       {voteType === 'registered' ? (
-        <div className="mt-0 flex flex-col gap-[14px]">
+        <div className="mt-0 flex flex-col gap-[14px] flex-1">
           {loading ? (
             <>
               <VoteCardSkeleton />
@@ -206,7 +206,7 @@ export default function VotePage() {
             filteredVotes.map((v) => <MyVoteCard key={v.id} vote={v} />)
           )}
           {!loading && filteredVotes.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="flex-1 flex flex-col items-center justify-center py-12 text-center">
               <Character width={120} height={134} className="mb-5" />
               <div className="flex flex-col items-center gap-1">
                 <p className="text-[18px] font-bold leading-[27px] text-[#202020]">
