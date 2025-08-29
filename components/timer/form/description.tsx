@@ -4,10 +4,11 @@ import Asterisk from '@/assets/timer/create/asterisk.svg';
 import { useState } from 'react';
 
 interface Props {
+  required: boolean;
   onChange: (value: string) => void;
 }
 
-export const Description = ({ onChange }: Props) => {
+export const Description = ({ required, onChange }: Props) => {
   const [count, setCount] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,7 +35,7 @@ export const Description = ({ onChange }: Props) => {
       >
         {count}/80
       </span>
-      <Asterisk className="absolute right-3 top-3" />
+      {required && <Asterisk className="absolute right-3 top-3" />}
     </div>
   );
 };

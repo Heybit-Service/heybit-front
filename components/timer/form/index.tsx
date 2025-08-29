@@ -24,8 +24,8 @@ export const TimerForm = ({ onSubmit }: Props) => {
     if (form.category === '') return false;
     if (form.name === '') return false;
     if (form.price === '') return false;
-    if (form.description === '') return false;
-    if (form.image === null) return false;
+    if (form.voting === true && form.description === '') return false;
+    if (form.voting === true && form.image === null) return false;
     return true;
   };
 
@@ -36,8 +36,11 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Category onChange={(value) => setForm({ ...form, category: value })} />
         <Name onChange={(value) => setForm({ ...form, name: value })} />
         <Price onChange={(value) => setForm({ ...form, price: value })} />
-        <Description onChange={(value) => setForm({ ...form, description: value })} />
-        <Upload onChange={(value) => setForm({ ...form, image: value })} />
+        <Description
+          required={form.voting}
+          onChange={(value) => setForm({ ...form, description: value })}
+        />
+        <Upload required={form.voting} onChange={(value) => setForm({ ...form, image: value })} />
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
       <FixedBottom>

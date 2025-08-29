@@ -5,10 +5,11 @@ import CameraIcon from '@/assets/icon/camera.svg';
 import Asterisk from '@/assets/timer/create/asterisk.svg';
 
 interface Props {
+  required: boolean;
   onChange: (file: File) => void;
 }
 
-export const Upload = ({ onChange }: Props) => {
+export const Upload = ({ required, onChange }: Props) => {
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -48,7 +49,7 @@ export const Upload = ({ onChange }: Props) => {
             <span className="font-pretendard font-medium text-xs text-[#A8A8A8] leading-[140%] tracking-[0%] text-center">
               이미지 업로드
             </span>
-            <Asterisk className="absolute right-[10px] top-[10px]" />
+            {required && <Asterisk className="absolute right-[10px] top-[10px]" />}
           </>
         )}
       </div>
