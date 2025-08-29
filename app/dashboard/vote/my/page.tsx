@@ -10,6 +10,8 @@ import Thumbnail from '@/assets/vote/thumbnail.png';
 import Character from '@/assets/vote/character.svg';
 import { getUserProfile } from '@/data/api/user';
 import { VoteCardSkeleton } from '@/components/vote/VoteCardSkeleton';
+import { getMyVotes } from '@/data/api/vote';
+import type { MyVotedPost } from '@/data/type/vote';
 
 type Filter = 'all' | 'ongoing' | 'completed';
 
@@ -18,12 +20,16 @@ interface MyRegisteredVote {
   name: string;
   amount: number;
   image: string | StaticImageData;
-  endTime: string;
+  endTime?: string | null;
   buyCount: number;
   holdCount: number;
+  status: 'IN_PROGRESS' | 'WAITING' | 'SAVED' | 'PURCHASED';
+  myVote: 'BUY' | 'HOLD';
+  votedAt: string; // YYYY-MM-DD
 }
 
-function formatRemainingUntil(endISO: string): string | undefined {
+function formatRemainingUntil(endISO?: string | null): string | undefined {
+  if (!endISO) return undefined;
   try {
     const end = new Date(endISO).getTime();
     const now = Date.now();
@@ -41,8 +47,8 @@ function formatRemainingUntil(endISO: string): string | undefined {
   }
 }
 
-function formatYmd(endISO: string): string {
-  const d = new Date(endISO);
+function formatYmd(iso: string): string {
+  const d = new Date(iso);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
@@ -51,6 +57,7 @@ function formatYmd(endISO: string): string {
 
 function MyVoteCard({ vote }: { vote: MyRegisteredVote }) {
   const remaining = formatRemainingUntil(vote.endTime);
+  const isInProgress = vote.status === 'IN_PROGRESS';
   return (
     <div className="bg-white rounded-[10px] shadow-[var(--HB-shadow-card)] w-full overflow-hidden">
       <div className="p-4">
@@ -64,31 +71,30 @@ function MyVoteCard({ vote }: { vote: MyRegisteredVote }) {
           />
           <div className="flex flex-col gap-3 flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              {remaining && (
+              {isInProgress ? (
                 <div className="inline-flex items-center justify-center h-[26px] px-2.5 rounded-full bg-heybit-variable-HB-balck">
                   <span className="text-heybit-variable-HB-white text-xs font-bold leading-[150%]">
                     투표 중
                   </span>
                 </div>
-              )}
-              {!remaining && (
+              ) : (
                 <div className="inline-flex items-center justify-center h-[26px] px-2.5 rounded-full bg-heybit-variable-HB-gray300">
                   <span className="text-heybit-variable-HB-white text-xs font-bold leading-[150%]">
                     투표 종료
                   </span>
                 </div>
               )}
-              {!remaining && (
-                <div className="inline-flex items-center gap-1">
-                  <span className="text-[12px] leading-[18px] text-heybit-variable-HB-balck">
-                    {formatYmd(vote.endTime)}
-                  </span>
-                </div>
-              )}
-              {remaining && (
+              {isInProgress && remaining && (
                 <div className="inline-flex items-center gap-1">
                   <span className="text-[12px] leading-[18px] text-heybit-variable-HB-balck">
                     {remaining}
+                  </span>
+                </div>
+              )}
+              {!isInProgress && (
+                <div className="inline-flex items-center gap-1">
+                  <span className="text-[12px] leading-[18px] text-heybit-variable-HB-balck">
+                    {formatYmd(vote.votedAt)}
                   </span>
                 </div>
               )}
@@ -109,7 +115,7 @@ function MyVoteCard({ vote }: { vote: MyRegisteredVote }) {
             <VotingBubble
               buyCount={vote.buyCount}
               stopCount={vote.holdCount}
-              completed={!remaining}
+              completed={!isInProgress}
             />
             <VotingBar buyCount={vote.buyCount} stopCount={vote.holdCount} />
           </div>
@@ -124,62 +130,49 @@ export default function VotePage() {
   const [nickname, setNickname] = useState<string>('');
   const [filter, setFilter] = useState<Filter>('all');
   const [loading, setLoading] = useState<boolean>(true);
+  const [myVotes, setMyVotes] = useState<MyVotedPost[]>([]);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const init = async () => {
       try {
-        const profile = await getUserProfile();
-        if (profile?.nickname) setNickname(profile.nickname);
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
+        const [profileRes, myVotesRes] = await Promise.allSettled([getUserProfile(), getMyVotes()]);
+        if (profileRes.status === 'fulfilled' && profileRes.value?.nickname) {
+          setNickname(profileRes.value.nickname);
+        }
+        if (myVotesRes.status === 'fulfilled') {
+          setMyVotes(myVotesRes.value ?? []);
+        }
+      } catch (e) {
+        console.error('Failed to load my votes', e);
       } finally {
         setLoading(false);
       }
     };
-    fetchUserProfile();
+    init();
   }, []);
 
   const registeredVotes = useMemo<MyRegisteredVote[]>(
-    () => [
-      {
-        id: 1,
-        name: '헤어 리프팅 샴푸',
-        amount: 37000,
+    () =>
+      myVotes.map((v) => ({
+        id: v.votePostId,
+        name: v.name,
+        amount: v.amount,
         image: Thumbnail,
-        endTime: new Date(Date.now() + 36 * 60 * 60 * 1000).toISOString(),
-        buyCount: 32,
-        holdCount: 138,
-      },
-      {
-        id: 2,
-        name: '무선 블루투스 이어폰',
-        amount: 119000,
-        image: Thumbnail,
-        endTime: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(),
-        buyCount: 85,
-        holdCount: 15,
-      },
-      {
-        id: 3,
-        name: '무선 청소기 필터',
-        amount: 15000,
-        image: Thumbnail,
-        endTime: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-        buyCount: 10,
-        holdCount: 40,
-      },
-    ],
-    [],
+        endTime: null,
+        buyCount: v.buyCount,
+        holdCount: v.holdCount,
+        status: v.status,
+        myVote: v.myVote,
+        votedAt: v.votedAt,
+      })),
+    [myVotes],
   );
 
   const filteredVotes = useMemo(() => {
     if (filter === 'all') return registeredVotes;
-    const now = Date.now();
-    return registeredVotes.filter((v) => {
-      const end = new Date(v.endTime).getTime();
-      const ongoing = end > now;
-      return filter === 'ongoing' ? ongoing : !ongoing;
-    });
+    return registeredVotes.filter((v) =>
+      filter === 'ongoing' ? v.status === 'IN_PROGRESS' : v.status !== 'IN_PROGRESS',
+    );
   }, [filter, registeredVotes]);
 
   const handleStatusChange = (value: string) => {
@@ -212,7 +205,7 @@ export default function VotePage() {
           ) : (
             filteredVotes.map((v) => <MyVoteCard key={v.id} vote={v} />)
           )}
-          {filteredVotes.length === 0 && (
+          {!loading && filteredVotes.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <Character width={120} height={134} className="mb-5" />
               <div className="flex flex-col items-center gap-1">
