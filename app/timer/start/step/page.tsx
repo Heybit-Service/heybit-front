@@ -24,6 +24,10 @@ const Page = () => {
     setStep(step + 1);
   };
 
+  const onSkip = () => {
+    router.push('/timer/create');
+  };
+
   return (
     <div className="h-dvh bg-[#F7F7F7] flex flex-col">
       <AppBar
@@ -32,7 +36,7 @@ const Page = () => {
           <>
             <button
               className="px-4 py-5 font-pretendard font-bold text-sm text-[#AAAAAA] leading-[140%] text-center"
-              onClick={onNext}
+              onClick={onSkip}
             >
               건너뛰기
             </button>
