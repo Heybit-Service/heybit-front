@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
 
     const json = await upstream.json().catch(() => ({}));
     return NextResponse.json(json, { status: upstream.status });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: '서버 오류' }, { status: 500 });
   }
 }
-

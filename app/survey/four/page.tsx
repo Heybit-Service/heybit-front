@@ -7,7 +7,7 @@ import SurveyItem from '@/components/survey/surveyItem';
 import FullButton from '@/components/button/fullButton';
 import { SurveyProgressBar } from '@/components/surveyProgressBar';
 import { SurveyStorage, mapImprovementReason } from '@/utils/survey';
-import { submitUserSurvey } from '@/data/api/survey';
+import { submitUserSurvey, type UserSurveyRequest } from '@/data/api/survey';
 
 export default function SurveyPage() {
     const router = useRouter();
@@ -25,11 +25,18 @@ export default function SurveyPage() {
 
         try {
             setSubmitting(true);
-            await submitUserSurvey(all as any);
+            const payload: UserSurveyRequest = {
+                consumptionTime: all.consumptionTime!,
+                impulseFrequency: all.impulseFrequency!,
+                purchaseTrigger: all.purchaseTrigger!,
+                improvementReason: all.improvementReason!,
+            };
+            await submitUserSurvey(payload);
             SurveyStorage.clear();
             router.push('/register-complete');
-        } catch (e: any) {
-            if (e?.status === 400) {
+        } catch (e: unknown) {
+            const status = (e as { status?: number } | undefined)?.status;
+            if (status === 400) {
                 router.push('/register-complete');
                 return;
             }
