@@ -16,7 +16,7 @@ export const Price = ({ onChange }: Props) => {
       const numberWithCommas = Number(inputValue).toLocaleString();
       const formattedValue = `₩ ${numberWithCommas}`;
       setValue(formattedValue);
-      onChange(formattedValue);
+      onChange(inputValue);
     } else {
       setValue('');
       onChange('');
