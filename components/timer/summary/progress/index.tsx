@@ -11,7 +11,7 @@ export const TimerProgressSummary = ({ timer }: Props) => {
 
   return (
     <div className="pt-8 pb-4">
-      <div className="flex flex-col items-center gap-7 px-19">
+      <div className="flex flex-col items-center gap-7">
         <div className="px-4 py-[10px] bg-[#7C7C7C] rounded-[100px]">
           <Title progress={progress} />
         </div>
