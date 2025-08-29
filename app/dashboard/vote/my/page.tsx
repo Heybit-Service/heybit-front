@@ -193,14 +193,14 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
-function ParticipatedCard({ v }: { v: ParticipatedVote }) {
+function ParticipatedCard({ v, className }: { v: ParticipatedVote; className?: string }) {
   const winner = v.buyCount > v.stopCount ? 'buy' : v.stopCount > v.buyCount ? 'stop' : 'tie';
   const formattedDate = new Date(v.date);
   const dateLabel = `${formattedDate.getFullYear()}년 ${
     formattedDate.getMonth() + 1
   }월 ${formattedDate.getDate()}일`;
   return (
-    <div className="bg-white rounded-[10px] w-full overflow-hidden">
+    <div className={`bg-white rounded-[10px] w-full overflow-hidden ${className ?? ''}`}>
       <div className="p-[14px_12px] flex flex-col gap-[10px]">
         <div className="flex items-start justify-between">
           <StatusChip status={v.status} />
@@ -418,7 +418,9 @@ export default function VotePage() {
                 <ParticipatedCardSkeleton />
               </>
             ) : (
-              participated.map((v) => <ParticipatedCard key={v.id} v={v} />)
+              participated.map((v) => (
+                <ParticipatedCard key={v.id} v={v} className="last:mb-4" />
+              ))
             )}
           </div>
           {false && (
