@@ -3,16 +3,17 @@
 import { AppBar } from '@/components/app-bar';
 import { BackButton } from '@/components/button/back';
 import { TimerForm } from '@/components/timer/form';
-import { createTimer } from './action';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { Form, formAtom, initValue } from '@/components/timer/form/store';
 import TimerBubble from '@/components/timer/bubble';
+import { useCreateTimer } from '@/hooks/queries/timer';
 
 const Page = () => {
   const router = useRouter();
   const [form, setForm] = useAtom(formAtom);
   const duration = `${form.day}일 ${form.hour}시간 ${form.minute}분`;
+  const createTimerMutation = useCreateTimer();
 
   const onSubmit = async (form: Form) => {
     const startTime = new Date();
@@ -23,18 +24,22 @@ const Page = () => {
         form.minute * 60 * 1000,
     );
 
-    await createTimer({
-      name: form.name,
-      amount: Number(form.price),
-      description: form.description,
-      category: form.category,
-      startTime,
-      endTime,
-      withVotePost: form.voting,
-      image: form.image!,
-    });
-    setForm(initValue);
-    router.push('/dashboard/timer/progress');
+    try {
+      await createTimerMutation.mutateAsync({
+        name: form.name,
+        amount: Number(form.price),
+        description: form.description,
+        category: form.category,
+        startTime,
+        endTime,
+        withVotePost: form.voting,
+        image: form.image!,
+      });
+      setForm(initValue);
+      router.push('/dashboard/timer/progress');
+    } catch (error) {
+      console.error('타이머 생성 실패:', error);
+    }
   };
 
   return (

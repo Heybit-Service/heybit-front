@@ -1,15 +1,19 @@
+'use client';
+
 import TimerCard from '@/components/timer/timerCard';
 import CharacterTimer from '@/assets/timer/character_timer.svg';
-import { fetchCurrentTimers } from '@/data/api/timer';
 import TimerCount from '@/components/timer/count';
 import { Fab } from '@/components/fab';
 import { Empty } from './empty';
+import { useCurrentTimers } from '@/hooks/queries/timer';
 
-const Page = async () => {
-  const timers = await fetchCurrentTimers();
+const Page = () => {
+  const { data: timers = [] } = useCurrentTimers();
+
   if (timers.length === 0) {
     return <Empty />;
   }
+
   return (
     <>
       <CharacterTimer

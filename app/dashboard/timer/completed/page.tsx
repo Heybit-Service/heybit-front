@@ -1,16 +1,18 @@
-'use server';
+'use client';
 
 import TimerCompletedCard from '@/components/timer/timerCompletedCard';
 import { Title, TitleWrapper, Description } from './styles';
-import { fetchHistoryTimers } from '@/data/api/timer';
 import { Fab } from '@/components/fab';
 import { Empty } from './empty';
+import { useHistoryTimers } from '@/hooks/queries/timer';
 
-const TimerCompletedPage = async () => {
-  const timers = await fetchHistoryTimers();
+const Page = () => {
+  const { data: timers = [] } = useHistoryTimers();
+
   if (timers.length === 0) {
     return <Empty />;
   }
+
   return (
     <>
       <TitleWrapper>
@@ -25,4 +27,4 @@ const TimerCompletedPage = async () => {
   );
 };
 
-export default TimerCompletedPage;
+export default Page;

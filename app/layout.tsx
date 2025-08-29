@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import StyledComponentsRegistry from '@/lib/registry';
+import { ReactQueryProvider } from '@/lib/react-query-provider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -30,12 +31,16 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <StyledComponentsRegistry>
-          <div className="min-h-screen flex justify-center bg-gray-100">
-            <div className="w-full md:max-w-[430px] bg-white relative md:shadow-xl">{children}</div>
-          </div>
-          <div id="popup-root" />
-        </StyledComponentsRegistry>
+        <ReactQueryProvider>
+          <StyledComponentsRegistry>
+            <div className="min-h-screen flex justify-center bg-gray-100">
+              <div className="w-full md:max-w-[430px] bg-white relative md:shadow-xl">
+                {children}
+              </div>
+            </div>
+            <div id="popup-root" />
+          </StyledComponentsRegistry>
+        </ReactQueryProvider>
       </body>
     </html>
   );

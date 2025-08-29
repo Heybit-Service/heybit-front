@@ -1,6 +1,5 @@
-'use server';
-
-import { API_BASE_URL, getServerToken } from '@/data/api';
+import { API_BASE_URL } from '@/data/api';
+import { getToken } from '@/data/auth';
 
 interface TimerCommand {
   name: string;
@@ -37,14 +36,17 @@ export const createTimer = async ({
   if (image) {
     formData.append('img', image);
   }
-  const token = await getServerToken();
+
+  const token = getToken();
   const response = await fetch(`${API_BASE_URL}/api/v1/timers`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${token}`,
     },
     body: formData,
   });
-  console.log('response: ', response);
+
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  }
 };
