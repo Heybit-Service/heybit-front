@@ -11,9 +11,10 @@ interface Props {
 
 const TimerCard = ({ timer }: Props) => {
   const router = useRouter();
+  const active = timer.status === 'IN_PROGRESS';
 
   const onClick = () => {
-    if (timer.active) {
+    if (active) {
       router.push(`/timer/${timer.timerId}/progress`);
     } else {
       router.push(`/timer/${timer.timerId}/confirm`);
@@ -43,7 +44,7 @@ const TimerCard = ({ timer }: Props) => {
 
   const isVoting = timer.withVotePost;
   const votingLabel = isVoting ? '투표중' : '투표 종료';
-  const activeLabel = timer.active ? formatRemaining(timer.endTime) : '결과 입력하기';
+  const activeLabel = active ? formatRemaining(timer.endTime) : '결과 입력하기';
 
   return (
     <Wrapper>
@@ -55,8 +56,8 @@ const TimerCard = ({ timer }: Props) => {
         <Price>{timer.amount.toLocaleString()}원</Price>
       </TitleWrapper>
       <Description>{timer.description}</Description>
-      <Button $active={timer.active} onClick={onClick}>
-        {timer.active && <IconTimer />}
+      <Button $active={active} onClick={onClick}>
+        {active && <IconTimer />}
         {activeLabel}
       </Button>
     </Wrapper>

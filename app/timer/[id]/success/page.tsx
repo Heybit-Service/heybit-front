@@ -1,17 +1,35 @@
+'use client';
+
 import Image from 'next/image';
 import Character from '@/assets/timer/success/character.png';
-import { fetchTimer } from '@/data/api/timer';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useTimer } from '@/hooks/queries/timer';
 
-interface Props {
-  params: Promise<{
-    id: number;
-  }>;
-}
+const Page = () => {
+  const params = useParams();
+  const id = Number(params.id);
+  const { data: timer, isLoading, error } = useTimer(id);
 
-const Page = async ({ params }: Props) => {
-  const { id } = await params;
-  const timer = await fetchTimer(id);
+  if (isLoading) {
+    return (
+      <div className="h-dvh bg-[#F7F7F7] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg font-medium">로딩 중...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !timer) {
+    return (
+      <div className="h-dvh bg-[#F7F7F7] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg font-medium text-red-500">타이머를 불러올 수 없습니다</div>
+        </div>
+      </div>
+    );
+  }
   const formatDuration = (startTime: string, endTime: string) => {
     const start = new Date(startTime);
     const end = new Date(endTime);

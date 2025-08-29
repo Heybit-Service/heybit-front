@@ -1,6 +1,6 @@
 export interface CurrentTimer {
   timerId: number;
-  active: boolean;
+  status: 'IN_PROGRESS' | 'WAITING';
   name: string;
   description: string;
   amount: number;
