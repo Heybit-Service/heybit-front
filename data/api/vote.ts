@@ -1,5 +1,5 @@
 import { getToken } from '../auth';
-import { ProductVotePost, VoteResult } from '../type/vote';
+import { ProductVotePost, VoteResult, MyVotedPost } from '../type/vote';
 
 export const getVotes = async (): Promise<ProductVotePost[]> => {
   const token = getToken();
@@ -56,4 +56,25 @@ export const cancelVote = async (votePostId: number): Promise<void> => {
     const text = await res.text().catch(() => '');
     throw new Error(text || 'Failed to cancel vote');
   }
+};
+
+export const getMyVotes = async (): Promise<MyVotedPost[]> => {
+  const token = getToken();
+  if (!token) throw new Error('No authentication token found');
+
+  const res = await fetch('/api/votes/me', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(text || 'Failed to load my votes');
+  }
+
+  const json = await res.json();
+  return (json.data as MyVotedPost[]) ?? [];
 };
