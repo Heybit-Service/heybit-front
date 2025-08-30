@@ -42,13 +42,15 @@ export function VoteCard({
     <div className="flex flex-col gap-2.5 p-5 bg-white rounded-[10px] shadow-[0px_3px_8px_0px_rgba(83,83,83,0.05)]">
       <div className="flex flex-col gap-4 w-full">
         <div className="flex items-center gap-4">
-          <Image
-            src={productImage}
-            alt={productName}
-            width={84}
-            height={84}
-            className="rounded-[10px] object-cover"
-          />
+          <div className="relative w-[84px] h-[84px] flex-shrink-0">
+            <Image
+              src={productImage}
+              alt={productName}
+              fill
+              sizes="84px"
+              className="rounded-[10px] object-cover"
+            />
+          </div>
 
           <div className="flex flex-col gap-1.5 flex-1">
             {timeRemaining && (
