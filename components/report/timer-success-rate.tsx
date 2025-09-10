@@ -11,7 +11,7 @@ interface TimerSuccessRateProps {
 }
 
 export function TimerSuccessRate({ data, styles = {}, showLabels = true, animated = true }: TimerSuccessRateProps) {
-  const { successRate, totalTimers, grade } = data
+  const { successRate, grade } = data
 
   const gradeColor = GRADE_CONFIG[grade]?.color || TIMER_STYLES.colors.primary
 

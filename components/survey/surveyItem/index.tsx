@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { Wrapper, IconWrapper } from './styles';
+import { Wrapper } from './styles';
 import CheckCircle from '@/assets/survey/check_circle.svg'
 
 interface SurveyItemProps extends PropsWithChildren {

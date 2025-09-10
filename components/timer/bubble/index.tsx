@@ -1,5 +1,5 @@
 import Background from '@/assets/timer/create/background.png';
-import Bubble from '@/assets/timer/create/bubble.png';
+// import Bubble from '@/assets/timer/create/bubble.png';
 
 interface Props {
   duration: string;

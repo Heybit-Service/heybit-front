@@ -3,6 +3,11 @@ export interface Transaction {
   expense?: number
 }
 
+export interface CalendarTransaction {
+  income?: number
+  expense?: number
+}
+
 export interface CalendarData {
   [date: string]: Transaction // YYYY-MM-DD format
 }

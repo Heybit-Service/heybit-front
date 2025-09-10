@@ -10,7 +10,7 @@ import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import type { ExpenseData } from '@/lib/expense-types';
 import type { ImpulseData } from '@/lib/impulse-types';
 import type { TimerSuccessData } from '@/lib/timer-types';
-import { transformTimerApiData } from '@/lib/timer-config';
+// import { transformTimerApiData } from '@/lib/timer-config';
 
 const SAMPLE_DATA = {
   '2024-12-01': { income: 398000 },
@@ -92,10 +92,10 @@ const SAMPLE_TIMER_DATA: TimerSuccessData = {
   emoji: '😊',
 };
 
-const SAMPLE_API_TIMER_DATA = {
-  total_timers: 10,
-  successful_timers: 8,
-};
+// const SAMPLE_API_TIMER_DATA = {
+//   total_timers: 10,
+//   successful_timers: 8,
+// };
 
 export default function HomePage() {
   const router = useRouter(); // Added router hook for navigation
@@ -103,7 +103,7 @@ export default function HomePage() {
     return new Date(2024, 11, 1); // 2024년 12월 (월은 0부터 시작)
   });
 
-  const handleDateClick = (date: Date, dayData?: any) => {
+  const handleDateClick = (date: Date, dayData?: { income?: number; expense?: number }) => {
     const dateStr = date.toLocaleDateString('ko-KR');
     console.log(`${dateStr} 클릭`, dayData ? `데이터: ${JSON.stringify(dayData)}` : '데이터 없음');
   };
@@ -119,8 +119,8 @@ export default function HomePage() {
     let totalSpent = 0;
 
     Object.values(SAMPLE_DATA).forEach((dayData) => {
-      if (dayData.income) totalSaved += dayData.income;
-      if (dayData.expense) totalSpent += dayData.expense;
+      if ('income' in dayData && dayData.income) totalSaved += dayData.income;
+      if ('expense' in dayData && dayData.expense) totalSpent += dayData.expense;
     });
 
     return { totalSaved, totalSpent };
@@ -128,7 +128,7 @@ export default function HomePage() {
 
   const { totalSaved, totalSpent } = calculateTotals();
 
-  const transformedTimerData = transformTimerApiData(SAMPLE_API_TIMER_DATA);
+  // const transformedTimerData = transformTimerApiData(SAMPLE_API_TIMER_DATA);
 
   const handleReportClick = () => {
     router.push('/dashboard/report/total');

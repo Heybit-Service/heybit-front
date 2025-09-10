@@ -1,7 +1,7 @@
 "use client"
 
 import styled from 'styled-components';
-import { GRAY, BLACK } from '@/constant/color';
+import { GRAY } from '@/constant/color';
 
 export const Wrapper = styled.div`
   background-color: ${GRAY[100]};

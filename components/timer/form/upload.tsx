@@ -42,7 +42,10 @@ export const Upload = ({ required, onChange }: Props) => {
         className="relative w-[90px] h-[90px] flex flex-col justify-center items-center gap-2 bg-white cursor-pointer"
         onClick={handleClick}
       >
-        {preview && <img src={preview} alt="미리보기" className="w-full h-full object-contain" />}
+        {preview && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={preview} alt="미리보기" className="w-full h-full object-contain" />
+        )}
         {!preview && (
           <>
             <CameraIcon />

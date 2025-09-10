@@ -1,12 +1,12 @@
 import { CUMULATIVE_STYLES, CUMULATIVE_TEXT } from '@/lib/cumulative-config';
 import type { TotalSavingsProps } from '@/lib/cumulative-types';
 
-export function TotalSavings({ totalAmount, customStyles }: TotalSavingsProps) {
-  const styles = {
-    backgroundColor: customStyles?.backgroundColor || CUMULATIVE_STYLES.colors.primaryLight,
-    textColor: customStyles?.textColor || CUMULATIVE_STYLES.colors.primaryDark,
-    pillColor: customStyles?.pillColor || CUMULATIVE_STYLES.colors.primary,
-  };
+export function TotalSavings({ totalAmount }: TotalSavingsProps) {
+  // const styles = {
+  //   backgroundColor: customStyles?.backgroundColor || CUMULATIVE_STYLES.colors.primaryLight,
+  //   textColor: customStyles?.textColor || CUMULATIVE_STYLES.colors.primaryDark,
+  //   pillColor: customStyles?.pillColor || CUMULATIVE_STYLES.colors.primary,
+  // };
 
   return (
     <div className="space-y-3">

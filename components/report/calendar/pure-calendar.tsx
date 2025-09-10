@@ -8,7 +8,7 @@ import type { CalendarData, CalendarTransaction } from "./types"
 interface PureCalendarProps {
   currentDate: Date
   data: CalendarData
-  onDateClick?: (date: Date, transactions: CalendarTransaction[]) => void
+  onDateClick?: (date: Date, dayData?: CalendarTransaction) => void
 }
 
 export function PureCalendar({ currentDate, data, onDateClick }: PureCalendarProps) {

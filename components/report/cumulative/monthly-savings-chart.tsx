@@ -1,11 +1,11 @@
-import { CUMULATIVE_STYLES } from "@/lib/cumulative-config"
+// import { CUMULATIVE_STYLES } from "@/lib/cumulative-config"
 import type { MonthlySavingsChartProps } from "@/lib/cumulative-types"
 
 export function MonthlySavingsChart({ data, highlightMonth = "7월", customStyles }: MonthlySavingsChartProps) {
   const maxAmount = Math.max(...data.map((d) => d.amount))
   const maxHeight = customStyles?.maxHeight || 200
-  const primaryColor = customStyles?.primaryColor || CUMULATIVE_STYLES.colors.primary
-  const secondaryColor = customStyles?.secondaryColor || "#CFF3E7"
+  // const primaryColor = customStyles?.primaryColor || CUMULATIVE_STYLES.colors.primary
+  // const secondaryColor = customStyles?.secondaryColor || "#CFF3E7"
 
   return (
     <div className="space-y-6">

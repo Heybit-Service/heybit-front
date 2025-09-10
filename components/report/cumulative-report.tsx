@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { CUMULATIVE_STYLES } from '@/lib/cumulative-config';
 import type { CumulativeReportProps, MonthlyData } from '@/lib/cumulative-types';
 import { TotalSavings } from '@/components/report/cumulative/total-savings';
@@ -15,8 +15,8 @@ const DEFAULT_MONTHLY_DATA: MonthlyData[] = [
   { month: '7월', amount: 130000 },
 ];
 
-export function CumulativeReport({ data, onBack, showHeader = false }: CumulativeReportProps) {
-  const router = useRouter();
+export function CumulativeReport({ data }: CumulativeReportProps) {
+  // const router = useRouter();
 
   const monthlySavings = data?.monthlySavings || DEFAULT_MONTHLY_DATA;
   const timerSuccessRate = data?.timerSuccessRate || 50;
@@ -24,13 +24,13 @@ export function CumulativeReport({ data, onBack, showHeader = false }: Cumulativ
 
   const totalSavings = monthlySavings.reduce((sum, monthData) => sum + monthData.amount, 0);
 
-  const handleBack = () => {
-    if (onBack) {
-      onBack();
-    } else {
-      router.back();
-    }
-  };
+  // const handleBack = () => {
+  //   if (onBack) {
+  //     onBack();
+  //   } else {
+  //     router.back();
+  //   }
+  // };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: CUMULATIVE_STYLES.colors.background }}>
