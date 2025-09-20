@@ -13,10 +13,13 @@ export const Price = ({ onChange }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.replace(/[^\d]/g, '');
     if (inputValue.length > 0) {
-      const numberWithCommas = Number(inputValue).toLocaleString();
-      const formattedValue = `₩ ${numberWithCommas}`;
-      setValue(formattedValue);
-      onChange(inputValue);
+      const numericValue = Number(inputValue);
+      if (numericValue > 0) {
+        const numberWithCommas = numericValue.toLocaleString();
+        const formattedValue = `₩ ${numberWithCommas}`;
+        setValue(formattedValue);
+        onChange(inputValue);
+      }
     } else {
       setValue('');
       onChange('');
