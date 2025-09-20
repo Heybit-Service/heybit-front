@@ -30,7 +30,7 @@ const TimerCompletedCard = ({ timer }: Props) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <TitleWrapper>
         <Title>
           {timer.name}
@@ -38,7 +38,7 @@ const TimerCompletedCard = ({ timer }: Props) => {
         </Title>
         <Price>{priceLabel}</Price>
       </TitleWrapper>
-      <Button success={timer.success} onClick={onClick}>
+      <Button success={timer.success}>
         <IconTimer />
         {timer.durationMessage}
       </Button>

@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   box-shadow: 0px 3px 8px 0px rgba(83, 83, 83, 0.05);
   background-color: #ffffff;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 export const TitleWrapper = styled.div`
@@ -56,7 +57,7 @@ export const Description = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Button = styled.button<{ $active?: boolean }>`
+export const Button = styled.div<{ $active?: boolean }>`
   width: 100%;
   height: 48px;
   background-color: ${({ $active }) => ($active ? WHITE : GREEN.SUB1)};
@@ -68,6 +69,5 @@ export const Button = styled.button<{ $active?: boolean }>`
   align-items: center;
   font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
   gap: 4px;
 `;

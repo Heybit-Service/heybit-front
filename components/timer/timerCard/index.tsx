@@ -49,7 +49,7 @@ const TimerCard = ({ timer }: Props) => {
   const votingLabel = showVoteStatus ? (active ? '투표중' : '투표 완료') : '';
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <TitleWrapper>
         <Title>
           {timer.name}
@@ -58,7 +58,7 @@ const TimerCard = ({ timer }: Props) => {
         <Price>{timer.amount.toLocaleString()}원</Price>
       </TitleWrapper>
       <Description>{timer.description}</Description>
-      <Button $active={active} onClick={onClick}>
+      <Button $active={active}>
         {active && <IconTimer />}
         {activeLabel}
       </Button>
