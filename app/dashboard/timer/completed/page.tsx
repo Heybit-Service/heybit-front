@@ -7,7 +7,11 @@ import { Empty } from './empty';
 import { useHistoryTimers } from '@/hooks/queries/timer';
 
 const Page = () => {
-  const { data: timers = [] } = useHistoryTimers();
+  const { data: timers = [], isLoading } = useHistoryTimers();
+
+  if (isLoading) {
+    return null;
+  }
 
   if (timers.length === 0) {
     return <Empty />;

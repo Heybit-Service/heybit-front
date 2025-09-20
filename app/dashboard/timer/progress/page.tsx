@@ -8,7 +8,11 @@ import { Empty } from './empty';
 import { useCurrentTimers } from '@/hooks/queries/timer';
 
 const Page = () => {
-  const { data: timers = [] } = useCurrentTimers();
+  const { data: timers = [], isLoading } = useCurrentTimers();
+
+  if (isLoading) {
+    return null;
+  }
 
   if (timers.length === 0) {
     return <Empty />;
