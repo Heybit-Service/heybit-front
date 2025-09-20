@@ -13,7 +13,7 @@ interface Props {
 
 export const TimerInformation = ({ timer }: Props) => {
   const imageVisible = timer.imageUrl !== null && timer.imageUrl !== '';
-  const votingVisible = true;
+  const votingVisible = timer.withVotePost;
   return (
     <div className="px-4">
       <Category value={timer.category} />
