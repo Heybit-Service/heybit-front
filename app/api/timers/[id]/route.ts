@@ -48,7 +48,7 @@ export async function DELETE(
     if (response.ok) {
       return NextResponse.json({ success: true });
     } else {
-      const data = await response.json();
+      const data = await response.json().catch(() => ({ error: 'Unknown error' }));
       return NextResponse.json(data, { status: response.status });
     }
   } catch {

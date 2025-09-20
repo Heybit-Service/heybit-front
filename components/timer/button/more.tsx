@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import MoreIcon from '@/assets/icon/more.svg';
 import { ConfirmPopup } from '@/components/popup/confirm';
-import { deleteTimer } from '@/data/api/timer';
+import { useDeleteTimer } from '@/hooks/queries/timer';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   id: number;
@@ -11,6 +12,8 @@ interface Props {
 
 export const MoreButton = ({ id }: Props) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const deleteTimerMutation = useDeleteTimer();
 
   const onClick = () => {
     setOpen(true);
@@ -21,8 +24,13 @@ export const MoreButton = ({ id }: Props) => {
   };
 
   const onCancel = async () => {
-    await deleteTimer(id);
-    setOpen(false);
+    try {
+      await deleteTimerMutation.mutateAsync(id);
+      setOpen(false);
+      router.replace('/dashboard/timer/progress');
+    } catch {
+      setOpen(false);
+    }
   };
 
   return (
