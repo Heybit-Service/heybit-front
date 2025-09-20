@@ -43,7 +43,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-dvh bg-[#F7F7F7]">
+    <div className="min-h-dvh bg-[#F7F7F7]">
       <AppBar title="타이머 상품 등록" leadings={<BackButton />} />
       <TimerBubble duration={duration} />
       <div className="pt-8">

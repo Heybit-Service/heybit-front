@@ -21,7 +21,7 @@ const Page = ({ params }: Props) => {
     return null;
   }
   return (
-    <div className="h-dvh flex flex-col bg-[#F7F7F7]">
+    <div className="min-h-dvh flex flex-col bg-[#F7F7F7]">
       <AppBar title="참고 있는 상품" leadings={<BackButton />} />
       <div className="flex flex-col flex-grow items-center justify-between">
         <div className="flex flex-col items-center justify-center pt-10 gap-4">

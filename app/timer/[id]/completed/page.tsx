@@ -22,7 +22,7 @@ const Page = ({ params }: Props) => {
     return null;
   }
   return (
-    <div className="bg-[#F7F7F7]">
+    <div className="min-h-dvh bg-[#F7F7F7]">
       <AppBar title="내가 등록한 상품" leadings={<BackButton />} />
       <main className="pb-[126px]">
         <TimerSummary timer={timer} />

@@ -30,7 +30,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
   };
 
   return (
-    <div className="h-dvh flex flex-col items-center gap-13 px-4">
+    <div className="flex flex-col items-center gap-13 px-4">
       <div className="flex flex-col gap-6 pb-[126px]">
         <Title />
         <Category onChange={(value) => setForm({ ...form, category: value })} />

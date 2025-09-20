@@ -13,7 +13,7 @@ const Page = () => {
 
   if (isLoading) {
     return (
-      <div className="h-dvh bg-[#F7F7F7] flex items-center justify-center">
+      <div className="min-h-dvh bg-[#F7F7F7] flex items-center justify-center">
         <div className="text-center">
           <div className="text-lg font-medium">로딩 중...</div>
         </div>
@@ -23,7 +23,7 @@ const Page = () => {
 
   if (error || !timer) {
     return (
-      <div className="h-dvh bg-[#F7F7F7] flex items-center justify-center">
+      <div className="min-h-dvh bg-[#F7F7F7] flex items-center justify-center">
         <div className="text-center">
           <div className="text-lg font-medium text-red-500">타이머를 불러올 수 없습니다</div>
         </div>
@@ -46,7 +46,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-dvh bg-[#F7F7F7] flex flex-col pt-30">
+    <div className="min-h-dvh bg-[#F7F7F7] flex flex-col pt-30">
       <div className="flex flex-col items-center gap-5 flex-grow">
         <Image className="px-23" src={Character} alt="character" />
         <div className="flex flex-col items-center gap-3">

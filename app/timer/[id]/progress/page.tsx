@@ -23,7 +23,7 @@ const Page = ({ params }: Props) => {
     return null;
   }
   return (
-    <div className="h-dvh bg-[#F7F7F7] flex flex-col">
+    <div className="min-h-dvh bg-[#F7F7F7] flex flex-col">
       <AppBar title="참고 있는 상품" leadings={<BackButton />} actions={<MoreButton id={id} />} />
       <div className="pb-[126px]">
         <TimerProgressSummary timer={timer} />
