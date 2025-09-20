@@ -6,8 +6,10 @@ import TimerCount from '@/components/timer/count';
 
 export const Empty = () => {
   return (
-    <div className="flex flex-col items-center h-full pt-30 gap-22">
-      <Image className="px-18" src={EmptyCharacter} alt="progress-empty-character" />
+    <div className="flex flex-col justify-between h-full pt-20">
+      <div className="flex justify-center">
+        <Image className="px-18" src={EmptyCharacter} alt="progress-empty-character" />
+      </div>
       <div className="flex flex-col gap-3 w-full">
         <TimerCount count={0} />
         <Link
