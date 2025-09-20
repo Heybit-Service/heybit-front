@@ -1,5 +1,6 @@
 'use client';
 
+import Asterisk from '@/assets/timer/create/asterisk.svg';
 import { useState } from 'react';
 
 const categories = [
@@ -26,7 +27,10 @@ export const Category = ({ onChange }: Props) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <span className="font-pretendard font-medium text-base leading-[140%]">상품 카테고리</span>
+      <div className="flex items-center gap-[5px]">
+        <span className="font-pretendard font-medium text-base leading-[140%]">상품 카테고리</span>
+        <Asterisk />
+      </div>
       <div className="flex gap-[6px] flex-wrap">
         {categories.map(({ label, value }) => {
           const isSelected = selected === value;
