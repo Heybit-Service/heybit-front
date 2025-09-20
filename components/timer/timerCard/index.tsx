@@ -42,16 +42,18 @@ const TimerCard = ({ timer }: Props) => {
     return parts.length ? `${parts.join(' ')} 남음` : '1분 미만 남음';
   };
 
-  const isVoting = timer.withVotePost;
-  const votingLabel = isVoting ? '투표중' : '투표 종료';
   const activeLabel = active ? formatRemaining(timer.endTime) : '결과 입력하기';
+
+  // withVotePost가 true인 경우에만 투표 상태 표시
+  const showVoteStatus = timer.withVotePost;
+  const votingLabel = showVoteStatus ? (active ? '투표중' : '투표 완료') : '';
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>
           {timer.name}
-          <Tag $active={isVoting}>{votingLabel}</Tag>
+          {showVoteStatus && <Tag $active={active}>{votingLabel}</Tag>}
         </Title>
         <Price>{timer.amount.toLocaleString()}원</Price>
       </TitleWrapper>
