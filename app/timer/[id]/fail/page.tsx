@@ -57,7 +57,7 @@ const Page = () => {
             닫기
           </div>
         </Link>
-        <Link className="w-full cursor-pointer" href={`/timer/${id}/report`}>
+        <Link className="w-full cursor-pointer" href={'/dashboard/report'}>
           <div className="w-full py-4 bg-[#202020] rounded-[10px] text-white font-pretendard font-semibold text-lg leading-[150%] text-center">
             리포트 확인
           </div>
