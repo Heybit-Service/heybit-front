@@ -9,21 +9,24 @@ export function ReportSummary({ savedAmount, spentAmount }: ReportSummaryProps) 
   const formatAmount = (amount: number) => {
     return amount.toLocaleString('ko-KR');
   };
-
   return (
-    <div className="space-y-3 mb-6">
-      <div className="flex items-center">
-        <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#cff3e7] text-sm font-medium text-[#0a8a5c] mr-1">
+    <div className="flex flex-col gap-[9px] px-4">
+      <div className="flex items-center gap-1">
+        <span className="inline-flex items-center px-3 py-1 rounded-[4px] bg-[#cff3e7] text-xl font-bold leading-[140%] text-[#0EC189]">
           {formatAmount(savedAmount)}원
         </span>
-        <span className="text-base text-gray-700">을 아꼈어요</span>
+        <span className="text-xl font-bold leading-[140%] text-[#0EC189] align-middle">
+          을 아꼈어요
+        </span>
       </div>
 
-      <div className="flex items-center">
-        <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#fadbd4] text-sm font-medium text-[#e74a27] mr-1">
+      <div className="flex items-center gap-1">
+        <span className="inline-flex items-center px-3 py-1 rounded-[4px] bg-[#fadbd4] text-xl font-bold leading-[140%] text-[#FF0000]">
           {formatAmount(spentAmount)}원
         </span>
-        <span className="text-base text-gray-700">을 소비했어요</span>
+        <span className="text-xl font-bold leading-[140%] text-[#FF0000] align-middle">
+          을 소비했어요
+        </span>
       </div>
     </div>
   );
