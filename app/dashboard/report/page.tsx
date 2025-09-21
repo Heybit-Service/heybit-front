@@ -24,7 +24,7 @@ export default function Page() {
   const router = useRouter();
   const [currentDate] = useAtom(currentDateAtom);
   const monthString = formatMonthForAPI(currentDate);
-  const { data: reportData, isLoading, error } = useMonthlyReport(monthString);
+  const { data: reportData } = useMonthlyReport(monthString);
   const handleDateClick = (date: Date, dayData?: { income?: number; expense?: number }) => {
     const dateStr = date.toLocaleDateString('ko-KR');
     console.log(`${dateStr} 클릭`, dayData ? `데이터: ${JSON.stringify(dayData)}` : '데이터 없음');
@@ -37,28 +37,6 @@ export default function Page() {
   const handleReportClick = () => {
     router.push('/dashboard/report/total');
   };
-
-  if (isLoading) {
-    return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: '#F7F7F7' }}
-      >
-        <div className="text-lg">리포트 데이터를 불러오는 중...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: '#F7F7F7' }}
-      >
-        <div className="text-lg text-red-500">데이터를 불러오는데 실패했습니다.</div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F7F7' }}>

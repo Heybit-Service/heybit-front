@@ -17,18 +17,9 @@ export function Cell({ date, transactions, isToday, onClick }: Props) {
   return (
     <button
       onClick={() => onClick?.(date)}
-      className={`
-        aspect-square flex flex-col items-center justify-start
-        hover:bg-gray-50 transition-colors min-h-[60px] w-full max-w-full
-        ${isToday ? 'bg-[#cff3e7]' : ''}
-      `}
+      className="aspect-square flex flex-col items-center justify-start hover:bg-gray-50 transition-colors min-h-[60px] w-full max-w-full"
     >
-      <span
-        className={`
-          text-sm font-medium leading-[140%] text-center align-middle
-          ${isToday ? 'text-[#0a8a5c] font-semibold' : 'text-[#7C7C7C]'}
-        `}
-      >
+      <span className="text-sm font-medium leading-[140%] text-center align-middle text-[#7C7C7C]">
         {date}
       </span>
 
