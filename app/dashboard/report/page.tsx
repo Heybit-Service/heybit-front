@@ -53,11 +53,8 @@ export default function Page() {
             progressBarWidth: 'w-72',
             primaryColor: '#0ec189',
           }}
-          animated={true}
-          showLabels={true}
         />
       </div>
-
       <div className="px-4 pb-8 pt-6">
         <button
           onClick={handleReportClick}
