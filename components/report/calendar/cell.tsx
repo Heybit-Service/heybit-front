@@ -1,32 +1,32 @@
-"use client"
+'use client';
 
-import type { Transaction } from "./types"
+import type { Transaction } from './types';
 
 interface Props {
-  date: number
-  transactions?: Transaction
-  isToday?: boolean
-  onClick?: (date: number) => void
+  date: number;
+  transactions?: Transaction;
+  isToday?: boolean;
+  onClick?: (date: number) => void;
 }
 
 export function Cell({ date, transactions, isToday, onClick }: Props) {
-  if (!date) return <div className="aspect-square" />
+  if (!date) return <div className="aspect-square w-full max-w-full" />;
 
-  const formatAmount = (val: number) => `${Math.abs(val).toLocaleString()}`
+  const formatAmount = (val: number) => `${Math.abs(val).toLocaleString()}`;
 
   return (
     <button
       onClick={() => onClick?.(date)}
       className={`
         aspect-square p-1 flex flex-col items-center justify-start
-        hover:bg-gray-50 transition-colors min-h-[60px]
-        ${isToday ? "bg-[#cff3e7]" : ""}
+        hover:bg-gray-50 transition-colors min-h-[60px] w-full max-w-full
+        ${isToday ? 'bg-[#cff3e7]' : ''}
       `}
     >
       <span
         className={`
           text-sm font-medium mb-1
-          ${isToday ? "text-[#0a8a5c] font-semibold" : "text-black"}
+          ${isToday ? 'text-[#0a8a5c] font-semibold' : 'text-black'}
         `}
       >
         {date}
@@ -34,7 +34,9 @@ export function Cell({ date, transactions, isToday, onClick }: Props) {
 
       <div className="flex flex-col items-center gap-0.5 text-[10px] leading-none w-full">
         {transactions?.income && (
-          <div className="text-[#0ec189] text-center w-full truncate">+{formatAmount(transactions.income)}</div>
+          <div className="text-[#0ec189] text-center w-full truncate">
+            +{formatAmount(transactions.income)}
+          </div>
         )}
         {transactions?.expense && (
           <div className="text-[#e74a27] text-center w-full truncate">
@@ -43,5 +45,5 @@ export function Cell({ date, transactions, isToday, onClick }: Props) {
         )}
       </div>
     </button>
-  )
+  );
 }

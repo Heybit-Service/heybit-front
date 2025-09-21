@@ -1,7 +1,6 @@
 'use client';
 
 import { Cell } from './cell';
-import { CALENDAR_STYLES } from './styles';
 import type { CalendarData, Transaction } from './types';
 
 interface Props {
@@ -56,5 +55,5 @@ export function Grid({ date, data = {}, onDateClick }: Props) {
     );
   }
 
-  return <div className={`grid grid-cols-7 ${CALENDAR_STYLES.spacing.gridGap} pb-4`}>{cells}</div>;
+  return <div className="grid grid-cols-7 gap-2 pb-4 w-full">{cells}</div>;
 }
