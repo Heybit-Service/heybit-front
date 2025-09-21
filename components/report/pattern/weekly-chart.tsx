@@ -1,4 +1,7 @@
+import { LineChart, Line, ResponsiveContainer } from 'recharts';
 import type { Counts } from '@/data/api/report';
+import { ChartDot } from './chart-dot';
+import { WeekdayLabels } from './weekday-labels';
 
 interface Props {
   weekdayData: Counts['byWeekday'];
@@ -6,7 +9,7 @@ interface Props {
 
 export function WeeklyChart({ weekdayData }: Props) {
   // API 데이터를 차트용 배열로 변환
-  const data = [
+  const rawData = [
     { day: '월', count: weekdayData.MONDAY },
     { day: '화', count: weekdayData.TUESDAY },
     { day: '수', count: weekdayData.WEDNESDAY },
@@ -15,70 +18,32 @@ export function WeeklyChart({ weekdayData }: Props) {
     { day: '토', count: weekdayData.SATURDAY },
     { day: '일', count: weekdayData.SUNDAY },
   ];
-  const maxCount = Math.max(...data.map((item) => item.count));
-  const maxIndex = data.findIndex((item) => item.count === maxCount);
 
-  // 차트 크기 설정 (Tailwind 대신 직접 값 사용)
-  const chartHeight = 80;
-  const chartWidth = 280;
-  const horizontalPadding = 40;
-  const verticalPadding = 30;
-  const totalWidth = chartWidth + horizontalPadding * 2;
-  const totalHeight = chartHeight + verticalPadding * 2;
+  // 최고값 찾기
+  const maxCount = Math.max(...rawData.map((item) => item.count));
 
-  const safeMaxCount = maxCount > 0 ? maxCount : 1;
-
-  const points = data
-    .map((item, index) => {
-      // Calculate x position to align with label centers
-      const segmentWidth = chartWidth / data.length;
-      const x = horizontalPadding + segmentWidth * index + segmentWidth / 2;
-      const y = verticalPadding + chartHeight - (item.count / safeMaxCount) * chartHeight;
-      return `${x},${y}`;
-    })
-    .join(' ');
+  // 최고값 표시를 위한 데이터 가공
+  const data = rawData.map((item) => ({
+    ...item,
+    isMax: item.count === maxCount,
+  }));
 
   return (
-    <div>
-      <div className="relative" style={{ height: totalHeight }}>
-        <svg
-          width={totalWidth}
-          height={totalHeight}
-          className="mx-auto"
-          viewBox={`0 0 ${totalWidth} ${totalHeight}`}
-        >
-          <polyline fill="none" stroke="#ef4444" strokeWidth="2" points={points} />
-          {data.map((item, index) => {
-            if (index !== maxIndex) return null;
-            const segmentWidth = chartWidth / data.length;
-            const x = horizontalPadding + segmentWidth * index + segmentWidth / 2;
-            const y = verticalPadding + chartHeight - (item.count / safeMaxCount) * chartHeight;
-            return (
-              <g key={item.day}>
-                <circle cx={x} cy={y} r="5" fill="#dc2626" />
-                <text x={x} y={y - 12} textAnchor="middle" className="text-xs fill-gray-600">
-                  {item.count}회
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+    <div className="w-full px-[10px]">
+      <div className="h-[100px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data} margin={{ top: 20, right: 5, left: 5, bottom: 18 }}>
+            <Line
+              type="linear"
+              dataKey="count"
+              stroke="#E74A27"
+              strokeWidth={1}
+              dot={<ChartDot />}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
-      <div
-        className="flex text-sm text-gray-600 mt-2"
-        style={{
-          paddingLeft: horizontalPadding,
-          paddingRight: horizontalPadding,
-          width: totalWidth,
-          margin: '0 auto',
-        }}
-      >
-        {data.map((item) => (
-          <div key={item.day} className="flex-1 text-center">
-            {item.day}
-          </div>
-        ))}
-      </div>
+      <WeekdayLabels data={data} />
     </div>
   );
 }
