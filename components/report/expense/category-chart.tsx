@@ -1,13 +1,12 @@
-import { EXPENSE_STYLES } from '@/lib/expense-config';
 import type { ExpenseCategory } from '@/lib/expense-types';
 
-interface CategoryChartProps {
+interface Props {
   categories: ExpenseCategory[];
 }
 
-export function CategoryChart({ categories }: CategoryChartProps) {
+export function CategoryChart({ categories }: Props) {
   return (
-    <div className={EXPENSE_STYLES.spacing.section}>
+    <div className="mb-6">
       <div className="flex h-4 rounded-lg overflow-hidden bg-gray-100">
         {categories.map((category) => (
           <div
