@@ -41,24 +41,27 @@ export default function Page() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F7F7' }}>
       <UserGreeting />
-      <ReportCard
-        savedAmount={totalSaved}
-        spentAmount={totalSpent}
-        currentDate={currentDate}
-        data={calendarData}
-        onDateClick={handleDateClick}
-      />
-      <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
-      <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
-      <TimerSuccessRate
-        data={SAMPLE_TIMER_DATA}
-        styles={{
-          progressBarWidth: 'w-72',
-          primaryColor: '#0ec189',
-        }}
-        animated={true}
-        showLabels={true}
-      />
+      <div className="flex flex-col gap-3">
+        <ReportCard
+          savedAmount={totalSaved}
+          spentAmount={totalSpent}
+          currentDate={currentDate}
+          data={calendarData}
+          onDateClick={handleDateClick}
+        />
+        <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
+        <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
+        <TimerSuccessRate
+          data={SAMPLE_TIMER_DATA}
+          styles={{
+            progressBarWidth: 'w-72',
+            primaryColor: '#0ec189',
+          }}
+          animated={true}
+          showLabels={true}
+        />
+      </div>
+
       <div className="px-4 pb-8 pt-6">
         <button
           onClick={handleReportClick}

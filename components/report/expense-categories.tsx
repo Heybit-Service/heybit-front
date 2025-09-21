@@ -6,7 +6,7 @@ import type { ExpenseCategoriesProps } from '@/lib/expense-types';
 
 export function ExpenseCategories({ data }: ExpenseCategoriesProps) {
   return (
-    <div className="px-4 bg-white">
+    <div className="py-7 px-[18.5px] bg-white rounded-[10px]">
       <CategorySummary topCategory={data.topCategory.name} topAmount={data.topCategory.amount} />
       <CategoryChart categories={data.categories} />
       <CategoryList categories={data.categories} />
