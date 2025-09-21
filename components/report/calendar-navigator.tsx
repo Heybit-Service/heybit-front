@@ -12,7 +12,7 @@ interface Props {
 export function CalendarNavigator({ currentDate, onPrevMonth, onNextMonth }: Props) {
   const monthText = `${currentDate.getFullYear()}년 ${currentDate.getMonth() + 1}월`;
   return (
-    <div className="flex items-center justify-between px-5 py-4">
+    <div className="flex items-center justify-between px-5 w-full h-[60px]">
       <button onClick={onPrevMonth}>
         <ArrowLeft />
       </button>

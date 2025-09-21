@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Added useRouter import for proper Next.js navigation
-import { ReportHeader } from '@/components/report/report-header';
+import { useAtom } from 'jotai';
+import { UserGreeting } from '@/components/report/user-greeting';
+import { currentDateAtom } from './store';
 import { ReportCard } from '@/components/report/report-card';
 import { ExpenseCategories } from '@/components/report/expense-categories';
 import { ImpulseSpendingPattern } from '@/components/report/impulse-spending-pattern';
@@ -10,7 +11,6 @@ import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import type { ExpenseData } from '@/lib/expense-types';
 import type { ImpulseData } from '@/lib/impulse-types';
 import type { TimerSuccessData } from '@/lib/timer-types';
-// import { transformTimerApiData } from '@/lib/timer-config';
 
 const SAMPLE_DATA = {
   '2024-12-01': { income: 398000 },
@@ -97,21 +97,13 @@ const SAMPLE_TIMER_DATA: TimerSuccessData = {
 //   successful_timers: 8,
 // };
 
-export default function HomePage() {
+export default function Page() {
   const router = useRouter(); // Added router hook for navigation
-  const [currentDate, setCurrentDate] = useState(() => {
-    return new Date(2024, 11, 1); // 2024년 12월 (월은 0부터 시작)
-  });
+  const [currentDate] = useAtom(currentDateAtom);
 
   const handleDateClick = (date: Date, dayData?: { income?: number; expense?: number }) => {
     const dateStr = date.toLocaleDateString('ko-KR');
     console.log(`${dateStr} 클릭`, dayData ? `데이터: ${JSON.stringify(dayData)}` : '데이터 없음');
-  };
-
-  const handleMonthChange = (offset: number) => {
-    const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
-    setCurrentDate(newDate);
-    console.log(`${newDate.getFullYear()}년 ${newDate.getMonth() + 1}월로 변경`);
   };
 
   const calculateTotals = () => {
@@ -136,43 +128,36 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-md mx-auto">
-        <ReportHeader
-          currentDate={currentDate}
-          onPrevMonth={() => handleMonthChange(-1)}
-          onNextMonth={() => handleMonthChange(1)}
-        />
+      <UserGreeting />
+      <ReportCard
+        savedAmount={totalSaved}
+        spentAmount={totalSpent}
+        currentDate={currentDate}
+        data={SAMPLE_DATA}
+        onDateClick={handleDateClick}
+      />
 
-        <ReportCard
-          savedAmount={totalSaved}
-          spentAmount={totalSpent}
-          currentDate={currentDate}
-          data={SAMPLE_DATA}
-          onDateClick={handleDateClick}
-        />
+      <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
 
-        <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
+      <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
 
-        <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
+      <TimerSuccessRate
+        data={SAMPLE_TIMER_DATA}
+        styles={{
+          progressBarWidth: 'w-72', // Custom width
+          primaryColor: '#0ec189', // Custom color
+        }}
+        animated={true}
+        showLabels={true}
+      />
 
-        <TimerSuccessRate
-          data={SAMPLE_TIMER_DATA}
-          styles={{
-            progressBarWidth: 'w-72', // Custom width
-            primaryColor: '#0ec189', // Custom color
-          }}
-          animated={true}
-          showLabels={true}
-        />
-
-        <div className="px-4 pb-8 pt-6">
-          <button
-            onClick={handleReportClick}
-            className="w-full bg-black text-white py-4 px-6 rounded-lg font-medium text-base hover:bg-gray-800 transition-colors"
-          >
-            누적 데이터 확인
-          </button>
-        </div>
+      <div className="px-4 pb-8 pt-6">
+        <button
+          onClick={handleReportClick}
+          className="w-full bg-black text-white py-4 px-6 rounded-lg font-medium text-base hover:bg-gray-800 transition-colors"
+        >
+          누적 데이터 확인
+        </button>
       </div>
     </div>
   );
