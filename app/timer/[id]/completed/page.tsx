@@ -29,7 +29,7 @@ const Page = ({ params }: Props) => {
         <TimerInformation timer={timer} />
       </main>
       <FixedBottom>
-        <ReportConfirmButton id={id} />
+        <ReportConfirmButton />
       </FixedBottom>
     </div>
   );
