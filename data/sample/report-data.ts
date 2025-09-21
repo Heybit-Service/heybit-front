@@ -1,6 +1,7 @@
 import type { ExpenseData } from '@/lib/expense-types';
 import type { ImpulseData } from '@/lib/impulse-types';
 import type { TimerSuccessData } from '@/lib/timer-types';
+import type { MonthlyReport } from '@/data/api/report';
 
 export const SAMPLE_CALENDAR_DATA = {
   '2024-12-01': { income: 398000 },
@@ -32,22 +33,97 @@ export const SAMPLE_CALENDAR_DATA = {
   '2024-12-30': { expense: 627000 },
 };
 
-export const SAMPLE_EXPENSE_DATA: ExpenseData = {
-  categories: [
-    { id: 'clothing', name: '의류', amount: 157630, percentage: 48, color: '#e74a27' },
-    { id: 'transport', name: '교통', amount: 82100, percentage: 25, color: '#fb7b7b' },
-    { id: 'food', name: '음식', amount: 52544, percentage: 16, color: '#ff9999' },
-    { id: 'hobby', name: '취미', amount: 22989, percentage: 7, color: '#ffb3b3' },
-    { id: 'living', name: '생활', amount: 13136, percentage: 4, color: '#ffcccc' },
-    { id: 'beauty', name: '뷰티', amount: 8100, percentage: 1, color: '#ffe6e6' },
-    { id: 'etc', name: '기타', amount: 8100, percentage: 1, color: '#fff0f0' },
+// 백엔드 응답 형태의 샘플 데이터
+export const SAMPLE_MONTHLY_REPORT: MonthlyReport = {
+  year: 2025,
+  month: 8,
+  dailySummaries: [
+    {
+      day: '2025-08-24',
+      savedAmount: 12000,
+      consumedAmount: 13000,
+    },
+    {
+      day: '2025-08-25',
+      savedAmount: 15000,
+      consumedAmount: 8000,
+    },
   ],
-  totalExpense: 328400,
-  topCategory: {
-    name: '의류',
-    amount: 157630,
+  successRate: {
+    successRatePercent: 50.0,
+    totalCount: 4,
+    successCount: 2,
+  },
+  categoryFailures: [
+    {
+      category: 'CLOTHES',
+      failCount: 2,
+      failPercent: 40.0,
+      totalAmount: 157630,
+    },
+    {
+      category: 'TRANSPORT',
+      failCount: 1,
+      failPercent: 50.0,
+      totalAmount: 82100,
+    },
+    {
+      category: 'FOOD',
+      failCount: 1,
+      failPercent: 50.0,
+      totalAmount: 52544,
+    },
+    {
+      category: 'HOBBY',
+      failCount: 1,
+      failPercent: 30.0,
+      totalAmount: 22989,
+    },
+    {
+      category: 'DAILY',
+      failCount: 0,
+      failPercent: 0.0,
+      totalAmount: 13136,
+    },
+    {
+      category: 'BEAUTY',
+      failCount: 0,
+      failPercent: 0.0,
+      totalAmount: 8100,
+    },
+    {
+      category: 'ETC',
+      failCount: 0,
+      failPercent: 0.0,
+      totalAmount: 8100,
+    },
+  ],
+  registeredCounts: {
+    byWeekday: {
+      MONDAY: 1,
+      TUESDAY: 0,
+      WEDNESDAY: 1,
+      THURSDAY: 0,
+      FRIDAY: 2,
+      SATURDAY: 0,
+      SUNDAY: 0,
+    },
+    byTimeZone: {
+      NIGHT: 0,
+      MORNING: 1,
+      LUNCH: 0,
+      AFTERNOON: 1,
+      EVENING: 2,
+    },
+  },
+  pollAgreement: {
+    stopRate: 50,
+    agreeRate: 75,
   },
 };
+
+// 기존 호환성을 위한 변환된 데이터 (더 이상 사용하지 않음)
+// export const SAMPLE_EXPENSE_DATA: ExpenseData = ...
 
 export const SAMPLE_IMPULSE_DATA: ImpulseData = {
   summary: {

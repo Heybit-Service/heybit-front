@@ -53,6 +53,44 @@ export interface MonthlyReport {
   pollAgreement: Poll;
 }
 
+// 카테고리 관련 함수들
+
+// ENUM을 한글 이름으로 변환
+const CATEGORY_LABELS = {
+  CLOTHES: '의류',
+  TRANSPORT: '교통',
+  FOOD: '음식',
+  HOBBY: '취미',
+  DAILY: '생활',
+  BEAUTY: '뷰티',
+  ETC: '기타',
+} as const;
+
+// 라벨 가져오기
+export const getCategoryLabel = (category: string): string => {
+  return CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS] || '기타';
+};
+
+// 총 금액 계산
+export const getTotalAmount = (categories: Category[]): number => {
+  return categories.reduce((sum, cat) => sum + cat.totalAmount, 0);
+};
+
+// 퍼센티지 계산
+export const getPercentage = (amount: number, total: number): number => {
+  return total > 0 ? Math.round((amount / total) * 100) : 0;
+};
+
+// 금액 기준 정렬 (내림차순)
+export const sortByAmount = (categories: Category[]): Category[] => {
+  return [...categories].sort((a, b) => b.totalAmount - a.totalAmount);
+};
+
+// 최고 소비 카테고리
+export const getTopCategory = (categories: Category[]): Category | null => {
+  return sortByAmount(categories)[0] || null;
+};
+
 export const getMonthlyReport = async (month: string): Promise<MonthlyReport> => {
   const token = getToken();
 

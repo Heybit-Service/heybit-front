@@ -1,3 +1,4 @@
+// UI 컴포넌트용 타입 (변환된 데이터)
 export interface ExpenseCategory {
   id: string;
   name: string;
