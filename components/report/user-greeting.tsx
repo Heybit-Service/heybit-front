@@ -4,7 +4,7 @@ interface Props {
 
 export function UserGreeting({ userName = '텅장지켜' }: Props) {
   return (
-    <div className="px-4 pt-6 pb-3">
+    <div className="pt-6 pb-3">
       <h2 className="font-bold text-2xl text-[#202020] leading-[133%] tracking-normal mb-[3px]">
         {userName}님,
       </h2>
