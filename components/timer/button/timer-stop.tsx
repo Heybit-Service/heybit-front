@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { ConfirmPopup } from '@/components/popup/confirm';
 import Character from '@/assets/popup/fail_character.png';
 import { useRouter } from 'next/navigation';
+import { useCreateTimerResult } from '@/hooks/queries/timer';
 
 interface Props {
   id: number;
+  amount: number;
 }
 
-export const TimerStopButton = ({ id }: Props) => {
+export const TimerStopButton = ({ id, amount }: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const createTimerResultMutation = useCreateTimerResult();
 
   const onClose = () => {
     setOpen(false);
@@ -21,8 +24,19 @@ export const TimerStopButton = ({ id }: Props) => {
     setOpen(false);
   };
 
-  const onCancel = () => {
-    router.push(`/timer/${id}/fail`);
+  const onCancel = async () => {
+    try {
+      await createTimerResultMutation.mutateAsync({
+        timerId: id,
+        result: 'PURCHASED', // 절제 실패
+        amount,
+      });
+      router.push(`/timer/${id}/fail`);
+    } catch (error) {
+      console.error('Failed to create timer result:', error);
+      // 에러가 발생해도 fail 페이지로 이동
+      router.push(`/timer/${id}/fail`);
+    }
   };
 
   const onClick = () => {
