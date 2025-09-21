@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation'; // Added useRouter import for proper Next.js navigation
+import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { UserGreeting } from '@/components/report/user-greeting';
 import { currentDateAtom } from './store';
@@ -8,8 +8,13 @@ import { ReportCard } from '@/components/report/report-card';
 import { ExpenseCategories } from '@/components/report/expense-categories';
 import { ImpulseSpendingPattern } from '@/components/report/impulse-spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
+import { useMonthlyReport } from '@/hooks/queries/report';
 import {
-  SAMPLE_CALENDAR_DATA,
+  transformToCalendarData,
+  calculateTotals,
+  formatMonthForAPI,
+} from '@/utils/report-data-transformer';
+import {
   SAMPLE_EXPENSE_DATA,
   SAMPLE_IMPULSE_DATA,
   SAMPLE_TIMER_DATA,
@@ -18,29 +23,42 @@ import {
 export default function Page() {
   const router = useRouter();
   const [currentDate] = useAtom(currentDateAtom);
-
+  const monthString = formatMonthForAPI(currentDate);
+  const { data: reportData, isLoading, error } = useMonthlyReport(monthString);
   const handleDateClick = (date: Date, dayData?: { income?: number; expense?: number }) => {
     const dateStr = date.toLocaleDateString('ko-KR');
     console.log(`${dateStr} 클릭`, dayData ? `데이터: ${JSON.stringify(dayData)}` : '데이터 없음');
   };
-
-  const calculateTotals = () => {
-    let totalSaved = 0;
-    let totalSpent = 0;
-
-    Object.values(SAMPLE_CALENDAR_DATA).forEach((dayData) => {
-      if ('income' in dayData && dayData.income) totalSaved += dayData.income;
-      if ('expense' in dayData && dayData.expense) totalSpent += dayData.expense;
-    });
-
-    return { totalSaved, totalSpent };
-  };
-
-  const { totalSaved, totalSpent } = calculateTotals();
+  const calendarData = reportData ? transformToCalendarData(reportData) : {};
+  const { totalSaved, totalSpent } = reportData
+    ? calculateTotals(reportData)
+    : { totalSaved: 0, totalSpent: 0 };
 
   const handleReportClick = () => {
     router.push('/dashboard/report/total');
   };
+
+  if (isLoading) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="text-lg">리포트 데이터를 불러오는 중...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="text-lg text-red-500">데이터를 불러오는데 실패했습니다.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F7F7' }}>
@@ -49,7 +67,7 @@ export default function Page() {
         savedAmount={totalSaved}
         spentAmount={totalSpent}
         currentDate={currentDate}
-        data={SAMPLE_CALENDAR_DATA}
+        data={calendarData}
         onDateClick={handleDateClick}
       />
       <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
