@@ -1,33 +1,27 @@
 'use client';
 
-import { TIMER_STYLES } from '@/lib/timer-config';
+// No imports needed
 
 interface Props {
   successRate: number;
 }
 
 export function ProgressBar({ successRate }: Props) {
-  const progressBarWidth = 'w-72';
-  const progressBarHeight = 'h-4';
-  const primaryColor = '#0ec189';
-
   return (
     <div className="flex justify-center">
-      <div className={`${progressBarWidth} space-y-3`}>
-        <div
-          className={`relative w-full ${progressBarHeight} bg-[${TIMER_STYLES.colors.background}] rounded-full overflow-hidden`}
-        >
+      <div className="w-72 space-y-3">
+        <div className="relative w-full h-4 bg-[#e8e8e8] rounded-full overflow-hidden">
           <div
             className="absolute left-0 h-full rounded-full transition-all duration-1000 ease-out"
             style={{
               width: `${successRate}%`,
-              backgroundColor: primaryColor,
+              backgroundColor: '#0ec189',
             }}
           />
         </div>
         <div className="flex justify-between">
-          <span className={TIMER_STYLES.progressBar.labels}>0%</span>
-          <span className={TIMER_STYLES.progressBar.labels}>100%</span>
+          <span className="text-xs text-[#99989d] font-medium">0%</span>
+          <span className="text-xs text-[#99989d] font-medium">100%</span>
         </div>
       </div>
     </div>
