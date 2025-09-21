@@ -40,12 +40,12 @@ export interface Duration {
 }
 
 export const getDuration = (startTime: string, endTime: string) => {
-  if (startTime >= endTime) {
-    return { days: 0, hours: 0, minutes: 0 };
-  }
   const start = new Date(startTime);
   const end = new Date(endTime);
   const diffMs = end.getTime() - start.getTime();
+  if (diffMs <= 0) {
+    return { days: 0, hours: 0, minutes: 0 };
+  }
   const totalMinutes = Math.floor(diffMs / (1000 * 60));
   const days = Math.floor(totalMinutes / (24 * 60));
   const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
