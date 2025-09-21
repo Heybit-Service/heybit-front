@@ -1,11 +1,11 @@
 'use client';
 
-interface ReportSummaryProps {
+interface Props {
   savedAmount: number;
   spentAmount: number;
 }
 
-export function ReportSummary({ savedAmount, spentAmount }: ReportSummaryProps) {
+export function ReportSummary({ savedAmount, spentAmount }: Props) {
   const formatAmount = (amount: number) => {
     return amount.toLocaleString('ko-KR');
   };
