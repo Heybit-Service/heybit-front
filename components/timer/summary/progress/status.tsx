@@ -19,6 +19,7 @@ const ProgressStatus = ({ progress, timer }: Props) => {
   const cx = size / 2;
   const cy = size / 2;
   const angle = 2 * Math.PI * percent - Math.PI / 2;
+
   const iconX = cx + radius * Math.cos(angle);
   const iconY = cy + radius * Math.sin(angle);
   const now = new Date();

@@ -54,11 +54,23 @@ export const getDuration = (startTime: string, endTime: string) => {
 };
 
 export const getProgress = (startTime: string, endTime: string) => {
+  if (!startTime || !endTime) {
+    return 0;
+  }
   const start = new Date(startTime);
   const end = new Date(endTime);
   const now = new Date();
   const totalDuration = end.getTime() - start.getTime();
-  const elapsed = now.getTime() - start.getTime();
-  const progress = Math.min(Math.max(100 - (elapsed / totalDuration) * 100, 0), 100);
-  return Math.round(progress);
+  if (totalDuration <= 0) {
+    return 0;
+  }
+  if (now < start) {
+    return 100;
+  }
+  if (now >= end) {
+    return 0;
+  }
+  const remaining = end.getTime() - now.getTime();
+  const progress = (remaining / totalDuration) * 100;
+  return Math.round(Math.min(Math.max(progress, 0), 100));
 };

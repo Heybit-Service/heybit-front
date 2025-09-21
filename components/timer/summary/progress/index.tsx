@@ -8,7 +8,6 @@ interface Props {
 
 export const TimerProgressSummary = ({ timer }: Props) => {
   const progress = getProgress(timer.startTime, timer.endTime);
-
   return (
     <div className="pt-8 pb-4">
       <div className="flex flex-col items-center gap-7">
