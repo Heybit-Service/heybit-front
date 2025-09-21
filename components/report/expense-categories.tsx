@@ -10,10 +10,8 @@ interface Props {
 }
 
 export function ExpenseCategories({ data }: Props) {
-  // 데이터가 없으면 샘플 데이터 사용
   const reportData = data || SAMPLE_MONTHLY_REPORT;
   const categories = reportData.categoryFailures || [];
-
   return (
     <div className="py-7 px-[18.5px] bg-white rounded-[10px]">
       <Summary categories={categories} />

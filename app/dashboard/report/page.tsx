@@ -6,7 +6,7 @@ import { UserGreeting } from '@/components/report/user-greeting';
 import { currentDateAtom } from './store';
 import { ReportCard } from '@/components/report/report-card';
 import { ExpenseCategories } from '@/components/report/expense-categories';
-import { ImpulseSpendingPattern } from '@/components/report/impulse-spending-pattern';
+import { SpendingPattern } from '@/components/report/spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import { useMonthlyReport } from '@/hooks/queries/report';
 import {
@@ -14,11 +14,7 @@ import {
   calculateTotals,
   formatMonthForAPI,
 } from '@/utils/report-data-transformer';
-import {
-  SAMPLE_EXPENSE_DATA,
-  SAMPLE_IMPULSE_DATA,
-  SAMPLE_TIMER_DATA,
-} from '@/data/sample/report-data';
+import { SAMPLE_TIMER_DATA, SAMPLE_MONTHLY_REPORT } from '@/data/sample/report-data';
 
 export default function Page() {
   const router = useRouter();
@@ -49,8 +45,8 @@ export default function Page() {
           data={calendarData}
           onDateClick={handleDateClick}
         />
-        <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
-        <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
+        <ExpenseCategories data={SAMPLE_MONTHLY_REPORT} />
+        <SpendingPattern />
         <TimerSuccessRate
           data={SAMPLE_TIMER_DATA}
           styles={{
