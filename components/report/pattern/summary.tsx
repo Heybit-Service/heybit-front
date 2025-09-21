@@ -45,11 +45,16 @@ export function Summary({ counts }: Props) {
   const primaryTime = getPrimaryTime(counts.byTimeZone);
   return (
     <div className="mb-6">
-      <p className="text-gray-700 text-sm leading-relaxed">
-        <span className="font-medium text-gray-900">{primaryDay}</span>과{' '}
-        <span className="font-medium text-gray-900">{primaryTime}</span> 시간에 타이머를 주로
-        등록했어요
-      </p>
+      <div className="flex flex-col gap-[2px]">
+        <p className="text-[20px] font-normal leading-[140%] tracking-[0%] text-[#202020]">
+          <span className="font-bold text-[20px] leading-[140%] tracking-[0%]">{primaryDay}</span>과{' '}
+          <span className="font-bold text-[20px] leading-[140%] tracking-[0%]">{primaryTime}</span>{' '}
+          시간에
+        </p>
+        <p className="text-[20px] font-normal leading-[140%] tracking-[0%] text-[#202020]">
+          충동 소비 욕구를 주로 느꼈어요
+        </p>
+      </div>
     </div>
   );
 }
