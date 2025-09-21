@@ -14,7 +14,7 @@ import {
   calculateTotals,
   formatMonthForAPI,
 } from '@/utils/report-data-transformer';
-import { SAMPLE_TIMER_DATA, SAMPLE_MONTHLY_REPORT } from '@/data/sample/report-data';
+import { SAMPLE_MONTHLY_REPORT } from '@/data/sample/report-data';
 
 export default function Page() {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function Page() {
         <ExpenseCategories data={SAMPLE_MONTHLY_REPORT} />
         <SpendingPattern />
         <TimerSuccessRate
-          data={SAMPLE_TIMER_DATA}
+          month={monthString}
           styles={{
             progressBarWidth: 'w-72',
             primaryColor: '#0ec189',

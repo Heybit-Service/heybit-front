@@ -1,4 +1,3 @@
-import type { ExpenseData } from '@/lib/expense-types';
 import type { ImpulseData } from '@/lib/impulse-types';
 import type { TimerSuccessData } from '@/lib/timer-types';
 import type { MonthlyReport } from '@/data/api/report';
@@ -155,5 +154,4 @@ export const SAMPLE_TIMER_DATA: TimerSuccessData = {
   totalTimers: 10,
   successfulTimers: 8,
   grade: '매우 우수',
-  emoji: '😊',
 };

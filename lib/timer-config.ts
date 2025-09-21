@@ -46,19 +46,18 @@ export function calculateGrade(successRate: number): string {
   return "개선 필요"
 }
 
-// Helper function to transform API data
-export function transformTimerApiData(apiData: {
-  total_timers: number
-  successful_timers: number
+// Helper function to transform API data from MonthlyReport
+export function transformTimerSuccessData(successRateData: {
+  successRatePercent: number
+  totalCount: number
+  successCount: number
 }): TimerSuccessData {
-  const successRate = Math.round((apiData.successful_timers / apiData.total_timers) * 100)
-  const grade = calculateGrade(successRate)
+  const grade = calculateGrade(successRateData.successRatePercent)
 
   return {
-    successRate,
-    totalTimers: apiData.total_timers,
-    successfulTimers: apiData.successful_timers,
+    successRate: successRateData.successRatePercent,
+    totalTimers: successRateData.totalCount,
+    successfulTimers: successRateData.successCount,
     grade,
-    emoji: "", // Not used in current design
   }
 }
