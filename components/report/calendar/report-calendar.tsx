@@ -5,13 +5,13 @@ import { Grid } from './grid';
 import { CALENDAR_CONFIG } from '@/lib/calendar-config';
 import type { CalendarData, CalendarTransaction } from './types';
 
-interface PureCalendarProps {
+interface Props {
   currentDate: Date;
   data: CalendarData;
   onDateClick?: (date: Date, dayData?: CalendarTransaction) => void;
 }
 
-export function PureCalendar({ currentDate, data, onDateClick }: PureCalendarProps) {
+export function ReportCalendar({ currentDate, data, onDateClick }: Props) {
   return (
     <div>
       <div
