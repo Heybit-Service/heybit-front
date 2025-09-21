@@ -17,9 +17,8 @@ export function ReportCard({
   onDateClick,
 }: ReportCardProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 mb-6">
+    <div className="bg-white rounded-[10px] py-[30px] shadow-[0px_3px_8px_0px_#5353530D]">
       <ReportSummary savedAmount={savedAmount} spentAmount={spentAmount} />
-
       <PureCalendar currentDate={currentDate} data={data} onDateClick={onDateClick} />
     </div>
   );
