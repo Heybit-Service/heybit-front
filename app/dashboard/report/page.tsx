@@ -45,15 +45,9 @@ export default function Page() {
           data={calendarData}
           onDateClick={handleDateClick}
         />
-        <ExpenseCategories data={SAMPLE_MONTHLY_REPORT} />
-        <SpendingPattern />
-        <TimerSuccessRate
-          month={monthString}
-          styles={{
-            progressBarWidth: 'w-72',
-            primaryColor: '#0ec189',
-          }}
-        />
+        <ExpenseCategories data={reportData ?? SAMPLE_MONTHLY_REPORT} />
+        <SpendingPattern data={reportData ?? SAMPLE_MONTHLY_REPORT} />
+        <TimerSuccessRate data={reportData ?? SAMPLE_MONTHLY_REPORT} />
       </div>
       <div className="px-4 pb-8 pt-6">
         <button
