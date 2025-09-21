@@ -18,28 +18,28 @@ export function Cell({ date, transactions, isToday, onClick }: Props) {
     <button
       onClick={() => onClick?.(date)}
       className={`
-        aspect-square p-1 flex flex-col items-center justify-start
+        aspect-square flex flex-col items-center justify-start
         hover:bg-gray-50 transition-colors min-h-[60px] w-full max-w-full
         ${isToday ? 'bg-[#cff3e7]' : ''}
       `}
     >
       <span
         className={`
-          text-sm font-medium mb-1
-          ${isToday ? 'text-[#0a8a5c] font-semibold' : 'text-black'}
+          text-sm font-medium leading-[140%] text-center align-middle
+          ${isToday ? 'text-[#0a8a5c] font-semibold' : 'text-[#7C7C7C]'}
         `}
       >
         {date}
       </span>
 
-      <div className="flex flex-col items-center gap-0.5 text-[10px] leading-none w-full">
+      <div className="flex flex-col items-center gap-1 text-[10px] leading-none w-full mt-1">
         {transactions?.income && (
-          <div className="text-[#0ec189] text-center w-full truncate">
+          <div className="text-[#0EC189] text-center w-full truncate text-[9px] font-medium leading-[120%] align-middle">
             +{formatAmount(transactions.income)}
           </div>
         )}
         {transactions?.expense && (
-          <div className="text-[#e74a27] text-center w-full truncate">
+          <div className="text-[#E74A27] text-center w-full truncate text-[9px] font-medium leading-[120%] align-middle">
             -{formatAmount(Math.abs(transactions.expense))}
           </div>
         )}

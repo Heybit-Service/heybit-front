@@ -55,5 +55,5 @@ export function Grid({ date, data = {}, onDateClick }: Props) {
     );
   }
 
-  return <div className="grid grid-cols-7 gap-2 pb-4 w-full">{cells}</div>;
+  return <div className="grid grid-cols-7 w-full">{cells}</div>;
 }
