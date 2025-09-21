@@ -52,21 +52,17 @@ export default function Page() {
         data={SAMPLE_CALENDAR_DATA}
         onDateClick={handleDateClick}
       />
-
       <ExpenseCategories data={SAMPLE_EXPENSE_DATA} />
-
       <ImpulseSpendingPattern data={SAMPLE_IMPULSE_DATA} />
-
       <TimerSuccessRate
         data={SAMPLE_TIMER_DATA}
         styles={{
-          progressBarWidth: 'w-72', // Custom width
-          primaryColor: '#0ec189', // Custom color
+          progressBarWidth: 'w-72',
+          primaryColor: '#0ec189',
         }}
         animated={true}
         showLabels={true}
       />
-
       <div className="px-4 pb-8 pt-6">
         <button
           onClick={handleReportClick}
