@@ -1,83 +1,48 @@
+import { LineChart, Line, ResponsiveContainer } from 'recharts';
 import type { Counts } from '@/data/api/report';
+import { ChartDot } from './chart-dot';
+import { TimeLabels } from './time-labels';
 
 interface Props {
   timeData: Counts['byTimeZone'];
 }
 
 export function TimeChart({ timeData }: Props) {
-  // API 데이터를 차트용 배열로 변환
-  const data = [
-    { period: '오전', timeRange: '6~11시', count: timeData.MORNING },
-    { period: '점심', timeRange: '11~14시', count: timeData.LUNCH },
-    { period: '오후', timeRange: '14~17시', count: timeData.AFTERNOON },
-    { period: '저녁', timeRange: '17~20시', count: timeData.EVENING },
-    { period: '밤', timeRange: '20~24시', count: timeData.NIGHT },
+  const rawData = [
+    { period: '오전', timeRange: '6~11시', count: timeData.MORNING || 0 },
+    { period: '점심', timeRange: '11~14시', count: timeData.LUNCH || 0 },
+    { period: '오후', timeRange: '14~17시', count: timeData.AFTERNOON || 0 },
+    { period: '저녁', timeRange: '17~20시', count: timeData.EVENING || 0 },
+    { period: '밤', timeRange: '20~24시', count: timeData.NIGHT || 0 },
+    { period: '새벽', timeRange: '00~6시', count: 0 }, // API에 없으므로 임시로 0
   ];
-  const maxCount = Math.max(...data.map((item) => item.count));
-  const maxIndex = data.findIndex((item) => item.count === maxCount);
+  const maxCount = Math.max(...rawData.map((item) => item.count));
+  const data = rawData.map((item) => ({
+    ...item,
+    isMax: maxCount > 0 && item.count === maxCount,
+  }));
 
-  // 차트 크기 설정 (Tailwind 대신 직접 값 사용)
-  const chartHeight = 80;
-  const chartWidth = 280;
-  const horizontalPadding = 40;
-  const verticalPadding = 30;
-  const totalWidth = chartWidth + horizontalPadding * 2;
-  const totalHeight = chartHeight + verticalPadding * 2;
-
-  const safeMaxCount = maxCount > 0 ? maxCount : 1;
-
-  const points = data
-    .map((item, index) => {
-      // Calculate x position to align with label centers
-      const segmentWidth = chartWidth / data.length;
-      const x = horizontalPadding + segmentWidth * index + segmentWidth / 2;
-      const y = verticalPadding + chartHeight - (item.count / safeMaxCount) * chartHeight;
-      return `${x},${y}`;
-    })
-    .join(' ');
-
+  // 디버깅용 로그
+  console.log('TimeChart data:', data);
+  console.log('MaxCount:', maxCount);
   return (
-    <div>
-      <div className="relative" style={{ height: totalHeight }}>
-        <svg
-          width={totalWidth}
-          height={totalHeight}
-          className="mx-auto"
-          viewBox={`0 0 ${totalWidth} ${totalHeight}`}
-        >
-          <polyline fill="none" stroke="#ef4444" strokeWidth="2" points={points} />
-          {data.map((item, index) => {
-            if (index !== maxIndex) return null;
-            const segmentWidth = chartWidth / data.length;
-            const x = horizontalPadding + segmentWidth * index + segmentWidth / 2;
-            const y = verticalPadding + chartHeight - (item.count / safeMaxCount) * chartHeight;
-            return (
-              <g key={item.period}>
-                <circle cx={x} cy={y} r="5" fill="#dc2626" />
-                <text x={x} y={y - 12} textAnchor="middle" className="text-xs fill-gray-600">
-                  {item.count}회
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+    <div className="w-full">
+      <div className="h-[100px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data} margin={{ top: 20, right: 17.5, left: 17.5, bottom: 18 }}>
+            <Line
+              type="linear"
+              dataKey="count"
+              stroke="#E74A27"
+              strokeWidth={1}
+              dot={<ChartDot />}
+              activeDot={false}
+              connectNulls={true}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
-      <div
-        className="grid grid-cols-6 gap-1 mt-2"
-        style={{
-          paddingLeft: horizontalPadding,
-          paddingRight: horizontalPadding,
-          width: totalWidth,
-          margin: '0 auto',
-        }}
-      >
-        {data.map((item) => (
-          <div key={item.period} className="text-center">
-            <div className="text-xs text-gray-900 font-medium">{item.period}</div>
-            <div className="text-xs text-gray-500">{item.timeRange}</div>
-          </div>
-        ))}
-      </div>
+      <TimeLabels data={data} />
     </div>
   );
 }

@@ -8,7 +8,6 @@ interface Props {
 }
 
 export function WeeklyChart({ weekdayData }: Props) {
-  // API 데이터를 차트용 배열로 변환
   const rawData = [
     { day: '월', count: weekdayData.MONDAY },
     { day: '화', count: weekdayData.TUESDAY },
@@ -18,16 +17,11 @@ export function WeeklyChart({ weekdayData }: Props) {
     { day: '토', count: weekdayData.SATURDAY },
     { day: '일', count: weekdayData.SUNDAY },
   ];
-
-  // 최고값 찾기
   const maxCount = Math.max(...rawData.map((item) => item.count));
-
-  // 최고값 표시를 위한 데이터 가공
   const data = rawData.map((item) => ({
     ...item,
-    isMax: item.count === maxCount,
+    isMax: maxCount > 0 && item.count === maxCount,
   }));
-
   return (
     <div className="w-full px-[10px]">
       <div className="h-[100px] w-full">
@@ -39,6 +33,8 @@ export function WeeklyChart({ weekdayData }: Props) {
               stroke="#E74A27"
               strokeWidth={1}
               dot={<ChartDot />}
+              activeDot={false}
+              connectNulls={true}
             />
           </LineChart>
         </ResponsiveContainer>
