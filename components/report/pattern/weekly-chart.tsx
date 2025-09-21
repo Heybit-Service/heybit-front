@@ -39,7 +39,7 @@ export function WeeklyChart({ weekdayData }: Props) {
     .join(' ');
 
   return (
-    <div className="mb-8">
+    <div>
       <div className="relative" style={{ height: totalHeight }}>
         <svg
           width={totalWidth}

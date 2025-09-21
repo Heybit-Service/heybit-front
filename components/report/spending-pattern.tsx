@@ -13,10 +13,12 @@ export function SpendingPattern({ data }: Props) {
   const counts = reportData.registeredCounts;
 
   return (
-    <div className="py-7 px-[18.5px] bg-white rounded-[10px] mt-4">
+    <div className="py-7 px-[18.5px] bg-white rounded-[10px] mt-4 flex flex-col gap-[22px]">
       <Summary counts={counts} />
-      <WeeklyChart weekdayData={counts.byWeekday} />
-      <TimeChart timeData={counts.byTimeZone} />
+      <div className="flex flex-col gap-[28px]">
+        <WeeklyChart weekdayData={counts.byWeekday} />
+        <TimeChart timeData={counts.byTimeZone} />
+      </div>
     </div>
   );
 }
