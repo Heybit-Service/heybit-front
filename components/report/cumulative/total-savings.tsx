@@ -4,13 +4,22 @@ interface Props {
 
 export function TotalSavings({ totalAmount }: Props) {
   return (
-    <div className="space-y-3">
-      <h2 className="font-bold text-xl text-gray-900 leading-[140%] tracking-[0%]">
+    <div className="flex flex-col gap-3">
+      <h2 className="font-bold text-xl leading-[140%] tracking-[0%]" style={{ color: '#202020' }}>
         헤이빗과 함께 지금까지
       </h2>
-      <div className="flex items-center gap-2 font-bold text-xl leading-[140%] tracking-[0%] text-emerald-700">
+      <div
+        className="flex items-center gap-1 font-bold text-xl leading-[140%] tracking-[0%]"
+        style={{ color: '#0EC189' }}
+      >
         <span>총</span>
-        <span className="py-1 px-3 bg-emerald-100 text-emerald-700 rounded">
+        <span
+          className="py-1 px-3 rounded"
+          style={{
+            backgroundColor: '#CFF3E7',
+            color: '#0EC189',
+          }}
+        >
           {totalAmount.toLocaleString()}원
         </span>
         <span>을 아꼈어요</span>

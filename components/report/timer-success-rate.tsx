@@ -1,12 +1,17 @@
 'use client';
 
-import type { MonthlyReport } from '@/data/api/report';
 import { SuccessInfo } from './timer-success-rate/success-info';
 import { GradeInfo } from './timer-success-rate/grade-info';
 import { ProgressBar } from './timer-success-rate/progress-bar';
 
+interface SuccessRateData {
+  successRatePercent: number;
+  totalCount: number;
+  successCount: number;
+}
+
 interface Props {
-  data: MonthlyReport;
+  data: { successRate: SuccessRateData };
 }
 
 export function TimerSuccessRate({ data }: Props) {
@@ -36,7 +41,7 @@ export function TimerSuccessRate({ data }: Props) {
 
   const { successRate, grade } = formatData(data.successRate);
   return (
-    <div className="bg-white px-4 py-7 flex flex-col" style={{ gap: '26px' }}>
+    <div className="bg-white px-4 py-7 flex flex-col rounded-[10px]" style={{ gap: '26px' }}>
       <SuccessInfo successRate={successRate} />
       <div className="flex flex-col gap-3">
         <GradeInfo grade={grade} />
