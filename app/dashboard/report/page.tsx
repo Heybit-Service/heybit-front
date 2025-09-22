@@ -14,17 +14,12 @@ import {
   calculateTotals,
   formatMonthForAPI,
 } from '@/utils/report-data-transformer';
-import { SAMPLE_MONTHLY_REPORT } from '@/data/sample/report-data';
 
 export default function Page() {
   const router = useRouter();
   const [currentDate] = useAtom(currentDateAtom);
   const monthString = formatMonthForAPI(currentDate);
   const { data: reportData } = useMonthlyReport(monthString);
-  const handleDateClick = (date: Date, dayData?: { income?: number; expense?: number }) => {
-    const dateStr = date.toLocaleDateString('ko-KR');
-    console.log(`${dateStr} 클릭`, dayData ? `데이터: ${JSON.stringify(dayData)}` : '데이터 없음');
-  };
   const calendarData = reportData ? transformToCalendarData(reportData) : {};
   const { totalSaved, totalSpent } = reportData
     ? calculateTotals(reportData)
@@ -43,11 +38,10 @@ export default function Page() {
           spentAmount={totalSpent}
           currentDate={currentDate}
           data={calendarData}
-          onDateClick={handleDateClick}
         />
-        <ExpenseCategories data={reportData ?? SAMPLE_MONTHLY_REPORT} />
-        <SpendingPattern data={reportData ?? SAMPLE_MONTHLY_REPORT} />
-        <TimerSuccessRate data={reportData ?? SAMPLE_MONTHLY_REPORT} />
+        <ExpenseCategories data={reportData} />
+        <SpendingPattern data={reportData} />
+        <TimerSuccessRate data={reportData} />
       </div>
       <div className="px-4 pb-8 pt-6">
         <button

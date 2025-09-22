@@ -6,7 +6,7 @@ interface ReportCardProps {
   spentAmount: number;
   currentDate: Date;
   data: Record<string, { income?: number; expense?: number }>;
-  onDateClick: (date: Date, dayData?: { income?: number; expense?: number }) => void;
+  onDateClick?: (date: Date, dayData?: { income?: number; expense?: number }) => void;
 }
 
 export function ReportCard({
