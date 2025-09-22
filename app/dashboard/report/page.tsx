@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { UserGreeting } from '@/components/report/user-greeting';
 import { currentDateAtom } from './store';
@@ -9,6 +8,7 @@ import { ExpenseCategories } from '@/components/report/expense-categories';
 import { SpendingPattern } from '@/components/report/spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import { useMonthlyReport } from '@/hooks/queries/report';
+import CumulativeButton from '@/components/button/CumulativeButton';
 import {
   transformToCalendarData,
   calculateTotals,
@@ -16,7 +16,6 @@ import {
 } from '@/utils/report-data-transformer';
 
 export default function Page() {
-  const router = useRouter();
   const [currentDate] = useAtom(currentDateAtom);
   const monthString = formatMonthForAPI(currentDate);
   const { data: reportData } = useMonthlyReport(monthString);
@@ -24,10 +23,6 @@ export default function Page() {
   const { totalSaved, totalSpent } = reportData
     ? calculateTotals(reportData)
     : { totalSaved: 0, totalSpent: 0 };
-
-  const handleReportClick = () => {
-    router.push('/dashboard/report/total');
-  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F7F7' }}>
@@ -42,14 +37,7 @@ export default function Page() {
         <ExpenseCategories data={reportData} />
         <SpendingPattern data={reportData} />
         <TimerSuccessRate data={reportData} />
-      </div>
-      <div className="px-4 pb-8 pt-6">
-        <button
-          onClick={handleReportClick}
-          className="w-full bg-black text-white py-4 px-6 rounded-lg font-medium text-base hover:bg-gray-800 transition-colors"
-        >
-          누적 데이터 확인
-        </button>
+        <CumulativeButton />
       </div>
     </div>
   );
