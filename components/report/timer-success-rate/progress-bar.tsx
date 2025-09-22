@@ -7,22 +7,48 @@ interface Props {
 }
 
 export function ProgressBar({ successRate }: Props) {
+  const gradeLines = [20, 40, 60, 80];
+
   return (
-    <div className="flex justify-center">
-      <div className="w-72 space-y-3">
-        <div className="relative w-full h-4 bg-[#e8e8e8] rounded-full overflow-hidden">
-          <div
-            className="absolute left-0 h-full rounded-full transition-all duration-1000 ease-out"
+    <div className="w-full space-y-3">
+      <div
+        className="relative w-full h-5 bg-[#e8e8e8] overflow-hidden"
+        style={{ borderRadius: '100px' }}
+      >
+        <div
+          className="absolute left-0 h-full transition-all duration-1000 ease-out"
+          style={{
+            width: `${successRate}%`,
+            backgroundColor: '#0ec189',
+            borderRadius: '100px',
+          }}
+        />
+        {gradeLines.map((percentage) => (
+          <svg
+            key={percentage}
+            className="absolute top-0"
             style={{
-              width: `${successRate}%`,
-              backgroundColor: '#0ec189',
+              left: `${percentage}%`,
+              height: '100%',
+              width: '1.2px',
+              opacity: 0.9,
             }}
-          />
-        </div>
-        <div className="flex justify-between">
-          <span className="text-xs text-[#99989d] font-medium">0%</span>
-          <span className="text-xs text-[#99989d] font-medium">100%</span>
-        </div>
+          >
+            <line
+              x1="0.6"
+              y1="0"
+              x2="0.6"
+              y2="100%"
+              stroke="#ffffff"
+              strokeWidth="1.2"
+              strokeDasharray="1,1"
+            />
+          </svg>
+        ))}
+      </div>
+      <div className="flex justify-between">
+        <span className="text-xs text-[#99989d] font-medium">0%</span>
+        <span className="text-xs text-[#99989d] font-medium">100%</span>
       </div>
     </div>
   );

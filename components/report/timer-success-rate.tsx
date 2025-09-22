@@ -14,7 +14,8 @@ export function TimerSuccessRate({ data }: Props) {
     if (rate >= 80) return '매우 우수';
     if (rate >= 60) return '우수';
     if (rate >= 40) return '보통';
-    return '개선 필요';
+    if (rate >= 20) return '나쁨';
+    return '매우 나쁨';
   };
 
   const formatData = (data: {
@@ -35,10 +36,12 @@ export function TimerSuccessRate({ data }: Props) {
 
   const { successRate, grade } = formatData(data.successRate);
   return (
-    <div className="bg-white px-4 py-7">
+    <div className="bg-white px-4 py-7 flex flex-col" style={{ gap: '26px' }}>
       <SuccessInfo successRate={successRate} />
-      <GradeInfo grade={grade} />
-      <ProgressBar successRate={successRate} />
+      <div className="flex flex-col gap-3">
+        <GradeInfo grade={grade} />
+        <ProgressBar successRate={successRate} />
+      </div>
     </div>
   );
 }
