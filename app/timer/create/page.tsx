@@ -47,7 +47,7 @@ const Page = () => {
       <AppBar title="타이머 상품 등록" leadings={<BackButton />} />
       <TimerBubble duration={duration} />
       <div className="pt-8">
-        <TimerForm onSubmit={onSubmit} />
+        <TimerForm onSubmit={onSubmit} isLoading={createTimerMutation.isPending} />
       </div>
     </div>
   );

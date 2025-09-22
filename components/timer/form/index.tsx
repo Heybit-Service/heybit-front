@@ -14,9 +14,10 @@ import { TimerCreateButton } from '../button/create';
 
 interface Props {
   onSubmit: (form: Form) => void;
+  isLoading?: boolean;
 }
 
-export const TimerForm = ({ onSubmit }: Props) => {
+export const TimerForm = ({ onSubmit, isLoading = false }: Props) => {
   const [form, setForm] = useAtom(formAtom);
 
   const enabled = () => {
@@ -45,7 +46,7 @@ export const TimerForm = ({ onSubmit }: Props) => {
         <Voting onChange={(value) => setForm({ ...form, voting: value })} />
       </div>
       <FixedBottom>
-        <TimerCreateButton onClick={() => onSubmit(form)} disabled={!enabled()} />
+        <TimerCreateButton onClick={() => onSubmit(form)} disabled={!enabled() || isLoading} />
       </FixedBottom>
     </div>
   );
