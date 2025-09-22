@@ -16,10 +16,6 @@ export function Grid({ date, data = {} }: Props) {
   const lastDay = new Date(year, month + 1, 0);
   const startOffset = (firstDay.getDay() + 6) % 7;
 
-  const today = new Date();
-  const todayDate =
-    today.getFullYear() === year && today.getMonth() === month ? today.getDate() : -1;
-
   const formatDateKey = (day: number) => {
     return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   };
@@ -36,7 +32,7 @@ export function Grid({ date, data = {} }: Props) {
     const dateKey = formatDateKey(d);
     const dayTransactions = data[dateKey];
 
-    cells.push(<Cell key={d} date={d} transactions={dayTransactions} isToday={d === todayDate} />);
+    cells.push(<Cell key={d} date={d} transactions={dayTransactions} />);
   }
 
   return <div className="grid grid-cols-7 w-full">{cells}</div>;

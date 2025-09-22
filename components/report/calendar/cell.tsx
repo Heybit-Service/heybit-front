@@ -5,11 +5,10 @@ import type { Transaction } from './types';
 interface Props {
   date: number;
   transactions?: Transaction;
-  isToday?: boolean;
   onClick?: (date: number) => void;
 }
 
-export function Cell({ date, transactions, isToday, onClick }: Props) {
+export function Cell({ date, transactions, onClick }: Props) {
   if (!date) return <div className="aspect-square w-full max-w-full" />;
 
   const formatAmount = (val: number) => `${Math.abs(val).toLocaleString()}`;
