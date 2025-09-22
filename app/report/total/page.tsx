@@ -1,3 +1,7 @@
+'use client';
+
+import { AppBar } from '@/components/app-bar';
+import { BackButton } from '@/components/button/back';
 import { CumulativeReport } from '@/components/report/cumulative-report';
 
 export default function Page() {
@@ -14,5 +18,10 @@ export default function Page() {
     timerGrade: '매우 우수',
   };
 
-  return <CumulativeReport data={sampleData} />;
+  return (
+    <div className="min-h-dvh bg-[#F7F7F7]">
+      <AppBar title="누적 리포트" leadings={<BackButton />} />
+      <CumulativeReport data={sampleData} />
+    </div>
+  );
 }

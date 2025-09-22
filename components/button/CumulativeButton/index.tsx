@@ -2,15 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 
-interface CumulativeButtonProps {
+interface Props {
   className?: string;
 }
 
-export default function ReportTotalButton({ className = '' }: CumulativeButtonProps) {
+export default function ReportTotalButton({ className = '' }: Props) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard/report/total');
+    router.push('/report/total');
   };
 
   return (
