@@ -6,7 +6,7 @@ interface CumulativeButtonProps {
   className?: string;
 }
 
-export default function CumulativeButton({ className = '' }: CumulativeButtonProps) {
+export default function ReportTotalButton({ className = '' }: CumulativeButtonProps) {
   const router = useRouter();
 
   const handleClick = () => {

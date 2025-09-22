@@ -8,7 +8,7 @@ import { ExpenseCategories } from '@/components/report/expense-categories';
 import { SpendingPattern } from '@/components/report/spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import { useMonthlyReport } from '@/hooks/queries/report';
-import CumulativeButton from '@/components/button/CumulativeButton';
+import ReportTotalButton from '@/components/button/CumulativeButton';
 import {
   transformToCalendarData,
   calculateTotals,
@@ -37,7 +37,7 @@ export default function Page() {
         <ExpenseCategories data={reportData} />
         <SpendingPattern data={reportData} />
         <TimerSuccessRate data={reportData} />
-        <CumulativeButton />
+        <ReportTotalButton />
       </div>
     </div>
   );
