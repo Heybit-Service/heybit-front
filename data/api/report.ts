@@ -111,5 +111,5 @@ export const getMonthlyReport = async (month: string): Promise<MonthlyReport> =>
   }
 
   const data = await response.json();
-  return data.data;
+  return data;
 };
