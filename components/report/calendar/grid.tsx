@@ -1,15 +1,14 @@
 'use client';
 
 import { Cell } from './cell';
-import type { CalendarData, Transaction } from './types';
+import type { CalendarData } from './types';
 
 interface Props {
   date: Date;
   data?: CalendarData;
-  onDateClick?: (date: Date, dayData?: Transaction) => void;
 }
 
-export function Grid({ date, data = {}, onDateClick }: Props) {
+export function Grid({ date, data = {} }: Props) {
   const year = date.getFullYear();
   const month = date.getMonth();
 
@@ -25,13 +24,6 @@ export function Grid({ date, data = {}, onDateClick }: Props) {
     return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   };
 
-  const handleDateClick = (day: number) => {
-    const clickedDate = new Date(year, month, day);
-    const dateKey = formatDateKey(day);
-    const dayData = data[dateKey];
-    onDateClick?.(clickedDate, dayData);
-  };
-
   const cells = [];
 
   // 빈 셀들
@@ -44,15 +36,7 @@ export function Grid({ date, data = {}, onDateClick }: Props) {
     const dateKey = formatDateKey(d);
     const dayTransactions = data[dateKey];
 
-    cells.push(
-      <Cell
-        key={d}
-        date={d}
-        transactions={dayTransactions}
-        isToday={d === todayDate}
-        onClick={handleDateClick}
-      />,
-    );
+    cells.push(<Cell key={d} date={d} transactions={dayTransactions} isToday={d === todayDate} />);
   }
 
   return <div className="grid grid-cols-7 w-full">{cells}</div>;

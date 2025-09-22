@@ -7,18 +7,10 @@ import { GradeInfo } from './timer-success-rate/grade-info';
 import { ProgressBar } from './timer-success-rate/progress-bar';
 
 interface Props {
-  data?: MonthlyReport;
+  data: MonthlyReport;
 }
 
 export function TimerSuccessRate({ data }: Props) {
-  if (!data) {
-    return (
-      <div className="bg-white px-4 py-7">
-        <div className="text-center text-gray-500">데이터가 없습니다</div>
-      </div>
-    );
-  }
-  
   const timerData = transformTimerSuccessData(data.successRate);
   const { successRate, grade } = timerData;
   return (

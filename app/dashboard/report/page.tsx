@@ -9,34 +9,23 @@ import { SpendingPattern } from '@/components/report/spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import { useMonthlyReport } from '@/hooks/queries/report';
 import ReportTotalButton from '@/components/button/CumulativeButton';
-import {
-  transformToCalendarData,
-  calculateTotals,
-  formatMonthForAPI,
-} from '@/utils/report-data-transformer';
+import { formatMonthForAPI } from '@/utils/report-data-transformer';
 
 export default function Page() {
   const [currentDate] = useAtom(currentDateAtom);
   const monthString = formatMonthForAPI(currentDate);
-  const { data: reportData } = useMonthlyReport(monthString);
-  const calendarData = reportData ? transformToCalendarData(reportData) : {};
-  const { totalSaved, totalSpent } = reportData
-    ? calculateTotals(reportData)
-    : { totalSaved: 0, totalSpent: 0 };
-
+  const { data: report } = useMonthlyReport(monthString);
+  if (!report) {
+    return null;
+  }
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F7F7' }}>
       <UserGreeting />
       <div className="flex flex-col gap-3">
-        <ReportCard
-          savedAmount={totalSaved}
-          spentAmount={totalSpent}
-          currentDate={currentDate}
-          data={calendarData}
-        />
-        <ExpenseCategories data={reportData} />
-        <SpendingPattern data={reportData} />
-        <TimerSuccessRate data={reportData} />
+        <ReportCard currentDate={currentDate} reportData={report} />
+        <ExpenseCategories data={report} />
+        <SpendingPattern data={report} />
+        <TimerSuccessRate data={report} />
         <ReportTotalButton />
       </div>
     </div>
