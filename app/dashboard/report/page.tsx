@@ -9,11 +9,17 @@ import { SpendingPattern } from '@/components/report/spending-pattern';
 import { TimerSuccessRate } from '@/components/report/timer-success-rate';
 import { useMonthlyReport } from '@/hooks/queries/report';
 import ReportTotalButton from '@/components/button/CumulativeButton';
-import { formatMonthForAPI } from '@/utils/report-data-transformer';
 
 export default function Page() {
   const [currentDate] = useAtom(currentDateAtom);
-  const monthString = formatMonthForAPI(currentDate);
+
+  const formatMonth = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${year}-${month}`;
+  };
+
+  const monthString = formatMonth(currentDate);
   const { data: report } = useMonthlyReport(monthString);
   if (!report) {
     return null;
