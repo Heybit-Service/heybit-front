@@ -11,9 +11,14 @@ import { removeToken } from '@/data/auth';
 const Page = () => {
   const router = useRouter();
 
-  const onDelete = () => {
-    removeToken();
-    router.push('/login');
+  const onDelete = async () => {
+    try {
+      removeToken();
+      router.push('/login');
+    } catch {
+      removeToken();
+      router.push('/login');
+    }
   };
 
   const onContinue = () => {
@@ -35,9 +40,9 @@ const Page = () => {
             className="font-medium text-base leading-[140%] align-middle"
             style={{ color: '#7C7C7C' }}
           >
-            회원 탈퇴를 하게 되면 진행 중이었던 타이머와 투표
+            현재는 로그아웃만 처리됩니다.
             <br />
-            데이터가 삭제되고 동일한 아이디로 재가입이 안돼요
+            (실제 계정 삭제 기능은 준비 중입니다)
           </span>
         </div>
         <Image src={Character} alt="character" width={150} />
@@ -52,7 +57,7 @@ const Page = () => {
             className="w-full py-4 bg-[#7C7C7C] font-semibold text-lg leading-[150%] text-center text-[#FFFFFF] rounded-[10px]"
             onClick={onDelete}
           >
-            탈퇴하기
+            로그아웃
           </button>
           <button
             className="w-full py-4 bg-[#0EC189] font-semibold text-lg leading-[150%] text-center text-[#FFFFFF] rounded-[10px]"
