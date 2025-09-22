@@ -1,37 +1,33 @@
 'use client';
-// import { useRouter } from 'next/navigation';
 import { CUMULATIVE_STYLES } from '@/lib/cumulative-config';
-import type { CumulativeReportProps, MonthlyData } from '@/lib/cumulative-types';
+import type { MonthlyData } from '@/lib/cumulative-types';
+import type { TotalReport } from '@/data/api/report';
 import { TotalSavings } from '@/components/report/cumulative/total-savings';
 import { MonthlySavingsChart } from '@/components/report/cumulative/monthly-savings-chart';
 import { HorizontalTimerSuccess } from '@/components/report/cumulative/horizontal-timer-success';
 
-const DEFAULT_MONTHLY_DATA: MonthlyData[] = [
-  { month: '1월', amount: 100000 },
-  { month: '2월', amount: 4000 },
-  { month: '3월', amount: 5000 },
-  { month: '5월', amount: 11000 },
-  { month: '6월', amount: 62000 },
-  { month: '7월', amount: 130000 },
-];
+interface Props {
+  data: TotalReport;
+}
 
-export function CumulativeReport({ data }: CumulativeReportProps) {
-  // const router = useRouter();
-
-  const monthlySavings = data?.monthlySavings || DEFAULT_MONTHLY_DATA;
-  const timerSuccessRate = data?.timerSuccessRate || 50;
-  const timerGrade = data?.timerGrade || '매우 우수';
-
+export function CumulativeReport({ data }: Props) {
+  const toMonthlySavings = (data: TotalReport): MonthlyData[] => {
+    return data.monthSummaries.map((summary) => ({
+      month: `${summary.month}월`,
+      amount: summary.savedAmount,
+    }));
+  };
+  const getGrade = (rate: number): string => {
+    if (rate >= 80) return '매우 우수';
+    if (rate >= 60) return '우수';
+    if (rate >= 40) return '보통';
+    if (rate >= 20) return '나쁨';
+    return '매우 나쁨';
+  };
+  const monthlySavings = toMonthlySavings(data);
+  const successRate = Math.floor(data.successRate.successRatePercent);
+  const timerGrade = getGrade(successRate);
   const totalSavings = monthlySavings.reduce((sum, monthData) => sum + monthData.amount, 0);
-
-  // const handleBack = () => {
-  //   if (onBack) {
-  //     onBack();
-  //   } else {
-  //     router.back();
-  //   }
-  // };
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: CUMULATIVE_STYLES.colors.background }}>
       <div
@@ -63,7 +59,7 @@ export function CumulativeReport({ data }: CumulativeReportProps) {
               boxShadow: '0px 3px 8px 0px #5353530D',
             }}
           >
-            <HorizontalTimerSuccess successRate={timerSuccessRate} grade={timerGrade} />
+            <HorizontalTimerSuccess successRate={successRate} grade={timerGrade} />
           </div>
         </div>
       </div>

@@ -91,6 +91,29 @@ export const getTopCategory = (categories: Category[]): Category | null => {
   return sortByAmount(categories)[0] || null;
 };
 
+export interface TotalReport {
+  totalSavedAmount: number;
+  monthSummaries: {
+    year: number;
+    month: number;
+    savedAmount: number;
+  }[];
+  successRate: {
+    successRatePercent: number;
+    totalCount: number;
+    successCount: number;
+  };
+  categoryFailures: Category[];
+  registeredCounts: Counts;
+}
+
+export interface TotalReportResponse {
+  success: boolean;
+  status: number;
+  message: string;
+  data: TotalReport;
+}
+
 export const getMonthlyReport = async (month: string): Promise<MonthlyReport> => {
   const token = getToken();
 
@@ -112,4 +135,27 @@ export const getMonthlyReport = async (month: string): Promise<MonthlyReport> =>
 
   const data = await response.json();
   return data;
+};
+
+export const getTotalReport = async (): Promise<TotalReport> => {
+  const token = getToken();
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('/api/reports/total', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch total report');
+  }
+
+  const responseData: TotalReportResponse = await response.json();
+  return responseData.data;
 };
