@@ -21,13 +21,14 @@ export function CumulativeReport({ data }: Props) {
   };
   const monthlySavings = toMonthlySavings(data);
   const totalSavings = monthlySavings.reduce((sum, monthData) => sum + monthData.amount, 0);
+  const currentMonth = `${new Date().getMonth() + 1}월`;
   return (
     <div style={{ backgroundColor: '#F7F7F7' }}>
       <div className="pt-5 px-4 flex flex-col gap-3">
         <SavingsSummary
           totalAmount={totalSavings}
           monthlySavings={monthlySavings}
-          highlightMonth="7월"
+          highlightMonth={currentMonth}
         />
         <TimerSuccessRate data={data} />
       </div>
