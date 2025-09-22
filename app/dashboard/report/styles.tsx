@@ -10,6 +10,7 @@ export const FixedHeader = styled.div`
   right: 0;
   display: flex;
   align-items: center;
+  z-index: 50;
 
   @media (min-width: 768px) {
     max-width: 430px;
