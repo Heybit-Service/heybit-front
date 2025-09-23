@@ -9,6 +9,7 @@ import {
 } from '@/data/api/timer';
 import { createTimer } from '@/app/timer/create/action';
 import { CurrentTimer, HistoryTimer, Timer } from '@/data/type/timer';
+import { reportKeys } from './report';
 
 export const timerKeys = {
   all: ['timers'] as const,
@@ -67,6 +68,9 @@ export const useAbandonTimer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: timerKeys.current() });
       queryClient.invalidateQueries({ queryKey: timerKeys.history() });
+      // Report 데이터도 갱신
+      queryClient.invalidateQueries({ queryKey: reportKeys.total() });
+      queryClient.invalidateQueries({ queryKey: ['reports', 'monthly'] });
     },
   });
 };
@@ -78,6 +82,9 @@ export const useCreateTimerResult = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: timerKeys.current() });
       queryClient.invalidateQueries({ queryKey: timerKeys.history() });
+      // Report 데이터도 갱신
+      queryClient.invalidateQueries({ queryKey: reportKeys.total() });
+      queryClient.invalidateQueries({ queryKey: ['reports', 'monthly'] });
     },
   });
 };
