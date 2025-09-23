@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ConfirmPopup } from '@/components/popup/confirm';
 import Character from '@/assets/popup/fail_character.png';
 import { useRouter } from 'next/navigation';
-import { useCreateTimerResult } from '@/hooks/queries/timer';
+import { useAbandonTimer } from '@/hooks/queries/timer';
 
 interface Props {
   id: number;
@@ -14,7 +14,7 @@ interface Props {
 export const TimerStopButton = ({ id, amount }: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const createTimerResultMutation = useCreateTimerResult();
+  const abandonTimerMutation = useAbandonTimer();
 
   const onClose = () => {
     setOpen(false);
@@ -26,15 +26,14 @@ export const TimerStopButton = ({ id, amount }: Props) => {
 
   const onCancel = async () => {
     try {
-      await createTimerResultMutation.mutateAsync({
+      await abandonTimerMutation.mutateAsync({
         timerId: id,
         result: 'PURCHASED', // 절제 실패
         amount,
       });
       router.push(`/timer/${id}/fail`);
     } catch (error) {
-      console.error('Failed to create timer result:', error);
-      // 에러가 발생해도 fail 페이지로 이동
+      console.error('Failed to abandon timer:', error);
       router.push(`/timer/${id}/fail`);
     }
   };

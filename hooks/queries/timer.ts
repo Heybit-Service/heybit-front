@@ -4,6 +4,7 @@ import {
   fetchHistoryTimers,
   fetchTimer,
   deleteTimer,
+  abandonTimer,
   createTimerResult,
 } from '@/data/api/timer';
 import { createTimer } from '@/app/timer/create/action';
@@ -52,6 +53,17 @@ export const useDeleteTimer = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteTimer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timerKeys.current() });
+      queryClient.invalidateQueries({ queryKey: timerKeys.history() });
+    },
+  });
+};
+
+export const useAbandonTimer = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: abandonTimer,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: timerKeys.current() });
       queryClient.invalidateQueries({ queryKey: timerKeys.history() });
