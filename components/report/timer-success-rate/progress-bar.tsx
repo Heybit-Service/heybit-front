@@ -4,10 +4,21 @@
 
 interface Props {
   successRate: number;
+  grade: string;
 }
 
-export function ProgressBar({ successRate }: Props) {
+export function ProgressBar({ successRate, grade }: Props) {
   const gradeLines = [20, 40, 60, 80];
+
+  const GRADE_CONFIG = {
+    '매우 우수': { color: '#0EC189', minRate: 80 },
+    우수: { color: '#0EC189', minRate: 60 },
+    보통: { color: '#FFC400', minRate: 40 },
+    나쁨: { color: '#E74A27', minRate: 20 },
+    '매우 나쁨': { color: '#E74A27', minRate: 0 },
+  } as const;
+
+  const gradeColor = GRADE_CONFIG[grade as keyof typeof GRADE_CONFIG]?.color || '#0EC189';
 
   return (
     <div className="w-full space-y-3">
@@ -19,7 +30,7 @@ export function ProgressBar({ successRate }: Props) {
           className="absolute left-0 h-full transition-all duration-1000 ease-out"
           style={{
             width: `${successRate}%`,
-            backgroundColor: '#0ec189',
+            backgroundColor: gradeColor,
             borderRadius: '100px',
           }}
         />

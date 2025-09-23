@@ -42,10 +42,10 @@ export function TimerSuccessRate({ data }: Props) {
   const { successRate, grade } = formatData(data.successRate);
   return (
     <div className="bg-white px-4 py-7 flex flex-col rounded-[10px]" style={{ gap: '26px' }}>
-      <SuccessInfo successRate={successRate} />
+      <SuccessInfo successRate={successRate} grade={grade} />
       <div className="flex flex-col gap-3">
         <GradeInfo grade={grade} />
-        <ProgressBar successRate={successRate} />
+        <ProgressBar successRate={successRate} grade={grade} />
       </div>
     </div>
   );
