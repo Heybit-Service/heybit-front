@@ -10,7 +10,7 @@ export interface UserProfile {
 
 export const getUserProfile = async (): Promise<UserProfile> => {
   const token = getToken();
-  
+
   if (!token) {
     throw new Error('No authentication token found');
   }
@@ -33,19 +33,22 @@ export const getUserProfile = async (): Promise<UserProfile> => {
 
 export const checkNickname = async (nickname: string): Promise<boolean> => {
   const token = getToken();
-  
+
   if (!token) {
     throw new Error('No authentication token found');
   }
 
   // Next.js API 라우트를 통해 프록시 요청 (CORS 우회)
-  const response = await fetch(`/api/users/check-nickname?nickname=${encodeURIComponent(nickname)}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `/api/users/check-nickname?nickname=${encodeURIComponent(nickname)}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error('Failed to check nickname');
@@ -57,7 +60,7 @@ export const checkNickname = async (nickname: string): Promise<boolean> => {
 
 export const updateNickname = async (nickname: string): Promise<void> => {
   const token = getToken();
-  
+
   if (!token) {
     throw new Error('No authentication token found');
   }
@@ -77,4 +80,30 @@ export const updateNickname = async (nickname: string): Promise<void> => {
   }
 
   await response.json();
+};
+
+export const deactivateUser = async (): Promise<void> => {
+  const token = getToken();
+
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  // Next.js API 라우트를 통해 프록시 요청 (CORS 우회)
+  const response = await fetch('/api/users/me/deactivate', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to deactivate user');
+  }
+
+  // 응답이 있는 경우 처리
+  if (response.status !== 204) {
+    await response.json();
+  }
 };
