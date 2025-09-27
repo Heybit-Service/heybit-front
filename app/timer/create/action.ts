@@ -27,8 +27,8 @@ export const createTimer = async ({
     amount,
     description,
     category,
-    startTime: startTime.toISOString().replace(/\.\d{3}Z$/, ''),
-    endTime: endTime.toISOString().replace(/\.\d{3}Z$/, ''),
+    startTime: startTime.toISOString().replace(/\.\d{3}Z$/, 'Z'),
+    endTime: endTime.toISOString().replace(/\.\d{3}Z$/, 'Z'),
     withVotePost,
   };
   const dataJson = new Blob([JSON.stringify(data)], {
