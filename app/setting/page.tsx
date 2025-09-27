@@ -26,6 +26,13 @@ const Page = () => {
     window.open('https://www.notion.so/230b5c7320fe8015a782e58d174f594b', '_blank');
   };
 
+  const onInquiry = () => {
+    const email = 'heybitservice815@gmail.com';
+    const subject = '[Heybit 문의]';
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
     <div className="h-dvh">
       <AppBar title="설정" leadings={<BackButton />} />
@@ -34,7 +41,7 @@ const Page = () => {
         <SettingItem label="회원 탈퇴" onClick={onAccountDelete} />
         <SettingItem label="서비스 이용약관" onClick={onTermsOfService} />
         <SettingItem label="개인정보 처리방침" onClick={onPrivacyPolicy} />
-        <SettingItem label="문의" onClick={() => {}} />
+        <SettingItem label="문의" onClick={onInquiry} />
       </div>
     </div>
   );
