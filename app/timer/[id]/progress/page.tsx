@@ -30,7 +30,7 @@ const Page = ({ params }: Props) => {
         <TimerInformation timer={timer} />
       </div>
       <FixedBottom>
-        <TimerStopButton id={id} amount={timer.amount} />
+        <TimerStopButton id={id} />
       </FixedBottom>
     </div>
   );

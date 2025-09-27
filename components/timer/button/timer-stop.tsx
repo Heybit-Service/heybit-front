@@ -8,10 +8,9 @@ import { useAbandonTimer } from '@/hooks/queries/timer';
 
 interface Props {
   id: number;
-  amount: number;
 }
 
-export const TimerStopButton = ({ id, amount }: Props) => {
+export const TimerStopButton = ({ id }: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const abandonTimerMutation = useAbandonTimer();
@@ -29,7 +28,6 @@ export const TimerStopButton = ({ id, amount }: Props) => {
       await abandonTimerMutation.mutateAsync({
         timerId: id,
         result: 'PURCHASED', // 절제 실패
-        amount,
       });
       router.push(`/timer/${id}/fail`);
     } catch (error) {

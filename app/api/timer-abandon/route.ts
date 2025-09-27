@@ -10,10 +10,10 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { timerId, result, amount } = body;
+    const { timerId, result } = body;
 
-    if (!timerId || !result || amount === undefined) {
-      return NextResponse.json({ error: 'timerId, result, amount가 필요합니다' }, { status: 400 });
+    if (!timerId || !result) {
+      return NextResponse.json({ error: 'timerId, result가 필요합니다' }, { status: 400 });
     }
 
     const response = await fetch(`${API_BASE_URL}/api/v1/timer-abandon`, {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
         Authorization: token,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ timerId, result, amount }),
+      body: JSON.stringify({ timerId, result }),
     });
 
     const data = await response.json().catch(() => ({}));

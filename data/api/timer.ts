@@ -93,14 +93,9 @@ export const deleteTimer = async (id: number): Promise<void> => {
 interface TimerAbandonCommand {
   timerId: number;
   result: 'PURCHASED' | 'SAVED';
-  amount: number;
 }
 
-export const abandonTimer = async ({
-  timerId,
-  result,
-  amount,
-}: TimerAbandonCommand): Promise<void> => {
+export const abandonTimer = async ({ timerId, result }: TimerAbandonCommand): Promise<void> => {
   const token = getToken();
 
   if (!token) {
@@ -113,7 +108,7 @@ export const abandonTimer = async ({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ timerId, result, amount }),
+    body: JSON.stringify({ timerId, result }),
   });
 
   if (!response.ok) {
@@ -124,14 +119,9 @@ export const abandonTimer = async ({
 interface TimerResultCommand {
   timerId: number;
   result: 'PURCHASED' | 'SAVED';
-  amount: number;
 }
 
-export const createTimerResult = async ({
-  timerId,
-  result,
-  amount,
-}: TimerResultCommand): Promise<void> => {
+export const createTimerResult = async ({ timerId, result }: TimerResultCommand): Promise<void> => {
   const token = getToken();
 
   if (!token) {
@@ -147,7 +137,6 @@ export const createTimerResult = async ({
     body: JSON.stringify({
       timerId,
       result,
-      amount,
     }),
   });
 

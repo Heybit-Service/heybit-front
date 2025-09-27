@@ -36,7 +36,7 @@ const Page = ({ params }: Props) => {
             </span>
           </div>
         </div>
-        <Actions id={id} amount={timer.amount} />
+        <Actions id={id} />
       </div>
     </div>
   );

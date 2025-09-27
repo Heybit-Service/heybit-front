@@ -8,10 +8,9 @@ import { useCreateTimerResult } from '@/hooks/queries/timer';
 
 interface Props {
   id: number;
-  amount: number;
 }
 
-export const Actions = ({ id, amount }: Props) => {
+export const Actions = ({ id }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const createTimerResultMutation = useCreateTimerResult();
@@ -21,7 +20,6 @@ export const Actions = ({ id, amount }: Props) => {
       await createTimerResultMutation.mutateAsync({
         timerId: id,
         result: 'SAVED',
-        amount,
       });
       router.push(`/timer/${id}/success`);
     } catch (error) {
@@ -42,7 +40,6 @@ export const Actions = ({ id, amount }: Props) => {
       await createTimerResultMutation.mutateAsync({
         timerId: id,
         result: 'PURCHASED',
-        amount,
       });
       router.push(`/timer/${id}/fail`);
     } catch (error) {

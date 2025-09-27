@@ -12,9 +12,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     const requestBody = {
-      productTimerId: body.timerId,
+      timerId: body.timerId,
       result: body.result,
-      amount: body.amount,
     };
 
     const response = await fetch(`${API_BASE_URL}/api/v1/timer-results`, {
