@@ -3,7 +3,7 @@ export type VoteResult = 'BUY' | 'HOLD';
 export interface ProductVotePost {
   votePostId: number;
   name: string;
-  imageUrl: string | null;
+  imageUrl: string;
   amount: number;
   description: string;
   writer: string | null;
@@ -21,6 +21,7 @@ export interface MyVotedPost {
   holdCount: number;
   buyCount: number;
   votedAt: string; // YYYY-MM-DD
+  imageUrl: string;
 }
 
 export interface MyVotesApiResponse {

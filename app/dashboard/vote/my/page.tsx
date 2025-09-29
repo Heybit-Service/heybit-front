@@ -279,6 +279,7 @@ export default function VotePage() {
           setNickname(profileRes.value.nickname);
         }
         if (myVotesRes.status === 'fulfilled') {
+          console.log('등록한 투표 데이터:', myVotesRes.value);
           setMyVotes(myVotesRes.value ?? []);
         }
       } catch (e) {
@@ -295,11 +296,12 @@ export default function VotePage() {
       setParticipatedLoading(true);
       try {
         const votes = await getParticipatedVotes();
+        console.log('참여한 투표 데이터:', votes);
         const mapped: ParticipatedVote[] = votes.map((v) => ({
           id: v.votePostId || Math.random(),
           title: v.name,
           price: v.amount,
-          image: Thumbnail,
+          image: v.imageUrl,
           date: v.votedAt,
           buyCount: v.buyCount,
           stopCount: v.holdCount,
@@ -322,7 +324,7 @@ export default function VotePage() {
         id: v.votePostId,
         name: v.name,
         amount: v.amount,
-        image: Thumbnail,
+        image: v.imageUrl,
         endTime: null,
         buyCount: v.buyCount,
         holdCount: v.holdCount,

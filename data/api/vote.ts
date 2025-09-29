@@ -77,16 +77,17 @@ export const getMyVotes = async (): Promise<MyVotedPost[]> => {
 
   const json = await res.json();
   const apiData = (json.data as MyVotesApiResponse[]) ?? [];
-  
+
   return apiData.map((item, index) => ({
     votePostId: index + 1,
     name: item.name,
     amount: item.amount,
     myVote: 'HOLD' as const,
-    status: item.inProgress ? 'IN_PROGRESS' : 'WAITING' as const,
+    status: item.inProgress ? 'IN_PROGRESS' : ('WAITING' as const),
     holdCount: item.voteStats.holdCount,
     buyCount: item.voteStats.buyCount,
     votedAt: new Date(item.endTime).toISOString().split('T')[0],
+    imageUrl: item.imageUrl,
   }));
 };
 
