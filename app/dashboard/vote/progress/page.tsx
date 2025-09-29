@@ -3,6 +3,7 @@
 import { VoteCard } from '@/components/vote/VoteCard';
 import { VoteCardSkeleton } from '@/components/vote/VoteCardSkeleton';
 import thumbnailImage from '@/assets/vote/thumbnail.png';
+import Character from '@/assets/vote/character.svg';
 import { useEffect, useState } from 'react';
 import { getUserProfile } from '@/data/api/user';
 import { getVotes, castVote } from '@/data/api/vote';
@@ -73,6 +74,26 @@ export default function VotePage() {
     );
   }
 
+  if (votes.length === 0) {
+    // Empty 화면 - 전체 높이 중앙 정렬
+    return (
+      <div className="flex flex-col h-full items-center justify-center">
+        <Character width={120} height={134} className="mb-5" />
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-[18px] font-bold leading-[27px] text-[#202020] text-center">
+            아직 진행중인 투표가 없어요!
+          </p>
+          <p className="text-[16px] font-medium leading-[150%] text-[#7C7C7C] text-center">
+            다른 사용자들이 타이머와 함께 투표를 등록하면
+            <br />
+            여기에서 확인할 수 있어요
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // 투표 목록 화면 - 헤더 + 목록
   return (
     <div className="flex flex-col items-start relative pb-6">
       <div className="flex flex-col items-start gap-1 mb-6">
@@ -88,29 +109,25 @@ export default function VotePage() {
       </div>
 
       <div className="flex flex-col gap-[14px] w-full">
-        {votes.length === 0 ? (
-          <div className="text-heybit-variable-HB-gray400">투표할 항목이 없어요.</div>
-        ) : (
-          votes.map((v) => (
-            <VoteCard
-              key={v.votePostId}
-              productImage={
-                (v.imageUrl ?? thumbnailImage) as string | import('next/image').StaticImageData
-              }
-              productName={v.name}
-              productPrice={v.amount}
-              timeRemaining={formatRemaining(v.endTime)}
-              userName={v.writer ?? undefined}
-              userComment={v.description}
-              onBuy={async () => {
-                await castVote(v.votePostId, 'BUY');
-              }}
-              onHold={async () => {
-                await castVote(v.votePostId, 'HOLD');
-              }}
-            />
-          ))
-        )}
+        {votes.map((v) => (
+          <VoteCard
+            key={v.votePostId}
+            productImage={
+              (v.imageUrl ?? thumbnailImage) as string | import('next/image').StaticImageData
+            }
+            productName={v.name}
+            productPrice={v.amount}
+            timeRemaining={formatRemaining(v.endTime)}
+            userName={v.writer ?? undefined}
+            userComment={v.description}
+            onBuy={async () => {
+              await castVote(v.votePostId, 'BUY');
+            }}
+            onHold={async () => {
+              await castVote(v.votePostId, 'HOLD');
+            }}
+          />
+        ))}
       </div>
     </div>
   );
